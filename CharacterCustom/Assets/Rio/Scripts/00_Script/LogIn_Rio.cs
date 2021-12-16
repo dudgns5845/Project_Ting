@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Auth;
-using System;
 using UnityEngine.UI;
+using System;
 using UnityEngine.SceneManagement;
 
-public class FirebaseAuth_Rio : MonoBehaviour
+/// <summary>
+/// 로그인 화면 부분을 담당하는 스크립트 
+/// </summary>
+public class LogIn_Rio : MonoBehaviour
 {
     FirebaseAuth auth;
 
-    //email, pssword inpufield
+    //이메일 패스워드 InputField
     public InputField inputEmail;
-    public InputField inputpassword;
+    public InputField inputPassword;
 
+
+    //로그인 시도 결과 텍스트
     public Text TXT_Result;
 
     private void Start()
@@ -40,34 +45,7 @@ public class FirebaseAuth_Rio : MonoBehaviour
             print("비로그인 상태");
     }
 
-    //회원 가입
-    public void onClickSignIn()
-    {
-        StartCoroutine(SignIn(inputEmail.text, inputpassword.text));
-    }
-
-    IEnumerator SignIn(string email, string password)
-    {
-        var task = auth.CreateUserWithEmailAndPasswordAsync(email, password);
-        yield return new WaitUntil(() => task.IsCompleted);
-
-        if (task.Exception == null)
-        {
-            TXT_Result.text = "회원가입 성공!!";
-
-            yield return new WaitForSeconds(1f);
-            SceneManager.LoadScene("01_CustomScene");
-        }
-
-
-        else
-        {
-            TXT_Result.text = "회원가입 실패!!";
-        }
-    }
-
-
-    //로그인 
+    //로그인 하기
     public void onClickLogIn()
     {
         if (inputEmail.text.Length == 0 || inputEmail.text.Length == 0)
@@ -75,9 +53,13 @@ public class FirebaseAuth_Rio : MonoBehaviour
             TXT_Result.text = "정보를 다 입력해주세요!!";
             return;
         }
+        else
+        {
+            StartCoroutine(Login(inputEmail.text, inputPassword.text));
+        }
 
-        StartCoroutine(Login(inputEmail.text, inputpassword.text));
     }
+
 
     IEnumerator Login(string email, string password)
     {
@@ -90,7 +72,7 @@ public class FirebaseAuth_Rio : MonoBehaviour
         if (task.Exception == null)
         {
             TXT_Result.text = "로그인 성공!!";
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.5f);
             SceneManager.LoadScene("01_CustomScene");
         }
         else //로그인 실패 로그 출력
