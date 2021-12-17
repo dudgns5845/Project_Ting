@@ -1,24 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using AdvancedPeopleSystem;
 public class CustomInfo_Rio : MonoBehaviour
 {
-    public static CustomInfo_Rio instance;
+    //public static CustomInfo_Rio instance;
 
-    private void Awake()
+
+    //private void Awake()
+    //{
+    //    DontDestroyOnLoad(gameObject);
+    //}
+
+    //public bool isMan = true;
+
+    //public void ChoiceMan()
+    //{
+    //    isMan = true;
+    //}
+    //public void ChoiceWoman()
+    //{
+    //    isMan = false;
+    //}
+
+    //CharacterCustomization cc;
+    //public GameObject Player;
+    //private void Start()
+    //{
+    //    cc = Player.GetComponent<CharacterCustomization>();
+    //    var saves = cc.GetSavedCharacterDatas();
+    //    if(saves!=null)
+    //        cc.ApplySavedCharacterData(saves[0]);
+    //}
+
+
+    public CharacterCustomization cc;
+
+   public void LoadCCData()
     {
-       DontDestroyOnLoad(gameObject);
+        StartCoroutine(Loading());
     }
 
-    public bool isMan = true;
+    IEnumerator Loading()
+    {
+        cc = FindObjectOfType<CharacterCustomization>();
+        yield return new WaitForSeconds(1f);
+        Database_Rio.instance.LoadUserInfo();
+        yield return new WaitForSeconds(1f);
+        Database_Rio.instance.UserSetting.SetCharacterSetup(Database_Rio.instance.myInfo.characterCustomizationSetup);
+    }
 
-    public void ChoiceMan()
-    {
-        isMan = true;
-    }
-    public void ChoiceWoman()
-    {
-        isMan = false;
-    }
 }

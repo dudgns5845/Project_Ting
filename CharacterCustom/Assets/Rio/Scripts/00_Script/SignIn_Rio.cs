@@ -7,12 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class SignIn_Rio : MonoBehaviour
 {
-    FirebaseAuth auth;
+    //FirebaseAuth auth;
 
     private void Start()
     {
         //로그인 상태 체크 이벤트 등록
-        auth = FirebaseAuth.DefaultInstance;
+        //auth = Database_Rio.instance.auth;
     }
 
     public GameObject SignINUI;
@@ -50,19 +50,20 @@ public class SignIn_Rio : MonoBehaviour
         else
         {
             StartCoroutine(SignIn(Email.text, Password.text));
-            //유저 정보 데이터베이스 저장하는 함수 호출
-            Database_Rio.instance.SaveUserInfo(Name.text, NickName.text, Age.text, Toggle_M.isOn ? "남성" : "여성");
+           
         }
     }
 
     //회원가입 코루틴 함수
     IEnumerator SignIn(string email, string password)
     {
-        var task = auth.CreateUserWithEmailAndPasswordAsync(email, password);
+        var task = Database_Rio.instance.auth.CreateUserWithEmailAndPasswordAsync(email, password);
         yield return new WaitUntil(() => task.IsCompleted);
         if (task.Exception == null)
         {
             print("회원가입 성공!!");
+            //유저 정보 데이터베이스 저장하는 함수 호출
+            Database_Rio.instance.SaveUserInfo(Name.text, NickName.text, Age.text, Toggle_M.isOn ? "남성" : "여성");
             yield return new WaitForSeconds(1.5f);
             SceneManager.LoadScene("01_CustomScene");
         }

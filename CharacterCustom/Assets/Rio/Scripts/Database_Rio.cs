@@ -21,23 +21,25 @@ public class Database_Rio : MonoBehaviour
     public static Database_Rio instance;
     public CharacterCustomization UserSetting;
 
+    public UserInfo myInfo;
+
     private void Awake()
     {
         if(instance == null)
         {
             instance = this;
         }
+        myInfo = new UserInfo();
     }
 
     FirebaseDatabase database;
-    FirebaseAuth auth;
+    public FirebaseAuth auth;
 
-    UserInfo myInfo = new UserInfo();
+
     private void Start()
     {
         database = FirebaseDatabase.DefaultInstance;
         auth = FirebaseAuth.DefaultInstance;
-       
     }
 
     public void SaveUserInfo(string Name, string NickName, string Age, string Gender)
@@ -60,7 +62,6 @@ public class Database_Rio : MonoBehaviour
         myInfo.nickname = NickName;
         myInfo.age = int.Parse(Age);
         myInfo.gender = Gender;
-
         //저장 경로
         string path = "USER_INFO/"+auth.CurrentUser.UserId;
         //해당 경로에 값 저장
@@ -78,42 +79,60 @@ public class Database_Rio : MonoBehaviour
         }
     }
 
-    //값을 불러오는 함수를 찾아야한다...
-    public void LoadCCData()
-    {
 
+    //캐릭터 커스텀 정보만 업데이트하는 함수
+    public void SaveCCData()
+    {
+        StartCoroutine(ISaveCCData());
     }
 
-    IEnumerator ILoadUserInfo(string Name, string NickName, string Age, string Gender)
+    IEnumerator ISaveCCData()
     {
-        if (UserSetting != null)
-        {
-            myInfo.characterCustomizationSetup = UserSetting.GetSetup();
-        }
-        else
-        {
-            myInfo.characterCustomizationSetup = new CharacterCustomizationSetup();
-        }
-
-        myInfo.name = Name;
-        myInfo.nickname = NickName;
-        myInfo.age = int.Parse(Age);
-        myInfo.gender = Gender;
-
+        myInfo.characterCustomizationSetup = UserSetting.GetSetup();
         //저장 경로
-        string path = "USER_INFO/" + auth.CurrentUser.UserId;
+        string path = "USER_INFO/" + auth.CurrentUser.UserId+ "/characterCustomizationSetup";
         //해당 경로에 값 저장
-        var task = database.GetReference(path).SetRawJsonValueAsync(JsonUtility.ToJson(myInfo));
+        var task = database.GetReference(path).SetRawJsonValueAsync(JsonUtility.ToJson(myInfo.characterCustomizationSetup));
 
         yield return new WaitUntil(() => task.IsCompleted);
 
         if (task.Exception == null)
         {
-            print("유저 정보 저장 성공");
+            print("캐릭터 정보 저장 성공");
         }
         else
         {
-            print("유저 정보 저장 실패 : " + task.Exception);
+            print("캐릭터 정보 저장 실패 : " + task.Exception);
+        }
+    }
+
+
+    //값을 불러오는 함수
+    public void LoadUserInfo()
+    {
+        StartCoroutine(ILoadUserInfo());
+    }
+
+    IEnumerator ILoadUserInfo()
+    {
+       
+        //저장 경로
+        string path = "USER_INFO/" + auth.CurrentUser.UserId;
+        //해당 경로에 값 가져오기
+        var task = database.GetReference(path).GetValueAsync();
+
+        yield return new WaitUntil(() => task.IsCompleted);
+
+        if (task.Exception == null)
+        {
+            myInfo = JsonUtility.FromJson<UserInfo>(task.Result.GetRawJsonValue());
+            
+            //UserSetting.SetCharacterSetup(myInfo.characterCustomizationSetup);
+            print("유저 정보 읽기 성공");
+        }
+        else
+        {
+            print("유저 정보 읽기 실패 : " + task.Exception);
         }
     }
 

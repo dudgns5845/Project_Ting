@@ -508,6 +508,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1627923957}
   - component: {fileID: 1627923956}
+  - component: {fileID: 1627923958}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -529,7 +530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Man: {fileID: 54302752850106576, guid: b30776e08009c6548b24c9b8d3bc4f52, type: 3}
   Woman: {fileID: 7591506337612389362, guid: 2715ce1ca1728c04497635aca037aca3, type: 3}
-  isMan: 0
+  Player: {fileID: 0}
 --- !u!4 &1627923957
 Transform:
   m_ObjectHideFlags: 0
@@ -538,12 +539,52 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1627923955}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1099.8842, y: 366.8676, z: 212.52039}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1627923958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627923955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932f5d53b1f73094492b6fe23439d580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserSetting: {fileID: 0}
+  myInfo:
+    name: 
+    nickname: 
+    gender: 
+    age: 0
+    characterCustomizationSetup:
+      settingsName: 
+      selectedElements:
+        Hair: -1
+        Beard: -1
+        Hat: -1
+        Shirt: -1
+        Pants: -1
+        Shoes: -1
+        Accessory: -1
+        Item1: -1
+      blendshapes: []
+      MinLod: 0
+      MaxLod: 0
+      SkinColor: []
+      EyeColor: []
+      HairColor: []
+      UnderpantsColor: []
+      TeethColor: []
+      OralCavityColor: []
+      Height: 0
+      HeadSize: 0
 --- !u!1 &1642995941
 GameObject:
   m_ObjectHideFlags: 0
