@@ -36,7 +36,7 @@ public class CustomInfo_Rio : MonoBehaviour
 
     public CharacterCustomization cc;
 
-   public void LoadCCData()
+    public void LoadCCData()
     {
         StartCoroutine(Loading());
     }

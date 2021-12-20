@@ -45,29 +45,24 @@ public class GameManager_Rio : MonoBehaviour
 
     private IEnumerator Start()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         //일단 서버에서 값을 읽어온다
         Database_Rio.instance.LoadUserInfo();
-        yield return new WaitForSeconds(1f);
+
+        yield return new WaitForSeconds(0.5f);
 
         if (Database_Rio.instance.myInfo.characterCustomizationSetup.settingsName == "MaleSettings")
         {
-        
-            print("나 실행한다...");
             Player = Instantiate(Man);
-            Player.transform.position = Vector3.zero;
-            Database_Rio.instance.UserSetting = Man.GetComponent<CharacterCustomization>();
-            yield return new WaitForSeconds(1f);
-
-            Database_Rio.instance.UserSetting.SetCharacterSetup(Database_Rio.instance.myInfo.characterCustomizationSetup);
         }
         else if (Database_Rio.instance.myInfo.characterCustomizationSetup.settingsName == "FemaleSettings")
         {
             Player = Instantiate(Woman);
-            Player.transform.position = Vector3.zero;
-            Database_Rio.instance.UserSetting = Man.GetComponent<CharacterCustomization>();
-            Database_Rio.instance.UserSetting.SetCharacterSetup(Database_Rio.instance.myInfo.characterCustomizationSetup);
         }
+
+        Player.transform.position = Vector3.zero;
+        Database_Rio.instance.UserSetting = Player.GetComponent<CharacterCustomization>();
+        Database_Rio.instance.UserSetting.SetCharacterSetup(Database_Rio.instance.myInfo.characterCustomizationSetup);
     }
 }
