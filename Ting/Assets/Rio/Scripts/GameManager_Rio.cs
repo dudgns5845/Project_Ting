@@ -50,7 +50,7 @@ public class GameManager_Rio : MonoBehaviour
         //일단 서버에서 값을 읽어온다
         Database_Rio.instance.LoadUserInfo();
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(3f);
 
         if (Database_Rio.instance.myInfo.characterCustomizationSetup.settingsName == "MaleSettings")
         {

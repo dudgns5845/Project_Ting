@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerMove_Rio : MonoBehaviour
 {
+    public float speed = 6.0F;
+    public float jumpSpeed = 8.0F;
+    public float gravity = 20.0F;
+    private Vector3 moveDirection = Vector3.zero;
     Animator anim;
     private void Start()
     {
@@ -13,6 +17,7 @@ public class PlayerMove_Rio : MonoBehaviour
     void Update()
     {
         FSM();
+        Move();
     }
 
     void FSM()
@@ -41,5 +46,31 @@ public class PlayerMove_Rio : MonoBehaviour
             anim.SetBool("angry", true);
         if (Input.GetKeyUp(KeyCode.Alpha3))
             anim.SetBool("angry", false);
+    }
+
+    void Move()
+    {
+        CharacterController controller = GetComponent<CharacterController>();
+        if (controller == null) return;
+        if (controller.isGrounded)
+        {
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            moveDirection = transform.TransformDirection(moveDirection);
+            moveDirection *= speed;
+            if (Input.GetButton("Jump"))
+                moveDirection.y = jumpSpeed;
+
+        }
+        moveDirection.y -= gravity * Time.deltaTime;
+        controller.Move(moveDirection * Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            transform.Rotate(new Vector3(0, 30, 0));
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            transform.Rotate(new Vector3(0, -30, 0));
+        }
     }
 }

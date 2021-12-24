@@ -10487,9 +10487,10 @@ GameObject:
   - component: {fileID: 7455428889000264263}
   - component: {fileID: 7699828008073870126}
   - component: {fileID: -1868972228368902221}
+  - component: {fileID: 3877855869614429731}
   m_Layer: 0
   m_Name: Woman
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10681,7 +10682,7 @@ MonoBehaviour:
     - {fileID: 1650837616806689312}
     - {fileID: 7580228736959294909}
   prefabPath: Assets/Prefabs/Woman.prefab
-  instanceStatus: 5
+  instanceStatus: 6
   originHip: {fileID: 7269736455034084531}
   headHip: {fileID: 39849524941822762}
   clothesAnchors:
@@ -11081,6 +11082,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2801744bcd7cc4e89d4debc2e8221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 6
+  jumpSpeed: 8
+  gravity: 20
+--- !u!143 &3877855869614429731
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7591506337612389362}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1.04, z: 0}
 --- !u!1 &7613318732516871617
 GameObject:
   m_ObjectHideFlags: 0
