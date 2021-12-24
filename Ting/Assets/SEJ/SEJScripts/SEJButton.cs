@@ -9,9 +9,10 @@ public class SEJButton : MonoBehaviour
     public static SEJButton btn;
 
     public Button btnQ;
-    public Button btnX;
+    public Button btnX; //´İ±â¹öÆ°
     public Button btnC; //ÄÁÅÙÃ÷»óÀÚ
-   
+    
+    
     private void Awake()
     {
         if(btn==null)
