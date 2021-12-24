@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 0b86d2eef9b15bb47ac9136b863ca93f
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Rage Italic
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: ba881a7b624abba4491d240687cf4095, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
