@@ -24,10 +24,15 @@ public class GM_SEJ : MonoBehaviourPunCallbacks
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void SetPlayerPos(PhotonView pv)
+    {
+        pv.RPC("RpcSetPlayerPos", RpcTarget.AllBuffered, playerPos[playerPosIndex].position);
+        playerPosIndex++;
     }
     void CreatePlayer()
     {
@@ -37,9 +42,6 @@ public class GM_SEJ : MonoBehaviourPunCallbacks
         Vector3 pos = new Vector3(Random.Range(-3.0f, 3.0f), 0, Random.Range(-3.0f, 3.0f));
         //Vector3 pos = new Vector3(0,0,0);
         PhotonNetwork.Instantiate("LobbyPlayer", pos, Quaternion.identity);
-
-
-
 
     }
 }
