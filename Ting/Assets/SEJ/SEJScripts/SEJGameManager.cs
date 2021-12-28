@@ -12,7 +12,7 @@ public class SEJGameManager : MonoBehaviourPunCallbacks
     
     public PhotonView myPhotonView;
     public Transform[] playerPos;
-    //현재 위치할 index
+    //현재 위치할 indexv
     int playerPosIndex;
 
     private void Awake()
@@ -60,7 +60,8 @@ public class SEJGameManager : MonoBehaviourPunCallbacks
 
     public void SetPlayerPos(PhotonView pv)
     {
-       
+        pv.RPC("RpcSetPlayerPos", RpcTarget.AllBuffered, playerPos[playerPosIndex].position);
+        playerPosIndex++;
     }
-
+    
 }
