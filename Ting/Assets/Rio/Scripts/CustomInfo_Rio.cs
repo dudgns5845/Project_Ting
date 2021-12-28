@@ -41,11 +41,12 @@ public class CustomInfo_Rio : MonoBehaviour
         StartCoroutine(Loading());
     }
 
+    
     IEnumerator Loading()
     {
         cc = FindObjectOfType<CharacterCustomization>();
         yield return new WaitForSeconds(1f);
-        Database_Rio.instance.LoadUserInfo();
+        Database_Rio.instance.LoadUserInfo(Database_Rio.instance.auth.CurrentUser.UserId);
         yield return new WaitForSeconds(1f);
         Database_Rio.instance.UserSetting.SetCharacterSetup(Database_Rio.instance.myInfo.characterCustomizationSetup);
     }

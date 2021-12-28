@@ -108,16 +108,18 @@ public class Database_Rio : MonoBehaviour
 
 
     //값을 불러오는 함수
-    public void LoadUserInfo()
+    public void LoadUserInfo(string userid, System.Action onComplete)
     {
-        StartCoroutine(ILoadUserInfo());
+        StartCoroutine(ILoadUserInfo(userid, onComplete));
     }
 
-    IEnumerator ILoadUserInfo()
+
+    IEnumerator ILoadUserInfo(string userid, System.Action onComplete)
     {
        
         //저장 경로
-        string path = "USER_INFO/" + auth.CurrentUser.UserId;
+        //string path = "USER_INFO/" + auth.CurrentUser.UserId;
+        string path = "USER_INFO/" + userid;
         //해당 경로에 값 가져오기
         var task = database.GetReference(path).GetValueAsync();
 
@@ -134,6 +136,8 @@ public class Database_Rio : MonoBehaviour
         {
             print("유저 정보 읽기 실패 : " + task.Exception);
         }
+
+        onComplete();
     }
 
 

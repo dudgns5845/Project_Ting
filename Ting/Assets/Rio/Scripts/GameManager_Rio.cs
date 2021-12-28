@@ -10,13 +10,14 @@ public class GameManager_Rio : MonoBehaviour
     public GameObject Woman;
     public GameObject Player;
 
-
+   
     public IEnumerator UserInit()
     {
+
         yield return new WaitForSeconds(0.5f);
 
         //일단 서버에서 값을 읽어온다
-        Database_Rio.instance.LoadUserInfo();
+        Database_Rio.instance.LoadUserInfo(Database_Rio.instance.auth.CurrentUser.UserId);
 
         yield return new WaitForSeconds(3f);
 

@@ -10,9 +10,10 @@ public class Player_Pun_Setting_Rio : MonoBehaviour
     PhotonVoiceView pv_voice;
     public GameObject Cam;
 
-    private void Awake()
+   
+
+    private void ww()
     {
-      
         pv = GetComponent<PhotonView>();
         pv_voice = GetComponent<PhotonVoiceView>();
         if (pv.IsMine)
