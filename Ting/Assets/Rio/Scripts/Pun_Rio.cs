@@ -47,8 +47,6 @@ public class Pun_Rio : MonoBehaviourPunCallbacks
         print("메롱~ 방입장실패!");
     }
 
-    Transform spawnPoint; //리스폰 위치
-    string userid;
     public override void OnJoinedRoom()
     {
         print("방입장 성공!");
@@ -58,50 +56,51 @@ public class Pun_Rio : MonoBehaviourPunCallbacks
             print($"{player.Value.NickName},{player.Value.ActorNumber}");
         }
 
-        spawnPoint = GameObject.Find("SpawnPoint").GetComponent<Transform>();
-        userid = Database_Rio.instance.auth.CurrentUser.UserId;
-        //PhotonNetwork.Instantiate("Man", spawnPoint.position, spawnPoint.rotation, 0);
-
-        photonView.RPC("initCharacter", RpcTarget.All, userid);
-    }
-
-    GameObject Player;
-
-    [PunRPC]
-    public void initCharacter(string userid)
-    {
-        //StartCoroutine(UserInit(userid));
-        //일단 서버에서 값을 읽어온다
-        Database_Rio.instance.LoadUserInfo(userid, ttt);
-    }
-
-    
-    public IEnumerator UserInit(string userid)
-    {
-
-        yield return new WaitForSeconds(0.5f);
-
-        //일단 서버에서 값을 읽어온다
-        Database_Rio.instance.LoadUserInfo(userid, ttt);
-
-        yield return new WaitForSeconds(3f);
-
+        Transform spawnPoint = GameObject.Find("SpawnPoint").GetComponent<Transform>();
         
+        //플레이어 생성
+        PhotonNetwork.Instantiate("Man", spawnPoint.position, spawnPoint.rotation, 0);
+
+        //photonView.RPC("initCharacter", RpcTarget.All, userid);
     }
 
-    public void ttt()
-    {
-        if (Database_Rio.instance.myInfo.characterCustomizationSetup.settingsName == "MaleSettings")
-        {
-            Player = PhotonNetwork.Instantiate("Man", spawnPoint.position, spawnPoint.rotation, 0);
-        }
-        else if (Database_Rio.instance.myInfo.characterCustomizationSetup.settingsName == "FemaleSettings")
-        {
-            Player = PhotonNetwork.Instantiate("Wamen", spawnPoint.position, spawnPoint.rotation, 0);
-        }
+    //GameObject Player;
 
-        Database_Rio.instance.UserSetting = Player.GetComponent<CharacterCustomization>();
-        Database_Rio.instance.UserSetting.SetCharacterSetup(Database_Rio.instance.myInfo.characterCustomizationSetup);
-    }
+    //[PunRPC]
+    //public void initCharacter(string userid)
+    //{
+    //    //StartCoroutine(UserInit(userid));
+    //    //일단 서버에서 값을 읽어온다
+    //    Database_Rio.instance.LoadUserInfo(userid, ttt);
+    //}
+
+
+    //public IEnumerator UserInit(string userid)
+    //{
+
+    //    yield return new WaitForSeconds(0.5f);
+
+    //    //일단 서버에서 값을 읽어온다
+    //    Database_Rio.instance.LoadUserInfo(userid, ttt);
+
+    //    yield return new WaitForSeconds(3f);
+
+
+    //}
+
+    //public void ttt()
+    //{
+    //    if (Database_Rio.instance.myInfo.characterCustomizationSetup.settingsName == "MaleSettings")
+    //    {
+    //        Player = PhotonNetwork.Instantiate("Man", spawnPoint.position, spawnPoint.rotation, 0);
+    //    }
+    //    else if (Database_Rio.instance.myInfo.characterCustomizationSetup.settingsName == "FemaleSettings")
+    //    {
+    //        Player = PhotonNetwork.Instantiate("Wamen", spawnPoint.position, spawnPoint.rotation, 0);
+    //    }
+
+    //    Database_Rio.instance.UserSetting = Player.GetComponent<CharacterCustomization>();
+    //    Database_Rio.instance.UserSetting.SetCharacterSetup(Database_Rio.instance.myInfo.characterCustomizationSetup);
+    //}
 
 }

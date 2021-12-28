@@ -567,12 +567,13 @@ GameObject:
   - component: {fileID: 777551915847813977}
   - component: {fileID: 6793755604931131254}
   - component: {fileID: 3010012774281165144}
-  - component: {fileID: -6131165530893750205}
   - component: {fileID: -1923682399001841302}
+  - component: {fileID: -6131165530893750205}
   - component: {fileID: 5327148113120005891}
   - component: {fileID: 5961597320653323213}
   - component: {fileID: 1191547685549260380}
   - component: {fileID: 6619218159676494257}
+  - component: {fileID: 9046025576524609258}
   m_Layer: 10
   m_Name: Man
   m_TagString: Player
@@ -1171,21 +1172,6 @@ LODGroup:
     - renderer: {fileID: 3593251436933045327}
     - renderer: {fileID: 2814061539100787280}
   m_Enabled: 1
---- !u!114 &-6131165530893750205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54302752850106576}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e2801744bcd7cc4e89d4debc2e8221e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 6
-  jumpSpeed: 8
-  gravity: 20
 --- !u!143 &-1923682399001841302
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1204,6 +1190,21 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.03, z: 0}
+--- !u!114 &-6131165530893750205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54302752850106576}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e2801744bcd7cc4e89d4debc2e8221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 6
+  jumpSpeed: 8
+  gravity: 20
 --- !u!114 &5327148113120005891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1275,6 +1276,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cam: {fileID: 715352159}
+--- !u!114 &9046025576524609258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54302752850106576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932f5d53b1f73094492b6fe23439d580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserSetting: {fileID: 0}
+  myInfo:
+    name: 
+    nickname: 
+    gender: 
+    age: 0
+    characterCustomizationSetup:
+      settingsName: 
+      selectedElements:
+        Hair: -1
+        Beard: -1
+        Hat: -1
+        Shirt: -1
+        Pants: -1
+        Shoes: -1
+        Accessory: -1
+        Item1: -1
+      blendshapes: []
+      MinLod: 0
+      MaxLod: 0
+      SkinColor: []
+      EyeColor: []
+      HairColor: []
+      UnderpantsColor: []
+      TeethColor: []
+      OralCavityColor: []
+      Height: 0
+      HeadSize: 0
 --- !u!1 &71575270452692673
 GameObject:
   m_ObjectHideFlags: 0

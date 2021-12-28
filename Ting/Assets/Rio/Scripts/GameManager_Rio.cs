@@ -17,7 +17,7 @@ public class GameManager_Rio : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         //일단 서버에서 값을 읽어온다
-        Database_Rio.instance.LoadUserInfo(Database_Rio.instance.auth.CurrentUser.UserId);
+        //Database_Rio.instance.LoadUserInfo(Database_Rio.instance.auth.CurrentUser.UserId);
 
         yield return new WaitForSeconds(3f);
 

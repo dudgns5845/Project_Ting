@@ -42,6 +42,7 @@ public class Database_Rio : MonoBehaviour
         auth = FirebaseAuth.DefaultInstance;
     }
 
+    //신규 회원 정보 저장 함수
     public void SaveUserInfo(string Name, string NickName, string Age, string Gender)
     {
         StartCoroutine(ISaveUserInfo(Name,NickName,Age,Gender));
@@ -113,7 +114,6 @@ public class Database_Rio : MonoBehaviour
         StartCoroutine(ILoadUserInfo(userid, onComplete));
     }
 
-
     IEnumerator ILoadUserInfo(string userid, System.Action onComplete)
     {
        
@@ -128,7 +128,6 @@ public class Database_Rio : MonoBehaviour
         if (task.Exception == null)
         {
             myInfo = JsonUtility.FromJson<UserInfo>(task.Result.GetRawJsonValue());
-            
             //UserSetting.SetCharacterSetup(myInfo.characterCustomizationSetup);
             print("유저 정보 읽기 성공");
         }
@@ -136,7 +135,6 @@ public class Database_Rio : MonoBehaviour
         {
             print("유저 정보 읽기 실패 : " + task.Exception);
         }
-
         onComplete();
     }
 
