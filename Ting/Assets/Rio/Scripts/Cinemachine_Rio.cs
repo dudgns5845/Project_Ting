@@ -10,8 +10,10 @@ public class Cinemachine_Rio : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         cv = GetComponent<CinemachineVirtualCamera>();
-        cv.Follow = GameObject.FindGameObjectWithTag ("Player").GetComponent<Transform>();
-        cv.LookAt = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        cv.Follow = transform.parent;
+        cv.LookAt = transform.parent;
+        //cv.Follow = GameObject.FindGameObjectWithTag ("Player").GetComponent<Transform>();
+        //cv.LookAt = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     

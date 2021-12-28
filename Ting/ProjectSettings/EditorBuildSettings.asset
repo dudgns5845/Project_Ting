@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Map/Ting.unity
     guid: 94db5b017517dfa42b3df49cf805a494
+  - enabled: 1
+    path: Assets/Rio/Scenes/02_Play1.unity
+    guid: c414d3e53a337884d895510ec79386b5
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 94fd412d509b34140bbc25e43d753d00, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 286694be8b1172f4aacbcc6a700022b2, type: 2}
