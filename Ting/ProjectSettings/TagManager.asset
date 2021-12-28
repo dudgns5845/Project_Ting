@@ -5,6 +5,38 @@ TagManager:
   serializedVersion: 2
   tags:
   - ClassicHand
+  - Board
+  - Ball
+  - Goal
+  - Fail
+  - Table
+  - Reload
+  - Line
+  - DoubleBull
+  - SingleBull
+  - Bullet
+  - Dart
+  - Male
+  - S5
+  - S3
+  - S2
+  - S13
+  - S8
+  - S19
+  - S20
+  - S17
+  - S4
+  - S12
+  - S11
+  - S15
+  - S6
+  - S7
+  - S1
+  - S9
+  - S16
+  - S14
+  - S10
+  - S18
   layers:
   - Default
   - TransparentFX
@@ -15,7 +47,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Mallet
   - ManVRmask
   - ManVRmask
   - 

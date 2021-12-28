@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class ThrowHockeyBall : MonoBehaviourPun, IPunObservable
+public class ThrowHockeyBall : MonoBehaviour
 {
     //플레이어 위치
     public Transform myPlayer;
@@ -11,7 +11,7 @@ public class ThrowHockeyBall : MonoBehaviourPun, IPunObservable
     public Transform trRight;
     public GameObject grabObject;
 
-    public GameObject mallet;
+    public GameObject mallet; //스틱
 
     public GameObject cameraRig;
 
@@ -22,25 +22,25 @@ public class ThrowHockeyBall : MonoBehaviourPun, IPunObservable
 
     //IK 이용해 우리가 보는 캐릭터의 손의 위치를 고정시켜둬서 Mallet이 테이블 밑으로 떨어지지 않게끔 보이게 한다
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if(stream.IsWriting) //데이터 전송하는 상황
-        {
-            stream.SendNext(transform.position);
-            stream.SendNext(trRight.position);
-            stream.SendNext(transform.rotation);
-        }
-        if(stream.IsReading) //읽을 수 있는 상태라면
-        {
-            playerPos = (Vector3)stream.ReceiveNext();
-            trRightPos = (Vector3)stream.ReceiveNext(); 
-            receiveRot = (Quaternion)stream.ReceiveNext();
+    //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    //{
+    //    if(stream.IsWriting) //데이터 전송하는 상황
+    //    {
+    //        stream.SendNext(transform.position);
+    //        stream.SendNext(trRight.position);
+    //        stream.SendNext(transform.rotation);
+    //    }
+    //    if(stream.IsReading) //읽을 수 있는 상태라면
+    //    {
+    //        playerPos = (Vector3)stream.ReceiveNext();
+    //        trRightPos = (Vector3)stream.ReceiveNext(); 
+    //        receiveRot = (Quaternion)stream.ReceiveNext();
 
-        }
-    }
+    //    }
+    //}
     void Start()
     {
-        cameraRig.SetActive(photonView.IsMine);
+        //cameraRig.SetActive(photonView.IsMine);
         //Instantiate(mallet); // mallet생성&위치는 테이블 생성될 때 같이 나오도록 테이블에 삽입하자
         //mallet.transform.position = new Vector3(0.47f, 1.23f, -1.153f);
     }
@@ -53,7 +53,7 @@ public class ThrowHockeyBall : MonoBehaviourPun, IPunObservable
 
     void Update()
     {
-        if (photonView.IsMine == false) return;
+        //if (photonView.IsMine == false) return;
         //왼손도 넣어주면 4개가 더 생기니까 아예 오른손, 왼손 컨트롤러스크립트를 따로 만들어서 넣어주는게 깔끔함
 
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))

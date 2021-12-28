@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using TMPro;
+
 
 public class HockeyGoal : MonoBehaviourPun
 {
@@ -10,7 +12,7 @@ public class HockeyGoal : MonoBehaviourPun
     bool isGoal;
     public Transform yours;
 
-    public Text txtMyScore;
+    public TextMeshProUGUI txtMyScore;
     public int myScore;
 
     private void Start()
@@ -26,7 +28,7 @@ public class HockeyGoal : MonoBehaviourPun
         }
     }
 
-    [PunRPC]
+    //[PunRPC]
     public void GetMyScore()
     {
         print("³ªÀÇ µæÁ¡");
@@ -35,11 +37,11 @@ public class HockeyGoal : MonoBehaviourPun
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(photonView.IsMine && other.gameObject.CompareTag("Ball"))
-        //if(other.gameObject.CompareTag("Ball"))
+        //    if(photonView.IsMine && other.gameObject.CompareTag("Ball"))
+        if (other.gameObject.CompareTag("Ball"))
         {
-            PhotonView pv = other.GetComponent<PhotonView>();
-            pv.RPC("GetMyScore", RpcTarget.AllBuffered);
+            //    PhotonView pv = other.GetComponent<PhotonView>();
+            //    pv.RPC("GetMyScore", RpcTarget.AllBuffered);
             //myScore += 1;
             //txtMyScore.text = myScore + "";
 
