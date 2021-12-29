@@ -5,7 +5,7 @@ using Firebase.Database;
 using Firebase.Auth;
 using AdvancedPeopleSystem;
 using UnityEngine.UI;
-
+using System;
 [System.Serializable]
 public class UserInfo
 {
@@ -18,17 +18,15 @@ public class UserInfo
 
 public class Database_Rio : MonoBehaviour
 {
-    public static Database_Rio instance;
+   
     public CharacterCustomization UserSetting;
 
     public UserInfo myInfo;
 
+    public string userid;
+
     private void Awake()
     {
-        if(instance == null)
-        {
-            instance = this;
-        }
         myInfo = new UserInfo();
     }
 
@@ -109,17 +107,17 @@ public class Database_Rio : MonoBehaviour
 
 
     //값을 불러오는 함수
-    public void LoadUserInfo(string userid, System.Action onComplete)
+    public void LoadUserInfo(string userid_, Action NextWork)
     {
-        StartCoroutine(ILoadUserInfo(userid, onComplete));
+        StartCoroutine(ILoadUserInfo(userid_, NextWork));
     }
 
-    IEnumerator ILoadUserInfo(string userid, System.Action onComplete)
+    IEnumerator ILoadUserInfo(string userid_, Action NextWork)
     {
        
         //저장 경로
         //string path = "USER_INFO/" + auth.CurrentUser.UserId;
-        string path = "USER_INFO/" + userid;
+        string path = "USER_INFO/" + userid_;
         //해당 경로에 값 가져오기
         var task = database.GetReference(path).GetValueAsync();
 
@@ -135,10 +133,8 @@ public class Database_Rio : MonoBehaviour
         {
             print("유저 정보 읽기 실패 : " + task.Exception);
         }
-        onComplete();
+        NextWork();
     }
-
-
 }
 
 

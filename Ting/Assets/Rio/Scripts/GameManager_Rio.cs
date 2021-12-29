@@ -10,7 +10,13 @@ public class GameManager_Rio : MonoBehaviour
     public GameObject Woman;
     public GameObject Player;
 
-   
+    Database_Rio db;
+    private void Start()
+    {
+        db = FindObjectOfType<Database_Rio>();
+    }
+
+
     public IEnumerator UserInit()
     {
 
@@ -21,17 +27,17 @@ public class GameManager_Rio : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
 
-        if (Database_Rio.instance.myInfo.characterCustomizationSetup.settingsName == "MaleSettings")
+        if (db.myInfo.characterCustomizationSetup.settingsName == "MaleSettings")
         {
             Player = Instantiate(Man);
         }
-        else if (Database_Rio.instance.myInfo.characterCustomizationSetup.settingsName == "FemaleSettings")
+        else if (db.myInfo.characterCustomizationSetup.settingsName == "FemaleSettings")
         {
             Player = Instantiate(Woman);
         }
 
         Player.transform.position = Vector3.zero;
-        Database_Rio.instance.UserSetting = Player.GetComponent<CharacterCustomization>();
-        Database_Rio.instance.UserSetting.SetCharacterSetup(Database_Rio.instance.myInfo.characterCustomizationSetup);
+        db.UserSetting = Player.GetComponent<CharacterCustomization>();
+        db.UserSetting.SetCharacterSetup(db.myInfo.characterCustomizationSetup);
     }
 }

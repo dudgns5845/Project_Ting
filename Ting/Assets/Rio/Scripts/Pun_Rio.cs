@@ -47,6 +47,8 @@ public class Pun_Rio : MonoBehaviourPunCallbacks
         print("메롱~ 방입장실패!");
     }
 
+   
+
     public override void OnJoinedRoom()
     {
         print("방입장 성공!");
@@ -59,7 +61,7 @@ public class Pun_Rio : MonoBehaviourPunCallbacks
         Transform spawnPoint = GameObject.Find("SpawnPoint").GetComponent<Transform>();
         
         //플레이어 생성
-        PhotonNetwork.Instantiate("Man", spawnPoint.position, spawnPoint.rotation, 0);
+        PhotonNetwork.Instantiate("Player", spawnPoint.position, spawnPoint.rotation, 0);
 
         //photonView.RPC("initCharacter", RpcTarget.All, userid);
     }

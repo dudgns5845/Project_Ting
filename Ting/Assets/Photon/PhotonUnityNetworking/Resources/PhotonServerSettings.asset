@@ -45,6 +45,9 @@ MonoBehaviour:
   - ChangeColour
   - HeresWhy
   - initCharacter
+  - UpdateCharacter
+  - userIdSetting
+  - UpdateUserCharacter
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

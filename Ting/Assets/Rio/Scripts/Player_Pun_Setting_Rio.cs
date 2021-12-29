@@ -4,23 +4,36 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Photon.Voice.PUN;
+using AdvancedPeopleSystem;
+using Firebase.Auth;
 
 //광장에 접속하면 생성되는 플레이어 셋팅 스크립트
-public class Player_Pun_Setting_Rio : MonoBehaviour
+public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
 {
     PhotonView pv;
     PhotonVoiceView pv_voice;
+    FirebaseAuth auth;
     public GameObject Cam;
+    public GameObject Man;
+    public GameObject Woman;
+    public string userid;
+
+    Database_Rio db;
 
     private void Start()
     {
+
+        db = GetComponent<Database_Rio>();
         pv = GetComponent<PhotonView>();
+        auth = FirebaseAuth.DefaultInstance;
+
         if (pv.IsMine)
         {
             //플레이어 카메라 활성화
             Cam.SetActive(true);
             //플레이어 조작 활성화
             GetComponent<PlayerMove_Rio>().enabled = true;
+
         }
         else
         {
@@ -29,14 +42,74 @@ public class Player_Pun_Setting_Rio : MonoBehaviour
             //플레이어 조작 활성화
             GetComponent<PlayerMove_Rio>().enabled = false;
         }
+        //유저 아이디 초기화
+        pv.RPC("userIdSetting", RpcTarget.All, auth.CurrentUser.UserId);
+
+        //데이터 베이스에서 CC데이터를 읽어온다
+        //읽고 난 다음에야 셋팅을 시작한다 ==> 콜백
+        //db.LoadUserInfo(CCSetting);
+        //pv.RPC("UpdateUserCharacter", RpcTarget.AllBuffered, userid);
+
     }
+
+    [PunRPC]
+    void userIdSetting(string id)
+    {
+        userid = id;
+        print(userid);
+        db.LoadUserInfo(userid, CCSetting);
+    }
+
+
+    //[PunRPC]
+    //void UpdateUserCharacter()
+    //{
+    //    db.LoadUserInfo(CCSetting);
+    //}
 
 
     //캐릭터가 생성되면 자신의 모습을 CC 데이터로 업데이트 하는 함수
     void CCSetting()
     {
-        Database_Rio.instance.LoadUserInfo("",null);
+        //성별에 따라 케릭터 활성화한다
+        //그리고 케릭터 업댓하는 속성을 등록해주고
+
+        if (db.myInfo.characterCustomizationSetup.settingsName == "MaleSettings")
+        {
+            Man.SetActive(true);
+            db.UserSetting = Man.GetComponent<CharacterCustomization>();
+            GetComponent<PlayerMove_Rio>().anim = Man.GetComponent<Animator>();
+        }
+        else if (db.myInfo.characterCustomizationSetup.settingsName == "FemaleSettings")
+        {
+            Woman.SetActive(true);
+            db.UserSetting = Woman.GetComponent<CharacterCustomization>();
+            GetComponent<PlayerMove_Rio>().anim = Man.GetComponent<Animator>();
+        }
+
+        db.UserSetting.SetCharacterSetup(db.myInfo.characterCustomizationSetup);
     }
+
+
+    //[PunRPC]
+    //void UpdateCharacter()
+    //{
+    //    if (pv.IsMine)
+    //    {
+    //        //cc정보를 가지고 활성화한다
+    //        db.UserSetting.SetCharacterSetup(db.myInfo.characterCustomizationSetup);
+    //    }  
+    //    else
+    //    {
+    //        db.LoadUserInfo(CCSetting);
+    //        //cc정보를 가지고 활성화한다
+    //        db.UserSetting.SetCharacterSetup(db.myInfo.characterCustomizationSetup);
+    //    }
+
+    //}
+
+
+
     //[PunRPC]
     //public void initCharacter(string userid)
     //{
@@ -74,38 +147,4 @@ public class Player_Pun_Setting_Rio : MonoBehaviour
     //    Database_Rio.instance.UserSetting.SetCharacterSetup(Database_Rio.instance.myInfo.characterCustomizationSetup);
     //}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //private void Start()
-    //{
-    //    pv = GetComponent<PhotonView>();
-    //    pv_voice = GetComponent<PhotonVoiceView>();
-    //    if (pv.IsMine)
-    //    {
-    //        pv_voice.enabled = true;
-    //        GetComponent<PlayerMove_Rio>().enabled = true;
-    //        Cam.SetActive(true);
-    //        AudioListener.volume = 1;
-    //    }
-    //    else
-    //    {
-    //        pv_voice.enabled = false;
-    //        GetComponent<AudioListener>().enabled = false;
-    //        GetComponent<PlayerMove_Rio>().enabled = false;
-    //        Cam.SetActive(false);
-    //    }
-    //}
 }
