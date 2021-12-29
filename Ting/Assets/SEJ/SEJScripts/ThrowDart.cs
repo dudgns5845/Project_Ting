@@ -11,7 +11,7 @@ public class ThrowDart : MonoBehaviour
     //다트 공장
     public GameObject dartFactory;
     //다트를 잡은 손
-    public Transform throwPos;
+    //public Transform throwPos;
     //오른손 Transfom
     public Transform trRight;
 
@@ -24,7 +24,7 @@ public class ThrowDart : MonoBehaviour
 
     void Start()
     {
-        throwPos = Camera.main.transform;
+        //throwPos = Camera.main.transform;
     }
 
     void Update()
@@ -39,7 +39,7 @@ public class ThrowDart : MonoBehaviour
         //else if (Input.GetButtonUp("Fire1") || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         else if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         {
-            if (dart != null) //도넛이 손에 있는 상태라면 
+            if (dart != null) //다트가 손에 있는 상태라면 
             {
                 // 던지는 힘의 크기를 제한하고싶다.
                 forceWithTime = Mathf.Clamp(forceWithTime, 5, forceMax);

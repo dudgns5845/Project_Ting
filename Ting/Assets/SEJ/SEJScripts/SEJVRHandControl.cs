@@ -40,7 +40,7 @@ public class SEJVRHandControl : MonoBehaviour
                 // 잡는 순간
                 tryGrab = true;
                 // trRight를 중심으로 반경 0.1M 안의 Mallet레이어 충돌체를 모두 검사하고싶다.
-                int layerMask = 1 << LayerMask.NameToLayer("Mallet");
+                int layerMask = 1 << LayerMask.NameToLayer("Stick");
                 Collider[] cols = Physics.OverlapSphere(trRight.position, grabRadius, layerMask);
                 if (cols.Length > 0)
                 {
