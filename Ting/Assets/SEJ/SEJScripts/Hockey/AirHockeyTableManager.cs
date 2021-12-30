@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-//using Photon.Pun;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -10,17 +10,31 @@ using TMPro;
 //점수판이 생성된다
 //공이 테이블 위에서 생성한다
 //스틱(말렛)도 생성한다
-public class AirHockeyTableManager : MonoBehaviour
+
+public class AirHockeyTableManager : MonoBehaviourPun
 {
+
+    public static AirHockeyTableManager hockeyTableM;
+
     //public PhotonView hockeyPv;
     public GameObject hockeyBtnObj;
     public Button hockeyBtn;
+
     public GameObject score; 
+
     public GameObject ball;
     public GameObject stick;
-    public GameObject stick2;
+
+    public Transform[] spawnPos; //stick 생성할 위치
 
 
+    private void Awake()
+    {
+        if(hockeyTableM==null)
+        {
+            hockeyTableM = this;
+        }
+    }
     void Start()
     {
         //처음에 테이블 위에 아무것도 없이 시작하기 버튼만 있음
@@ -28,7 +42,6 @@ public class AirHockeyTableManager : MonoBehaviour
         score.SetActive(false);
         ball.SetActive(false);
         stick.SetActive(false);
-        stick2.SetActive(false);
     }
 
     void Update()
@@ -45,7 +58,6 @@ public class AirHockeyTableManager : MonoBehaviour
         score.SetActive(true);
         ball.SetActive(true);
         stick.SetActive(true);
-        stick2.SetActive(true);
     }
 
 

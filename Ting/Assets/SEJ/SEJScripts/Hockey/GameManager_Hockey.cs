@@ -1,16 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class GameManager_Hockey : MonoBehaviour
+using Photon.Pun;
+//점수받기
+public class GameManager_Hockey : MonoBehaviourPun
 {
-    // Start is called before the first frame update
+    public static GameManager_Hockey gmHockey;
+    public Transform[] spawnPositions;
+
+    private void Awake()
+    {
+        if(gmHockey==null)
+        {
+            gmHockey = this;
+        }
+    }
+
+    void SpawnStick()
+    {
+        var localStickIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
+    }
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         

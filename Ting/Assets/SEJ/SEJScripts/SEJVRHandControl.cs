@@ -51,6 +51,12 @@ public class SEJVRHandControl : MonoBehaviour
                 }
             }
         }
+        if (Input.GetButton("Fire1") || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        {
+
+        }
+
+
     }
     void MeetingRoomHand()
     {
@@ -114,6 +120,10 @@ public class SEJVRHandControl : MonoBehaviour
                 if (hit.transform.name.Contains("RightBtn"))
                 {
                     SEJButton.btn.OnClickRight();
+                }
+                if(hit.transform.name.Contains("AirHockeyBtn"))
+                {
+                    AirHockeyTableManager.hockeyTableM.OnClickHockeyBtn();
                 }
                 else
                 {

@@ -5,14 +5,11 @@ using UnityEngine;
 //다트공장에서 다트를 생성한다
 //트리거를 누른 상태로 뒤로 잡아 댕겼다가 놓으면 발사하고싶다
 
-
 public class ThrowDart : MonoBehaviour
 {
     //다트 공장
     public GameObject dartFactory;
-    //다트를 잡은 손
-    //public Transform throwPos;
-    //오른손 Transfom
+ 
     public Transform trRight;
 
 
@@ -20,6 +17,8 @@ public class ThrowDart : MonoBehaviour
     float forceWithTime; //오래 잡고 있을 수록 던지는 힘이 커진다
     public float forceAdg = 2; //힘조절
     public float forceMax = 50; //최대힘
+    //private object OVRInput;
+
     //public Vector3 throwPower;
 
     void Start()
@@ -31,7 +30,7 @@ public class ThrowDart : MonoBehaviour
     {
 
         //if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        if(OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         {
             Darts();
 
@@ -72,8 +71,9 @@ public class ThrowDart : MonoBehaviour
         dart = dartobj.GetComponent<SEJDarts>();
         forceWithTime = 0;
     }
+    
 
-   
+
 
 
 }
