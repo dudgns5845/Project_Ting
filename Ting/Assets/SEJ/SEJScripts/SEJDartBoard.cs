@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SEJDartBoard : MonoBehaviour
 {
-    public Text scoreText;
+    public TextMeshProUGUI scoreText;
     int score; //현 점수
     public int SCORE
     {
@@ -43,6 +44,7 @@ public class SEJDartBoard : MonoBehaviour
         currentDart = dart;
         // 점수계산
         SCORE += type * scoreNum;
+        print(SCORE);
         print("맞은 점수 : " + type * scoreNum);
     }
 
