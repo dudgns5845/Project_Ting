@@ -5,41 +5,40 @@ using UnityEngine;
 //다트공장에서 다트를 생성한다
 //트리거를 누른 상태로 뒤로 잡아 댕겼다가 놓으면 발사하고싶다
 
-
 public class ThrowDart : MonoBehaviour
 {
     //다트 공장
     public GameObject dartFactory;
-    //다트를 잡은 손
-    public Transform throwPos;
-    //오른손 Transfom
+ 
     public Transform trRight;
+    public Transform trLeft;
 
 
     SEJDarts dart; // dart스크립트 담은 변수 
     float forceWithTime; //오래 잡고 있을 수록 던지는 힘이 커진다
     public float forceAdg = 2; //힘조절
     public float forceMax = 50; //최대힘
+
     //public Vector3 throwPower;
 
     void Start()
     {
-        throwPos = Camera.main.transform;
+        //throwPos = Camera.main.transform;
     }
 
     void Update()
     {
 
         //if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        if(OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch) || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
         {
             Darts();
 
         }
         //else if (Input.GetButtonUp("Fire1") || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
-        else if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        else if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch) || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
         {
-            if (dart != null) //도넛이 손에 있는 상태라면 
+            if (dart != null) //다트가 손에 있는 상태라면 
             {
                 // 던지는 힘의 크기를 제한하고싶다.
                 forceWithTime = Mathf.Clamp(forceWithTime, 5, forceMax);
@@ -72,8 +71,9 @@ public class ThrowDart : MonoBehaviour
         dart = dartobj.GetComponent<SEJDarts>();
         forceWithTime = 0;
     }
+    
 
-   
+
 
 
 }
