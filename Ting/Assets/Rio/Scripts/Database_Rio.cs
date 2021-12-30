@@ -5,7 +5,7 @@ using Firebase.Database;
 using Firebase.Auth;
 using AdvancedPeopleSystem;
 using UnityEngine.UI;
-
+using System;
 [System.Serializable]
 public class UserInfo
 {
@@ -18,17 +18,15 @@ public class UserInfo
 
 public class Database_Rio : MonoBehaviour
 {
-    public static Database_Rio instance;
+   
     public CharacterCustomization UserSetting;
 
     public UserInfo myInfo;
 
+    public string userid;
+
     private void Awake()
     {
-        if(instance == null)
-        {
-            instance = this;
-        }
         myInfo = new UserInfo();
     }
 
@@ -42,6 +40,7 @@ public class Database_Rio : MonoBehaviour
         auth = FirebaseAuth.DefaultInstance;
     }
 
+    //신규 회원 정보 저장 함수
     public void SaveUserInfo(string Name, string NickName, string Age, string Gender)
     {
         StartCoroutine(ISaveUserInfo(Name,NickName,Age,Gender));
@@ -107,17 +106,21 @@ public class Database_Rio : MonoBehaviour
     }
 
 
+
+
+    public bool isDone = false;
     //값을 불러오는 함수
-    public void LoadUserInfo()
+    public void LoadUserInfo(string userid_, Action NextWork)
     {
-        StartCoroutine(ILoadUserInfo());
+        StartCoroutine(ILoadUserInfo(userid_, NextWork));
     }
 
-    IEnumerator ILoadUserInfo()
+    IEnumerator ILoadUserInfo(string userid_, Action NextWork)
     {
        
         //저장 경로
-        string path = "USER_INFO/" + auth.CurrentUser.UserId;
+        //string path = "USER_INFO/" + auth.CurrentUser.UserId;
+        string path = "USER_INFO/" + userid_;
         //해당 경로에 값 가져오기
         var task = database.GetReference(path).GetValueAsync();
 
@@ -126,7 +129,6 @@ public class Database_Rio : MonoBehaviour
         if (task.Exception == null)
         {
             myInfo = JsonUtility.FromJson<UserInfo>(task.Result.GetRawJsonValue());
-            
             //UserSetting.SetCharacterSetup(myInfo.characterCustomizationSetup);
             print("유저 정보 읽기 성공");
         }
@@ -134,9 +136,8 @@ public class Database_Rio : MonoBehaviour
         {
             print("유저 정보 읽기 실패 : " + task.Exception);
         }
+        NextWork();
     }
-
-
 }
 
 
