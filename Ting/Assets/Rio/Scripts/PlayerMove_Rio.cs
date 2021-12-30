@@ -9,13 +9,15 @@ public class PlayerMove_Rio : MonoBehaviour
     public float gravity = 20.0F;
     private Vector3 moveDirection = Vector3.zero;
     public Animator anim;
-   
+    CharacterController controller;
 
     void Update()
     {
         if (anim == null) return;
         FSM();
-        Move();
+        //Move();
+        playerMove();
+        playerRot();
     }
 
     void FSM()
@@ -46,29 +48,73 @@ public class PlayerMove_Rio : MonoBehaviour
             anim.SetBool("angry", false);
     }
 
-    void Move()
-    {
-        CharacterController controller = GetComponent<CharacterController>();
-        if (controller == null) return;
-        if (controller.isGrounded)
-        {
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= speed;
-            if (Input.GetButton("Jump"))
-                moveDirection.y = jumpSpeed;
+    //void Move()
+    //{
+    //    controller = GetComponent<CharacterController>();
+    //    if (controller == null) return;
+    //    if (controller.isGrounded)
+    //    {
+    //        moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+    //        moveDirection = transform.TransformDirection(moveDirection);
+    //        moveDirection *= speed;
+    //        if (Input.GetButton("Jump"))
+    //            moveDirection.y = jumpSpeed;
 
-        }
+    //    }
+    //    moveDirection.y -= gravity * Time.deltaTime;
+    //    controller.Move(moveDirection * Time.deltaTime);
+
+    //    if (Input.GetKeyDown(KeyCode.E))
+    //    {
+    //        transform.Rotate(new Vector3(0, 30, 0));
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.Q))
+    //    {
+    //        transform.Rotate(new Vector3(0, -30, 0));
+    //    }
+    //}
+
+
+
+    void playerMove()
+    {
+        //조이스틱 값 받아오기 x 좌우 ,y 상하
+        Vector2 stickPos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch);
+
+        moveDirection = new Vector3(stickPos.x, 0, stickPos.y);
+        moveDirection = transform.TransformDirection(moveDirection);
+        moveDirection *= speed;
+        if (Input.GetButton("Jump"))
+            moveDirection.y = jumpSpeed;
+
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
+    }
 
-        if (Input.GetKeyDown(KeyCode.E))
+    void playerRot()
+    {
+
+        transform.rotation = Quaternion.Euler(rot);
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickRight, OVRInput.Controller.RTouch))
         {
-            transform.Rotate(new Vector3(0, 30, 0));
+            rotPlus();
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickLeft, OVRInput.Controller.RTouch))
         {
-            transform.Rotate(new Vector3(0, -30, 0));
+            rotMinus();
         }
+
+    }
+
+    Vector3 rot;
+    void rotPlus()
+    {
+        rot.y += 45;
+    }
+    void rotMinus()
+    {
+        rot.y -= 45;
     }
 }
+
+
