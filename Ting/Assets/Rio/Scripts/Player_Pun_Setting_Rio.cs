@@ -66,7 +66,8 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
     [PunRPC]
     void userIdSetting(string id)
     {
-       userid = id;
+        userid = id;
+     
     }
 
 
@@ -78,9 +79,14 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
     {
         //성별에 따라 케릭터 활성화한다
         //그리고 케릭터 업댓하는 속성을 등록해주고
+        if(db == null)
+        {
+            print("비어있습니다");
 
+        }
         if (db.myInfo.characterCustomizationSetup.settingsName == "MaleSettings")
         {
+            print("호출");
             Man.SetActive(true);
             db.UserSetting = Man.GetComponent<CharacterCustomization>();
             GetComponent<PlayerMove_Rio>().anim = Man.GetComponent<Animator>();
