@@ -4346,6 +4346,7 @@ MonoBehaviour:
   Man: {fileID: 3430333102386413763}
   Woman: {fileID: 7525835277793697895}
   userid: 
+  db: {fileID: 0}
 --- !u!143 &5269067580262016605
 CharacterController:
   m_ObjectHideFlags: 0

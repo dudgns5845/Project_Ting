@@ -18,7 +18,7 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
     public GameObject Woman;
     public string userid;
 
-    Database_Rio db;
+    public Database_Rio db;
 
     private void Start()
     {
@@ -67,7 +67,6 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
     void userIdSetting(string id)
     {
         userid = id;
-     
     }
 
 
@@ -82,11 +81,9 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
         if(db == null)
         {
             print("비어있습니다");
-
         }
         if (db.myInfo.characterCustomizationSetup.settingsName == "MaleSettings")
         {
-            print("호출");
             Man.SetActive(true);
             db.UserSetting = Man.GetComponent<CharacterCustomization>();
             GetComponent<PlayerMove_Rio>().anim = Man.GetComponent<Animator>();
@@ -118,8 +115,6 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
     //    }
 
     //}
-
-
 
     //[PunRPC]
     //public void initCharacter(string userid)
