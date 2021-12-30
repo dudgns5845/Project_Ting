@@ -106,6 +106,9 @@ public class Database_Rio : MonoBehaviour
     }
 
 
+
+
+    public bool isDone = false;
     //값을 불러오는 함수
     public void LoadUserInfo(string userid_, Action NextWork)
     {

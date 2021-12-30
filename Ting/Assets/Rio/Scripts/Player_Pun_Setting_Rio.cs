@@ -33,6 +33,9 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
             Cam.SetActive(true);
             //플레이어 조작 활성화
             GetComponent<PlayerMove_Rio>().enabled = true;
+            
+            //자신의 서버상의 캐릭터 id가 뭔지 알려준다
+            pv.RPC("userIdSetting", RpcTarget.AllBuffered, auth.CurrentUser.UserId);
 
         }
         else
@@ -42,8 +45,8 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
             //플레이어 조작 활성화
             GetComponent<PlayerMove_Rio>().enabled = false;
         }
-        //유저 아이디 초기화
-        pv.RPC("userIdSetting", RpcTarget.All, auth.CurrentUser.UserId);
+
+        db.LoadUserInfo(userid, check);
 
         //데이터 베이스에서 CC데이터를 읽어온다
         //읽고 난 다음에야 셋팅을 시작한다 ==> 콜백
@@ -52,23 +55,25 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
 
     }
 
-    [PunRPC]
-    void userIdSetting(string id)
+
+
+    void check()
     {
-        userid = id;
-        print(userid);
-        db.LoadUserInfo(userid, CCSetting);
+        pv.RPC("CCSetting", RpcTarget.AllBuffered);
     }
 
 
-    //[PunRPC]
-    //void UpdateUserCharacter()
-    //{
-    //    db.LoadUserInfo(CCSetting);
-    //}
+    [PunRPC]
+    void userIdSetting(string id)
+    {
+       userid = id;
+    }
+
+
 
 
     //캐릭터가 생성되면 자신의 모습을 CC 데이터로 업데이트 하는 함수
+    [PunRPC]
     void CCSetting()
     {
         //성별에 따라 케릭터 활성화한다
@@ -84,7 +89,7 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
         {
             Woman.SetActive(true);
             db.UserSetting = Woman.GetComponent<CharacterCustomization>();
-            GetComponent<PlayerMove_Rio>().anim = Man.GetComponent<Animator>();
+            GetComponent<PlayerMove_Rio>().anim = Woman.GetComponent<Animator>();
         }
 
         db.UserSetting.SetCharacterSetup(db.myInfo.characterCustomizationSetup);
