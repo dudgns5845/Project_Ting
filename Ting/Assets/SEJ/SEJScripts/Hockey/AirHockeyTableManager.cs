@@ -21,11 +21,16 @@ public class AirHockeyTableManager : MonoBehaviourPun
     public Button hockeyBtn;
 
     public GameObject score; 
+     
+    public GameObject ballFactory;
+    public Transform ballStartPos;
+    public Transform ballPos1;
+    public Transform ballPos2;
 
-    public GameObject ball;
-    public GameObject stick;
+    public GameObject stickFactory;
 
-    public Transform[] spawnPos; //stick 생성할 위치
+    public Transform[] spawnStickPos; //stick 생성할 위치
+    //public Transform[] spawnBallPos; //stick 생성할 위치
 
 
     private void Awake()
@@ -40,8 +45,6 @@ public class AirHockeyTableManager : MonoBehaviourPun
         //처음에 테이블 위에 아무것도 없이 시작하기 버튼만 있음
         hockeyBtnObj.SetActive(true);
         score.SetActive(false);
-        ball.SetActive(false);
-        stick.SetActive(false);
     }
 
     void Update()
@@ -56,8 +59,9 @@ public class AirHockeyTableManager : MonoBehaviourPun
         hockeyBtnObj.SetActive(false);
         //점수판, 공, 스틱 생성
         score.SetActive(true);
-        ball.SetActive(true);
-        stick.SetActive(true);
+        GameObject ball = Instantiate(ballFactory);
+        ball.transform.position = ballStartPos.position;
+        GameObject stick = Instantiate(stickFactory);
     }
 
 

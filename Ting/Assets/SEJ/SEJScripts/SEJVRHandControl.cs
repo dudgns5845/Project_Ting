@@ -51,12 +51,7 @@ public class SEJVRHandControl : MonoBehaviour
                 }
             }
         }
-        if (Input.GetButton("Fire1") || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
-        {
-
-        }
-
-
+  
     }
     void MeetingRoomHand()
     {
