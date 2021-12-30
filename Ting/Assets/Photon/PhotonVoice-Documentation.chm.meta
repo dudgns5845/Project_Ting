@@ -1,8 +1,14 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Ting/Assets/Photon/PhotonVoice-Documentation.chm.meta
 guid: 55420de2e457b3f43a60bebae70376df
 timeCreated: 1541690187
 licenseType: Store
+=======
+guid: 006f50925eb084fb7a542a990aee6ee1
+folderAsset: yes
+>>>>>>> SEJ_1224:Ting/Assets/Hong_F/AmusementparkPack/Plugins/x86_64.meta
 DefaultImporter:
+  externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
