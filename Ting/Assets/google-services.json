@@ -1,9 +1,9 @@
 {
   "project_info": {
     "project_number": "1004810087232",
+    "firebase_url": "https://ting-52f05-default-rtdb.firebaseio.com",
     "project_id": "ting-52f05",
-    "storage_bucket": "ting-52f05.appspot.com",
-    "firebase_url": "https://ting-52f05-default-rtdb.firebaseio.com/"
+    "storage_bucket": "ting-52f05.appspot.com"
   },
   "client": [
     {
