@@ -44,7 +44,7 @@ public class SEJDartBoard : MonoBehaviour
         currentDart = dart;
         // 점수계산
         SCORE += type * scoreNum;
-        print(SCORE);
+        print(SCORE); 
         print("맞은 점수 : " + type * scoreNum);
     }
 

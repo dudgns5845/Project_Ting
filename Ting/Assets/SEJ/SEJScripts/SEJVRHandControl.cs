@@ -71,22 +71,17 @@ public class SEJVRHandControl : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit)) //Ray¹ß»ç ÈÄ ¾îµò°¡¿¡ ºÎµúÈù´Ù¸é
         {
+            
             line.gameObject.SetActive(true);
             line.SetPosition(0, trRight.position);
             line.SetPosition(1, hit.point);
-
-
-
-
-
-
 
             //if(OVRInput.GetDown(OVRInput.Button.Two))
             if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
             {
                 print(hit.transform.name);
                 //int layerMask = 1 << LayerMask.NameToLayer("Q");
-
+          
                 line.transform.parent = trRight;
 
                 if (hit.transform.name.Contains("QButton"))
@@ -125,15 +120,21 @@ public class SEJVRHandControl : MonoBehaviour
                 {
                     AirHockeyTableManager.hockeyTableM.OnClickHockeyBtn();
                 }
+                if (hit.transform.name.Contains("AirHockeyOutBtn"))
+                {
+                    AirHockeyTableManager.hockeyTableM.OnClickExitHockeyBtn();
+                }
                 else
                 {
-                    line.gameObject.SetActive(false);
+                    line.enabled=false;
                 }
+
             }
             else if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
             {
                 line.gameObject.SetActive(false);
                 line.transform.parent = null;
+                line.enabled = true;
             }
 
             //¾Æ¿ô¶óÀÎ

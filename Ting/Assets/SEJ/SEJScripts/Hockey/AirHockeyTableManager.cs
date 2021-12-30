@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -11,26 +10,34 @@ using TMPro;
 //공이 테이블 위에서 생성한다
 //스틱(말렛)도 생성한다
 
-public class AirHockeyTableManager : MonoBehaviourPun
+public class AirHockeyTableManager : MonoBehaviour
 {
 
     public static AirHockeyTableManager hockeyTableM;
 
-    //public PhotonView hockeyPv;
     public GameObject hockeyBtnObj;
-    public Button hockeyBtn;
+    public Button hockeyBtn; 
 
-    public GameObject score; 
-     
+    public GameObject hockeyExitBtnObj;
+    public Button hockeyExitBtn; 
+
+    public GameObject score; //점수판
+
+
     public GameObject ballFactory;
+    public GameObject ballObj;
+    //public GameObject stickFactory;
+    public GameObject stickObj;
+    public GameObject stick2Obj;
+
+    //리스폰 될 위치들
     public Transform ballStartPos;
-    public Transform ballPos1;
-    public Transform ballPos2;
+    public Transform stickPos;
+    public Transform stick2Pos;
 
-    public GameObject stickFactory;
 
-    public Transform[] spawnStickPos; //stick 생성할 위치
-    //public Transform[] spawnBallPos; //stick 생성할 위치
+    //public Transform[] spawnStickPos; //stick 생성할 위치
+    ////public Transform[] spawnBallPos; //stick 생성할 위치
 
 
     private void Awake()
@@ -45,6 +52,10 @@ public class AirHockeyTableManager : MonoBehaviourPun
         //처음에 테이블 위에 아무것도 없이 시작하기 버튼만 있음
         hockeyBtnObj.SetActive(true);
         score.SetActive(false);
+
+        stickObj.SetActive(false);
+        stick2Obj.SetActive(false);
+        ballObj.SetActive(false);
     }
 
     void Update()
@@ -59,11 +70,26 @@ public class AirHockeyTableManager : MonoBehaviourPun
         hockeyBtnObj.SetActive(false);
         //점수판, 공, 스틱 생성
         score.SetActive(true);
-        GameObject ball = Instantiate(ballFactory);
-        ball.transform.position = ballStartPos.position;
-        GameObject stick = Instantiate(stickFactory);
+        ballObj.SetActive(true);
+        stickObj.SetActive(true);
+        stick2Obj.SetActive(true);
+
     }
 
+    public void OnClickExitHockeyBtn()
+    {
+        //나가기 버튼 누르면
+        //스코어 리셋, 점수판 사라짐 , 시작하기 버튼 다시 생성
+        HockeyBall.instance.txtLeftScore.text = "" + 0;
+        HockeyBall.instance.txtRightScore.text = "" + 0;
+        score.SetActive(false);
+        hockeyBtnObj.SetActive(true);
+        stickObj.SetActive(false);
+        stick2Obj.SetActive(false);
+        ballObj.SetActive(false);
+
+
+    }
 
 
 }

@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 4338583332970540593}
   - component: {fileID: 4338583332968214295}
   - component: {fileID: 4338583332968214294}
-  - component: {fileID: 4338583332968214289}
-  - component: {fileID: 327749741}
+  - component: {fileID: 9066581299147512074}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Ball
@@ -31,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4338583332968317041}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.02, y: 0.8213, z: 0}
-  m_LocalScale: {x: 2.5, y: 3, z: 2.5}
+  m_LocalScale: {x: 2, y: 3, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -114,7 +113,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.07796858, y: 0.005377054, z: 0.07796858}
   m_Center: {x: 0, y: 0.002688527, z: 0}
---- !u!114 &4338583332968214289
+--- !u!114 &9066581299147512074
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,26 +126,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kAdjustForce: 5
---- !u!114 &327749741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4338583332968317041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 4338583332968214289}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0

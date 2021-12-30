@@ -5,14 +5,25 @@ using Photon.Pun;
 
 public class ThrowHockeyBall : MonoBehaviour
 {
+    public static ThrowHockeyBall instance;
+
+
     //플레이어 위치
     public Transform myPlayer;
     //오른손
     public Transform trRight;
     public GameObject grabObject;
 
+    public Transform stickPos;
+    public Transform stick2Pos;
+
     public GameObject cameraRig;
 
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
     void Start()
     {
    
@@ -47,7 +58,7 @@ public class ThrowHockeyBall : MonoBehaviour
             isHandDown = false;
         }
 
-        if (isHandDown && isTriggerDown) //잡기버튼을 눌렀을 때
+        if (isHandDown && isTriggerDown) //잡기버튼을 눌렀을 때 잡도록 한다
         {
             
             if (false == tryGrab) //안잡혔다면
@@ -72,12 +83,15 @@ public class ThrowHockeyBall : MonoBehaviour
             if (true == tryGrab)
             {   //놓는순간
                 tryGrab = false;
-                if (grabObject != null)
+                if (grabObject != null) //안놓아졌다면
                 {
                     grabObject.transform.parent = null;
-                    grabObject.transform.position = new Vector3(-1, 0.82f, -0.2f); //내가 잡은 스틱이 Stick 일 때 놓았다면 이 위치로
+                 
+                    if(grabObject.name == "Stick")
+                    grabObject.transform.position = stickPos.position; //내가 잡은 스틱이 Stick1 일 때 놓았을 때 이 위치로
 
-                    //grabObject.transform.position = new Vector3(1, 0.82f, 0.2f); //내가 잡은 스틱이 Stick2 일 때 놓았다면 이 위치로
+                    if (grabObject.name == "Stick2")
+                        grabObject.transform.position = stick2Pos.position; //내가 잡은 스틱이 Stick2 일 때 놓았을 때 이 위치로
 
                     grabObject.transform.rotation = Quaternion.Euler(0, 0, 0);
                     grabObject = null;

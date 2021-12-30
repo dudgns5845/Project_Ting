@@ -15,10 +15,10 @@
 
 //    public Transform pos1; //공 나오는 위치1
 //    public Transform pos2; //공 나오는 위치2
-                           
+
 //    public TextMeshProUGUI txtLeftScore; //왼쪽 점수판
 //    public TextMeshProUGUI txtRightScore; //오른쪽 점수판
-   
+
 //    public int leftScore;
 //    public int rightScore;
 
@@ -30,7 +30,7 @@
 
 //    void Update()
 //    {
-       
+
 //    }
 
 //    //[PunRPC] 
