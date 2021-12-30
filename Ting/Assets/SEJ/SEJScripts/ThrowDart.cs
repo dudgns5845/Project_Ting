@@ -11,13 +11,13 @@ public class ThrowDart : MonoBehaviour
     public GameObject dartFactory;
  
     public Transform trRight;
+    public Transform trLeft;
 
 
     SEJDarts dart; // dart스크립트 담은 변수 
     float forceWithTime; //오래 잡고 있을 수록 던지는 힘이 커진다
     public float forceAdg = 2; //힘조절
     public float forceMax = 50; //최대힘
-    //private object OVRInput;
 
     //public Vector3 throwPower;
 
@@ -30,13 +30,13 @@ public class ThrowDart : MonoBehaviour
     {
 
         //if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
-        if(OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        if(OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch) || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
         {
             Darts();
 
         }
         //else if (Input.GetButtonUp("Fire1") || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
-        else if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        else if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch) || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
         {
             if (dart != null) //다트가 손에 있는 상태라면 
             {
