@@ -8,12 +8,14 @@ public class PlayerMove_Rio : MonoBehaviour
     public float jumpSpeed = 8.0F;
     public float gravity = 20.0F;
     private Vector3 moveDirection = Vector3.zero;
-    public Animator anim;
-   
+    Animator anim;
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     void Update()
     {
-        if (anim == null) return;
         FSM();
         Move();
     }

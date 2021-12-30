@@ -9,11 +9,10 @@ public class Cinemachine_Rio : MonoBehaviour
     IEnumerator Start()
     {
         yield return new WaitForSeconds(5f);
+        print("»£√‚");
         cv = GetComponent<CinemachineVirtualCamera>();
-        cv.Follow = transform.parent;
-        cv.LookAt = transform.parent;
-        //cv.Follow = GameObject.FindGameObjectWithTag ("Player").GetComponent<Transform>();
-        //cv.LookAt = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        cv.Follow = GameObject.FindGameObjectWithTag ("Player").GetComponent<Transform>();
+        cv.LookAt = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     

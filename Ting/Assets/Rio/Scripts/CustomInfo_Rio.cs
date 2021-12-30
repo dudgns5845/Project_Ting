@@ -34,21 +34,20 @@ public class CustomInfo_Rio : MonoBehaviour
     //}
 
 
-    //public CharacterCustomization cc;
+    public CharacterCustomization cc;
 
-    //public void LoadCCData()
-    //{
-    //    StartCoroutine(Loading());
-    //}
+    public void LoadCCData()
+    {
+        StartCoroutine(Loading());
+    }
 
-
-    //IEnumerator Loading()
-    //{
-    //    cc = FindObjectOfType<CharacterCustomization>();
-    //    yield return new WaitForSeconds(1f);
-    //    Database_Rio.instance.LoadUserInfo(Database_Rio.instance.auth.CurrentUser.UserId);
-    //    yield return new WaitForSeconds(1f);
-    //    Database_Rio.instance.UserSetting.SetCharacterSetup(Database_Rio.instance.myInfo.characterCustomizationSetup);
-    //}
+    IEnumerator Loading()
+    {
+        cc = FindObjectOfType<CharacterCustomization>();
+        yield return new WaitForSeconds(1f);
+        Database_Rio.instance.LoadUserInfo();
+        yield return new WaitForSeconds(1f);
+        Database_Rio.instance.UserSetting.SetCharacterSetup(Database_Rio.instance.myInfo.characterCustomizationSetup);
+    }
 
 }
