@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: 7d1083877b3838042b9e91b249731b89
+=======
+<<<<<<< Updated upstream:Ting/Assets/Final IK/Plugins/RootMotion/FinalIK/_Integration/Steam VR (Unity 2017.4.28f1, SteamVR Plugin v2.6.1).unitypackage.meta
+guid: 57ddc43ace113674392034825a54600a
+=======
+guid: 7d1083877b3838042b9e91b249731b89
+>>>>>>> Stashed changes:Ting/Assets/Final IK/Plugins/RootMotion/FinalIK/_Integration/Oculus (Unity 2017.4.28f1, Oculus Integration v1.37).unitypackage.meta
+>>>>>>> Stashed changes
 DefaultImporter:
   externalObjects: {}
   userData: 
