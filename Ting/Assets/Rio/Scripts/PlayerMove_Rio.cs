@@ -11,6 +11,11 @@ public class PlayerMove_Rio : MonoBehaviour
     public Animator anim;
     CharacterController controller;
 
+
+    private void Start()
+    {
+        controller = GetComponent<CharacterController>();
+    }
     void Update()
     {
         if (anim == null) return;
