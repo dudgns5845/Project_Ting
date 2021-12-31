@@ -73,7 +73,7 @@ public class LogIn_Rio : MonoBehaviour
         {
             TXT_Result.text = "로그인 성공!!";
             yield return new WaitForSeconds(1.5f);
-            SceneManager.LoadScene("01_CustomScene");
+            SceneManager.LoadScene("01_CustomScene_VR");
         }
         else //로그인 실패 로그 출력
         {
