@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GyroDrop : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class GyroDrop : MonoBehaviour
     {
         CenterUPMove();
         CenterDownMove();
+
+        
     }
 
 
@@ -36,7 +39,7 @@ public class GyroDrop : MonoBehaviour
         if (upMove == true)
         {
             // 꼭대기까지 올라갈때~
-            if (transform.localPosition.y <= 0.5f)
+            if (transform.localPosition.y <= 10f)
             {
                 transform.Translate(Vector3.up * upSpeed * Time.deltaTime);
                 transform.Rotate(new Vector3(0, rotaSpeed * Time.deltaTime, 0));
@@ -55,7 +58,7 @@ public class GyroDrop : MonoBehaviour
     {
         if (downMove == true)
         {
-            if (transform.localPosition.y >= -0.4f)
+            if (transform.localPosition.y >= -75f)
             {
                 transform.Translate(Vector3.down * downSpeed * Time.deltaTime);
             }
