@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //하키
 //소개팅
@@ -24,11 +25,25 @@ public class SEJVRHandControl : MonoBehaviour
     private bool tryGrab;
     public float grabRadius = 0.5f;
 
+    bool gameScene;
+    bool cafeScene;
+
+
+
     private void Awake()
     {
         if (vrhandcontrol == null)
             vrhandcontrol = this;
     }
+   //public void SceneM()
+   // {
+   //     if(cafeScene)
+   //     {
+   //         SceneManager.LoadScene("MeetingScene");
+           
+   //     }
+     
+   // }
 
     void GrabHockeyStick()
     {
@@ -71,22 +86,17 @@ public class SEJVRHandControl : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit)) //Ray발사 후 어딘가에 부딪힌다면
         {
+            
             line.gameObject.SetActive(true);
             line.SetPosition(0, trRight.position);
             line.SetPosition(1, hit.point);
-
-
-
-
-
-
 
             //if(OVRInput.GetDown(OVRInput.Button.Two))
             if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
             {
                 print(hit.transform.name);
                 //int layerMask = 1 << LayerMask.NameToLayer("Q");
-
+          
                 line.transform.parent = trRight;
 
                 if (hit.transform.name.Contains("QButton"))
@@ -104,6 +114,7 @@ public class SEJVRHandControl : MonoBehaviour
                 if (hit.transform.name.Contains("Balance"))
                 {
                     SEJButton.btn.OnClickBalance();
+
                 }
                 if (hit.transform.name.Contains("Question"))
                 {
@@ -125,78 +136,82 @@ public class SEJVRHandControl : MonoBehaviour
                 {
                     AirHockeyTableManager.hockeyTableM.OnClickHockeyBtn();
                 }
+                if (hit.transform.name.Contains("AirHockeyOutBtn"))
+                {
+                    AirHockeyTableManager.hockeyTableM.OnClickExitHockeyBtn();
+                }
                 else
                 {
-                    line.gameObject.SetActive(false);
+                    line.enabled=false;
                 }
+
             }
             else if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
             {
                 line.gameObject.SetActive(false);
                 line.transform.parent = null;
+                line.enabled = true;
             }
 
-            //아웃라인
+            ////아웃라인
 
-            if (hit.transform.name.Contains("Balance"))
-            {
-                UnityEngine.UI.Outline outline = SEJMeetingGM.gm.balanceBtn.GetComponent<UnityEngine.UI.Outline>();
-                outline.enabled = true;
+            //if (hit.transform.name.Contains("Balance"))
+            //{
+            //    UnityEngine.UI.Outline outline = SEJMeetingGM.gm.balanceBtn.GetComponent<UnityEngine.UI.Outline>();
+            //    outline.enabled = true;
+            //}
+            //else
+            //{
+            //    UnityEngine.UI.Outline outline = SEJMeetingGM.gm.balanceBtn.GetComponent<UnityEngine.UI.Outline>();
+            //    outline.enabled = false;
 
+            //}
 
-            }
-            else
-            {
-                UnityEngine.UI.Outline outline = SEJMeetingGM.gm.balanceBtn.GetComponent<UnityEngine.UI.Outline>();
-                outline.enabled = false;
-
-            }
-
-            if (hit.transform.name.Contains("Question"))
-            {
-                UnityEngine.UI.Outline outline = SEJMeetingGM.gm.questionBtn.GetComponent<UnityEngine.UI.Outline>();
-                outline.enabled = true;
+            //if (hit.transform.name.Contains("Question"))
+            //{
+            //    UnityEngine.UI.Outline outline = SEJMeetingGM.gm.questionBtn.GetComponent<UnityEngine.UI.Outline>();
+            //    outline.enabled = true;
               
-            }
-            else
-            {
-                UnityEngine.UI.Outline outline = SEJMeetingGM.gm.questionBtn.GetComponent<UnityEngine.UI.Outline>();
-                outline.enabled = false;
+            //}
+            //else
+            //{
+            //    UnityEngine.UI.Outline outline = SEJMeetingGM.gm.questionBtn.GetComponent<UnityEngine.UI.Outline>();
+            //    outline.enabled = false;
 
-            }
+            //}
 
-            // 버튼 크기 증가
+            //// 버튼 크기 증가
 
-            Vector3 btnScale = new Vector3(0.307f, 1, 1);
+            //Vector3 btnScale = new Vector3(0.307f, 1, 1);
 
-            if(hit.transform.name.Contains("QButton"))
-            {
-                SEJButton.btn.btnQ.transform.localScale = btnScale * 1.4f;
-            }
-            else
-            {
-                SEJButton.btn.btnQ.transform.localScale = btnScale;
-            }
+            //if(hit.transform.name.Contains("QButton"))
+            //{
+            //    SEJButton.btn.btnQ.transform.localScale = btnScale * 1.4f;
+            //}
+            //else
+            //{
+            //    SEJButton.btn.btnQ.transform.localScale = btnScale;
+            //}
 
-            if(hit.transform.name.Contains("XButton"))
-            {
-                SEJButton.btn.btnX.transform.localScale = btnScale * 1.4f;
-            }
-            else
-            {
-                SEJButton.btn.btnX.transform.localScale = btnScale;
-            }
+            //if(hit.transform.name.Contains("XButton"))
+            //{
+            //    SEJButton.btn.btnX.transform.localScale = btnScale * 1.4f;
+            //}
+            //else
+            //{
+            //    SEJButton.btn.btnX.transform.localScale = btnScale;
+            //}
 
-            if(hit.transform.name.Contains("ContentsButton"))
-            {
-                SEJButton.btn.btnC.transform.localScale = btnScale * 1.4f;
+            //if(hit.transform.name.Contains("ContentsButton"))
+            //{
+            //    SEJButton.btn.btnC.transform.localScale = btnScale * 1.4f;
 
-            }
-            else
-            {
-                SEJButton.btn.btnC.transform.localScale = btnScale;
+            //}
+            //else
+            //{
+            //    SEJButton.btn.btnC.transform.localScale = btnScale;
 
-            }
+            //}
         }
     }
 
