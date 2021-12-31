@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4338583332968214294}
   - component: {fileID: 9066581299147512074}
   m_Layer: 0
-  m_Name: Ball
+  m_Name: BallPrefab
   m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,4 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c86c31d9f013fe489579a889127b4a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kAdjustForce: 5
+  isLeftGoal: 0
+  isRightGoal: 0
+  leftBallPos: {fileID: 0}
+  rightBallPos: {fileID: 0}
+  kAdjustForce: 20

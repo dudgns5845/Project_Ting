@@ -48,5 +48,6 @@ public class SEJDartBoard : MonoBehaviour
         print("맞은 점수 : " + type * scoreNum);
     }
 
+    
 
 }
