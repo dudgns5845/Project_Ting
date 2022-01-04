@@ -95,10 +95,6 @@ public class SEJButton : MonoBehaviour
         SEJMeetingGM.gm.contentMSG.text = SEJMeetingGM.gm.Quation[0];
     }
 
- 
-
-
-
     //랜덤으로 받을 변수
     public int num;
     

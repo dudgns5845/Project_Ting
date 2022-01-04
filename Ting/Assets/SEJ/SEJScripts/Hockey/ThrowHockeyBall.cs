@@ -24,10 +24,6 @@ public class ThrowHockeyBall : MonoBehaviour
         if (instance == null)
             instance = this;
     }
-    void Start()
-    {
-   
-    }
 
     //Input에 &&연산자로 같이 연결하면 동시에 잘 안먹히는 경우가 많으니까 두가지 경우를 bool변수로 따로 써줘야 확실해짐
     bool isTriggerDown;

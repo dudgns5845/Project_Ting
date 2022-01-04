@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandControl : MonoBehaviour
+public class GunControl : MonoBehaviour
 {
     // 오른손 컨트롤러
     public Transform trRight;
@@ -52,16 +52,9 @@ public class HandControl : MonoBehaviour
             if (gun.transform.position == trRight.transform.position)
             {
                 gunRb.useGravity = true;
-
             }
 
-
         }
-        
-
-
-
-
 
     }
 }

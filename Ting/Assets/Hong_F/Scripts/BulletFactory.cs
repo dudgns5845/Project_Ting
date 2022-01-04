@@ -7,7 +7,7 @@ public class BulletFactory : MonoBehaviour
 {
 
     public GameObject bulletFactory;
-    public HandControl hc;
+    public GunControl hc;
     public Text bulletText;
     public GameObject gunHole;
     Rigidbody rd;
@@ -52,21 +52,14 @@ public class BulletFactory : MonoBehaviour
 
             }
 
-           
             if (MaxCount <= 0)
             {
                 MaxCount = 0;
             }
 
-
-
             string countS = MaxCount.ToString();
             bulletText.text = countS;
-
-
         }
-
-
 
     }
 
@@ -101,11 +94,7 @@ public class BulletFactory : MonoBehaviour
     public float raycastDistance = 10f;
     void GunRay()
     {
-        
-
-            
+                  
     }
-
-
 
 }
