@@ -79,6 +79,7 @@ public class AirHockeyTableManager : MonoBehaviour
     public void OnClickHockeyBtn()
     {
         //시작하기 버튼을 누르면
+     
         //시작버튼 사라지고
         hockeyBtnObj.SetActive(false);
         //점수판, 공, 스틱 생성
@@ -88,7 +89,7 @@ public class AirHockeyTableManager : MonoBehaviour
         stick2Obj.SetActive(true);
 
     }
-
+    bool isOnClickExit; //나가기 버튼 클릭 여부
     public void OnClickExitHockeyBtn()
     {
         //나가기 버튼 누르면
@@ -100,50 +101,58 @@ public class AirHockeyTableManager : MonoBehaviour
         stickObj.SetActive(false);
         stick2Obj.SetActive(false);
         ballObj.SetActive(false);
-
+        
+        isOnClickExit = true;
+        
+        // 이미 눌러서 실행되었다면
+        if(isOnClickExit)
+        {
+            //카메라 3인칭으로 전환
+            
+        }
 
     }
 
   
-    public void MakeRightBall() //오른쪽 리스폰 
+    public void MakeRightBall() //오른쪽 득점
     {
         print("오른쪽 리스폰 호출");
-        //isRightGoal = true;
-        leftScore += 1;
-        txtLeftScore.text = " " +leftScore;
+        rightScore += 1; 
+        txtRightScore.text = " " +rightScore;
         print("왼쪽플레이어  1점 Get");
         GameObject effect = Instantiate(effectFactory);
-        effect.transform.position = leftGoal.position;
+        effect.transform.position = leftGoal.position; //왼쪽골대에 공이 들어갔다는 것을 알려줌
         Destroy(effect.gameObject, 2);
 
+        //리스폰위치
         GameObject ballObj = Instantiate(ballFactory);
-        ballObj.transform.position = rightBallPos.position;
+        ballObj.transform.position = leftBallPos.position;
         ballObj.SetActive(true);
-        leftScore = 0;
 
         //계속 공이 생성되면 안되니까
         isRightGoal = false;
     }
+
     public GameObject effectFactory;
     public Transform rightGoal;
     public Transform leftGoal;
 
 
-    public void MakeLeftBall() //왼쪽 리스폰
+    public void MakeLeftBall() //왼쪽 득점
     {
         print("왼쪽 리스폰 호출");
-        rightScore += 1;
-        txtRightScore.text = " " + rightScore;
+        leftScore += 1; 
+        txtLeftScore.text = " " + leftScore;
         print("오른쪽플레이어  1점 Get");
       
         GameObject effect = Instantiate(effectFactory);
-        effect.transform.position = rightGoal.position;
+        effect.transform.position = rightGoal.position; //오른쪽 골대에 공이 들어갔다는 것을 알려줌
         Destroy(effect.gameObject, 2);
 
+        //리스폰위치
         GameObject ballObj = Instantiate(ballFactory);
-        ballObj.transform.position = leftBallPos.position;
+        ballObj.transform.position = rightBallPos.position;
         ballObj.SetActive(true);
-        rightScore = 0;
         //계속 공이 생성되면 안되니까
         isLeftGoal = false;
     }

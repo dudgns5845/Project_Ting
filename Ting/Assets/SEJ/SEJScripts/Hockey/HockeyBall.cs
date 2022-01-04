@@ -22,10 +22,10 @@ public class HockeyBall : MonoBehaviour
         if (instance == null)
             instance = this;
     }
-    public HockeyBall(Rigidbody rigidbody)
-    {
-        rigidbody = rigidbody;
-    }
+    //public HockeyBall(Rigidbody rigidbody)
+    //{
+    //    rigidbody = rigidbody;
+    //}
 
     void Start()
     {
@@ -65,14 +65,11 @@ public class HockeyBall : MonoBehaviour
         print("리스폰 호출");
         if (other.gameObject.name == "RightGoal") //오른쪽 골대 = 왼쪽플레이어 승리
         {
-            
-
             AirHockeyTableManager.hockeyTableM.MakeLeftBall();
             Destroy(gameObject);
         }
         if (other.gameObject.name == "LeftGoal")
         {
-         
             AirHockeyTableManager.hockeyTableM.MakeRightBall();
             Destroy(gameObject);
         }

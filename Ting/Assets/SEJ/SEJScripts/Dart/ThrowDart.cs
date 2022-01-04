@@ -9,10 +9,8 @@ public class ThrowDart : MonoBehaviour
 {
     //다트 공장
     public GameObject dartFactory;
- 
     public Transform trRight;
     public Transform trLeft;
-
 
     SEJDarts dart; // dart스크립트 담은 변수 
     float forceWithTime; //오래 잡고 있을 수록 던지는 힘이 커진다
@@ -28,12 +26,10 @@ public class ThrowDart : MonoBehaviour
 
     void Update()
     {
-
         //if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         if(OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch) || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
         {
             Darts();
-
         }
         //else if (Input.GetButtonUp("Fire1") || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         else if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch) || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
@@ -72,8 +68,4 @@ public class ThrowDart : MonoBehaviour
         forceWithTime = 0;
     }
     
-
-
-
-
 }
