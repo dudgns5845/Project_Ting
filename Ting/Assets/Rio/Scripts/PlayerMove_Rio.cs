@@ -89,7 +89,10 @@ public class PlayerMove_Rio : MonoBehaviour
         moveDirection = new Vector3(stickPos.x, 0, stickPos.y);
         moveDirection = transform.TransformDirection(moveDirection);
         moveDirection *= speed;
-        if (Input.GetButton("Jump"))
+        //if (Input.GetButton("Jump"))
+        //    moveDirection.y = jumpSpeed;
+
+        if(OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger, OVRInput.Controller.All))
             moveDirection.y = jumpSpeed;
 
         moveDirection.y -= gravity * Time.deltaTime;
