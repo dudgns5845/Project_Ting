@@ -35,40 +35,10 @@ public class SEJVRHandControl : MonoBehaviour
         if (vrhandcontrol == null)
             vrhandcontrol = this;
     }
-
-
-    //void GrabHockeyStick()
-    //{
-    //    if (isHandDown && isTriggerDown) //잡기버튼을 눌렀을 때
-    //    {
-
-    //        if (false == tryGrab) //안잡혔다면
-    //        {
-    //            // 잡는 순간
-    //            tryGrab = true;
-    //            // trRight를 중심으로 반경 0.1M 안의 Mallet레이어 충돌체를 모두 검사하고싶다.
-    //            int layerMask = 1 << LayerMask.NameToLayer("Stick");
-    //            Collider[] cols = Physics.OverlapSphere(trRight.position, grabRadius, layerMask);
-    //            if (cols.Length > 0)
-    //            {
-    //                grabObject = cols[0].gameObject;
-    //                // 나의 부모 = 너
-    //                grabObject.transform.parent = trRight;
-    //                grabObject.transform.position = trRight.position;
-    //            }
-    //        }
-    //    }
-
-    //}
-
-    //void MeetingRoomHand()
-    //{
-    //    if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
-    //    {
-    //        ClickRay();
-    //    }
-    //}
-
+    void Update()
+    {
+        ClickRay();
+    }
     private void ClickRay()
     {
         //오른손 위치,오른손 앞방향으로 나가는 Ray를 만든다
@@ -219,8 +189,5 @@ public class SEJVRHandControl : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        ClickRay();
-    }
+
 }

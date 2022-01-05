@@ -46,11 +46,11 @@ public class Pattern_05 : MonoBehaviour
         Vector3 v3 = pointPos_3;
         Vector3 v4 = pointPos_4;
 
-        v0.z += 0.03f * Mathf.Sin(Time.time * 2);
-        v1.z -= 0.03f * Mathf.Sin(Time.time * 2);
-        v2.z += 0.03f * Mathf.Sin(Time.time * 2);
-        v3.z -= 0.03f * Mathf.Sin(Time.time * 2);
-        v4.z += 0.03f * Mathf.Sin(Time.time * 2);
+        v0.z += 0.05f * Mathf.Sin(Time.time * 2);
+        v1.z -= 0.05f * Mathf.Sin(Time.time * 2);
+        v2.z += 0.05f * Mathf.Sin(Time.time * 2);
+        v3.z -= 0.05f * Mathf.Sin(Time.time * 2);
+        v4.z += 0.05f * Mathf.Sin(Time.time * 2);
 
         Point100obj[0].transform.position = v0;
         Point100obj[1].transform.position = v1;
@@ -74,11 +74,11 @@ public class Pattern_05 : MonoBehaviour
         Vector3 v3 = pointPos_3_1;
         Vector3 v4 = pointPos_4_1;
 
-        v0.z -= 0.03f * Mathf.Sin(Time.time * 2);
-        v1.z += 0.03f * Mathf.Sin(Time.time * 2);
-        v2.z -= 0.03f * Mathf.Sin(Time.time * 2);
-        v3.z += 0.03f * Mathf.Sin(Time.time * 2);
-        v4.z -= 0.03f * Mathf.Sin(Time.time * 2);
+        v0.z -= 0.05f * Mathf.Sin(Time.time * 2);
+        v1.z += 0.05f * Mathf.Sin(Time.time * 2);
+        v2.z -= 0.05f * Mathf.Sin(Time.time * 2);
+        v3.z += 0.05f * Mathf.Sin(Time.time * 2);
+        v4.z -= 0.05f * Mathf.Sin(Time.time * 2);
 
         Point100obj_1[0].transform.position = v0;
         Point100obj_1[1].transform.position = v1;

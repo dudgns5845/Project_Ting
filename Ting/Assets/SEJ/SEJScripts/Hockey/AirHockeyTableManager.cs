@@ -79,7 +79,7 @@ public class AirHockeyTableManager : MonoBehaviour
     public void OnClickHockeyBtn()
     {
         //시작하기 버튼을 누르면
-     
+        GameOnOff_SEJ.onoff.isHockey = true;
         //시작버튼 사라지고
         hockeyBtnObj.SetActive(false);
         //점수판, 공, 스틱 생성
@@ -93,23 +93,20 @@ public class AirHockeyTableManager : MonoBehaviour
     public void OnClickExitHockeyBtn()
     {
         //나가기 버튼 누르면
+        GameOnOff_SEJ.onoff.isHockey = false;
         //스코어 리셋, 점수판 사라짐 , 시작하기 버튼 다시 생성
-        leftScore = 0; 
+        leftScore = 0;
+        txtLeftScore.text = " " + leftScore;
         rightScore = 0;
+        txtRightScore.text = " " + rightScore;
         score.SetActive(false);
+        ballObj.SetActive(false);
         hockeyBtnObj.SetActive(true);
         stickObj.SetActive(false);
         stick2Obj.SetActive(false);
-        ballObj.SetActive(false);
         
         isOnClickExit = true;
-        
-        // 이미 눌러서 실행되었다면
-        if(isOnClickExit)
-        {
-            //카메라 3인칭으로 전환
-            
-        }
+      
 
     }
 

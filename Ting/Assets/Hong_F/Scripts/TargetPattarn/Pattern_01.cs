@@ -17,7 +17,9 @@ public class Pattern_01 : MonoBehaviour
     void Start()
     {
         obj_count = p1obj.Length;
-        transform.position = new Vector3(0, 3, 15);
+        //transform.position = new Vector3(0, 3, 15);
+        transform.localPosition = new Vector3(0, 0, 12);
+        
     }
 
     // Update is called once per frame
@@ -28,8 +30,9 @@ public class Pattern_01 : MonoBehaviour
 
     public void Pattern1()
     {
-        movePosition = new Vector3(0, 3, 5);
-        transform.position = Vector3.MoveTowards(transform.position, movePosition, 0.1f);
+        //movePosition = new Vector3(0, 3, 5);
+        movePosition = new Vector3(0, 0, 1);
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, movePosition, 0.1f);
 
         print(transform.position);
 

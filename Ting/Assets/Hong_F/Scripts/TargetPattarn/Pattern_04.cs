@@ -57,8 +57,8 @@ public class Pattern_04 : MonoBehaviour
             p4obj[8].activeSelf == false &&
             p4obj[9].activeSelf == false &&
             p4obj[10].activeSelf == false &&
-            p4obj[11].activeSelf == false &&
-            p4obj[12].activeSelf == false)
+            p4obj[11].activeSelf == false 
+          )
         {
             gameObject.SetActive(false);
         }
