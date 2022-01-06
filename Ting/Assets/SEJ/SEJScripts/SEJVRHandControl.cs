@@ -52,68 +52,73 @@ public class SEJVRHandControl : MonoBehaviour
             line.SetPosition(0, trRight.position);
             line.SetPosition(1, hit.point);
 
-            //if(OVRInput.GetDown(OVRInput.Button.Two))
+            print(hit.transform.name);
             if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
             {
-                print(hit.transform.name);
-                //int layerMask = 1 << LayerMask.NameToLayer("Q");
-          
                 line.transform.parent = trRight;
 
                 if (hit.transform.name.Contains("QButton"))
                 {
                     SEJButton.btn.OnClickQ();
                 }
-                if (hit.transform.name.Contains("XButton"))
+               else if (hit.transform.name.Contains("XButton"))
                 {
                     SEJButton.btn.OnClickX();
                 }
-                if (hit.transform.name.Contains("ContentsButton"))
+                else if (hit.transform.name.Contains("ContentsButton"))
                 {
                     SEJButton.btn.OnClickContents();
                 }
-                if (hit.transform.name.Contains("Balance"))
+                else if (hit.transform.name.Contains("Balance"))
                 {
                     SEJButton.btn.OnClickBalance();
 
                 }
-                if (hit.transform.name.Contains("Question"))
+                else if (hit.transform.name.Contains("Question"))
                 {
                     SEJButton.btn.OnClickQuestion();
                 }
-                if (hit.transform.name.Contains("BMenuBtn"))
+                else if (hit.transform.name.Contains("BMenuBtn"))
                 {
                     SEJButton.btn.BalanceMenuBtn();
                 }
-                if (hit.transform.name.Contains("QMenuBtn"))
+                else if (hit.transform.name.Contains("QMenuBtn"))
                 {
                     SEJButton.btn.QuestionMenuBtn();
                 }
-                if (hit.transform.name.Contains("RightBtn"))
+                else if (hit.transform.name.Contains("RightBtn"))
                 {
                     SEJButton.btn.OnClickRight();
                 }
-                if(hit.transform.name.Contains("AirHockeyBtn")) //하키
+                else if (hit.transform.name.Contains("AirHockeyBtn")) //하키
                 {
                     AirHockeyTableManager.hockeyTableM.OnClickHockeyBtn();
                     //하키 스크립트 켜기
                     GetComponent<ThrowHockeyBall>().enabled=true;
                 }
-                if(hit.transform.name.Contains("AirHockeyOutBtn")) //하키
+                else if (hit.transform.name.Contains("AirHockeyOutBtn")) //하키
                 {
                     AirHockeyTableManager.hockeyTableM.OnClickExitHockeyBtn();
                     GetComponent<ThrowHockeyBall>().enabled = false;
                 }
-                if (hit.transform.name.Contains("StartDartBtn")) //다트
+                else if (hit.transform.name.Contains("StartDartBtn")) //다트
                 {
                     SEJDartBoard.db.OnStartDart();
-                    //GetComponent<ThrowDart>().enabled = true;
                 }
-                if (hit.transform.name.Contains("ExitDartBtn")) //다트
+                else if (hit.transform.name.Contains("ExitDartBtn")) //다트
                 {
                     SEJDartBoard.db.OnExitDart();
-                    //GetComponent<ThrowDart>().enabled = false;
                 }
+                else if (hit.transform.name.Contains("StartGunBtn")) //총
+                {
+                    GunTableManager.gunTableM.OnClickStartGun();
+                }
+                else if (hit.transform.name.Contains("ExitGunBtn")) //총
+                {
+                    GunTableManager.gunTableM.OnClickExitGun();
+                }
+
+
                 else
                 {
                     line.enabled=false;

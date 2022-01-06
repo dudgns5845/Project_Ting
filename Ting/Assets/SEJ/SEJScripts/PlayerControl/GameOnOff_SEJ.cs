@@ -11,18 +11,19 @@ using UnityEngine;
 public class GameOnOff_SEJ : MonoBehaviour
 {
     public static GameOnOff_SEJ onoff;
-
+    public GameObject dartObjFactory; //다트핀 프리펩
 
     private void Awake()
     {
         if (onoff == null)
             onoff = this;
     }
-    void Start()
+    public void Start()
     {
        //처음에 게임에 관련된 스크립트는 다 꺼준다
         GetComponent<ThrowHockeyBall>().enabled = false;
         GetComponent<ThrowDart>().enabled = false;
+        dartObjFactory.SetActive(false);
         GetComponent<GunControl>().enabled = false;
     }
 

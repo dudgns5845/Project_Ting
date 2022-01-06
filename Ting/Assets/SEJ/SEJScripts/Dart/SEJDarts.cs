@@ -19,6 +19,9 @@ public class SEJDarts : MonoBehaviour
     {
         if (rb.velocity != new Vector3(0, 0, 0))
             transform.forward = rb.velocity.normalized;
+
+    
+
     }
 
     public void Shooting(float forceWithTime)

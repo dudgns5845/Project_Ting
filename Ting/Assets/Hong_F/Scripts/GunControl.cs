@@ -34,7 +34,6 @@ public class GunControl : MonoBehaviour
 
         if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
         {
-
             Collider[] gunObj = Physics.OverlapSphere(trRight.position, grabRange, Gunlayer);
 
             gun = gunObj[0].gameObject;
@@ -42,9 +41,6 @@ public class GunControl : MonoBehaviour
             gunRb.useGravity = false;
             gun.transform.position = trRight.transform.position;
             gun.transform.rotation = trRight.rotation;
-
-
-
         }
         if (OVRInput.GetUp(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
         {
@@ -53,8 +49,6 @@ public class GunControl : MonoBehaviour
             {
                 gunRb.useGravity = true;
             }
-
         }
-
     }
 }
