@@ -23,16 +23,16 @@ public class Pattern_02 : MonoBehaviour
     {
         Pattern2();
 
-        if(transform.position == movePosition)
+        if(transform.localPosition == movePosition)
         {
-        move100point();
+          move100point();
 
         }
     }
     public void Pattern2()
     {
-        movePosition = new Vector3(0, 3, 15);
-        transform.position = Vector3.MoveTowards(transform.position, movePosition, 0.1f);
+        movePosition = new Vector3(0, 0, 5);
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, movePosition, 0.1f);
 
         if(point100[0].activeSelf == false &&
             point100[1].activeSelf == false&&
@@ -40,9 +40,6 @@ public class Pattern_02 : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-
-        
-
 
     }
 
@@ -60,6 +57,5 @@ public class Pattern_02 : MonoBehaviour
         point100[0].transform.position = v0;
         point100[1].transform.position = v1;
 
-      
     }
 }

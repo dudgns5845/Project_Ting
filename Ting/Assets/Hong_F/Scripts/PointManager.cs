@@ -81,7 +81,7 @@ public class PointManager : MonoBehaviour
             if(currTime > 3)
             {
                 state = 1;
-                startCount.text =  "Start!";
+                     //startCount.text =  "Start!";
 
                 currTime = 0;
             }
@@ -93,7 +93,7 @@ public class PointManager : MonoBehaviour
             if(currTime > 1)
             {
                 state = 2;
-                startCount.gameObject.SetActive(false);
+                //startCount.gameObject.SetActive(false);
 
             }
         }

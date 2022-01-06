@@ -66,12 +66,14 @@ public class HockeyBall : MonoBehaviour
         if (other.gameObject.name == "RightGoal") //¿À¸¥ÂÊ °ñ´ë = ¿ÞÂÊÇÃ·¹ÀÌ¾î ½Â¸®
         {
             AirHockeyTableManager.hockeyTableM.MakeLeftBall();
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         if (other.gameObject.name == "LeftGoal")
         {
             AirHockeyTableManager.hockeyTableM.MakeRightBall();
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 

@@ -35,20 +35,21 @@ public class GameOnOff_SEJ : MonoBehaviour
     public bool isGun;
     public void PlayHockey()
     {
-        GetComponent<ThrowHockeyBall>().enabled = true;
-        //if(isHockey)
-        //{
-        //  GetComponent<ThrowHockeyBall>().enabled = true;
-        //}
-        //if(isHockey==false)
-        //{
-        //    GetComponent<ThrowHockeyBall>().enabled = false;
-        //}
+        //GetComponent<ThrowHockeyBall>().enabled = true;
+        if (isHockey)
+        {
+            GetComponent<ThrowHockeyBall>().enabled = true;
+        }
+        if (isHockey == false)
+        {
+            GetComponent<ThrowHockeyBall>().enabled = false;
+        }
 
     }
     public void PlayDart()
     {
         GetComponent<ThrowDart>().enabled = true;
+
 
     }
     public void PlayGun()

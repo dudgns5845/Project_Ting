@@ -66,14 +66,12 @@ public class SEJDartBoard : MonoBehaviour
    public void OnExitDart() //다트에서 나가기 버튼 누르면
     {
         dartStartBtnObj.SetActive(true);
+        SCORE = 0;
+
         //GameOnOff_SEJ.onoff.PlayDart();
-        //두번 누르면 3인칭 카메라로 전환
 
-
-
+       
+       
     }
-
-
-
 
 }
