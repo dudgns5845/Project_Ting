@@ -7,6 +7,8 @@ public class RollerCoasterManager : MonoBehaviour
 
     public Animator rollerCoasterAnim;
     public bool rollerStart;
+
+   
     
     // Start is called before the first frame update
     void Start()
@@ -31,4 +33,6 @@ public class RollerCoasterManager : MonoBehaviour
 
 
     }
+
+   
 }
