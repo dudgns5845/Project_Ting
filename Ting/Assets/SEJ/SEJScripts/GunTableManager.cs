@@ -32,6 +32,7 @@ public class GunTableManager : MonoBehaviour
 
     public void OnClickStartGun()
     {
+        GameOnOff_SEJ.onoff.isGun = true;
         startGunBtn.SetActive(false);
         pointM.SetActive(true);
         targetPatternM.SetActive(true);
@@ -41,6 +42,8 @@ public class GunTableManager : MonoBehaviour
     }
     public void OnClickExitGun()
     {
+
+        GameOnOff_SEJ.onoff.isGun = false;
         pointM.SetActive(false);
         startGunBtn.SetActive(true);
         targetPatternM.SetActive(false);

@@ -2004,7 +2004,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useRecommendedMSAALevel: 1
   _monoscopic: 0
-  _colorGamut: 4
   minRenderScale: 0.7
   maxRenderScale: 1
   _headPoseRelativeOffsetRotation: {x: 0, y: 0, z: 0}
@@ -3739,7 +3738,7 @@ MonoBehaviour:
   gunRb: {fileID: 1893142210}
   Gunlayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 2048
   bulletF: {fileID: 1893142211}
 --- !u!4 &1668567265
 Transform:

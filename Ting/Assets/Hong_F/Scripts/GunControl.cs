@@ -11,7 +11,7 @@ public class GunControl : MonoBehaviour
     //잡고 있는 물체 
     public GameObject gun;
     public Rigidbody gunRb;
-    public LayerMask Gunlayer;
+    public LayerMask Gunlayer; //Gun으로 바꾸기
     public BulletFactory bulletF;
 
     //잡을수 있는 거리 

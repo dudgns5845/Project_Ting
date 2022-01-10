@@ -61,13 +61,14 @@ public class SEJDartBoard : MonoBehaviour
 
    public  void OnStartDart() //다트에서 시작하기 버튼 누르면
     {
+        GameOnOff_SEJ.onoff.isDart = true;
         dartStartBtnObj.SetActive(false);
         dartExitBtnObj.transform.localPosition = new Vector3(3.75f, -8.08f, -23.89f);
         GameOnOff_SEJ.onoff.PlayDart();
     }
    public void OnExitDart() //다트에서 나가기 버튼 누르면
     {
-
+        GameOnOff_SEJ.onoff.isDart = false;
         GameOnOff_SEJ.onoff.Start();
         dartStartBtnObj.SetActive(true);
         dartExitBtnObj.transform.localPosition = new Vector3(-0.03999996f, -5.570004f, -23.89f);

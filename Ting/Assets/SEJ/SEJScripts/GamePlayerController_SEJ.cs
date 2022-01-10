@@ -1,39 +1,49 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//하키
-//소개팅
-
-public class SEJVRHandControl : MonoBehaviour
+public class GamePlayerController_SEJ : MonoBehaviour
 {
-    public static SEJVRHandControl vrhandcontrol;
+    //지금 플레이어의 상태 -- 어떤 게임을 하는중인지
+    //그 영역에 들어가면 true로 만들어준다
+    //나머지는 false
+    public bool isAirHokey = false;
+    public bool isDart = false;
+    public bool isGun = false;
 
-
-    //오른손 Transform
-    public Transform trRight;
-    //왼손 Transform
-    public Transform trLeft;
+    public LayerMask gripObjectLayer;
 
     public LineRenderer line;
 
+    //물체 던지는 힘
+    public float throwPower;
+
     public GameObject grabObject;
+
+   
+
 
     private bool tryGrab;
     public float grabRadius = 0.5f;
+    //양손 손위치
+    public Transform trRight;
+    public Transform trLeft;
+    //잡은 물체를 담을 위치
+    Transform grabObj;
 
 
-
-    private void Awake()
+    private void Start()
     {
-        if (vrhandcontrol == null)
-            vrhandcontrol = this;
+    
     }
-    void Update()
+
+
+    private void Update()
     {
         ClickRay();
+       
     }
+
 
     public RaycastHit hit;
     private void ClickRay()
@@ -41,27 +51,36 @@ public class SEJVRHandControl : MonoBehaviour
         //오른손 위치,오른손 앞방향으로 나가는 Ray를 만든다
         Ray ray_R = new Ray(trRight.position, trRight.forward);
         Ray ray_L = new Ray(trLeft.position, trLeft.forward);
+
         //맞은위치
-       
         int UilayerMask = 1 << LayerMask.NameToLayer("UI");
         int GriplayerMask = 1 << LayerMask.NameToLayer("gripObjectLayer");
 
 
-        if (Physics.Raycast(ray_R, out hit,100, UilayerMask)) //Ray발사 후 어딘가에 부딪힌다면
+        //ui클릭
+        if (Physics.Raycast(ray_R, out hit, 100, UilayerMask)) //Ray발사 후 어딘가에 부딪힌다면
         {
             LineDraw(trRight.position);
+
+
         }
-        else if(Physics.Raycast(ray_L, out hit, 100, UilayerMask))
+        else if (Physics.Raycast(ray_L, out hit, 100, UilayerMask))
         {
             LineDraw(trLeft.position);
         }
-       else if (Physics.Raycast(ray_R, out hit, 100, GriplayerMask)) 
+
+        //물체 잡기
+        else if (Physics.Raycast(ray_R, out hit, 100, GriplayerMask))
         {
             LineDraw(trRight.position);
+            GripObject(trRight);
+
         }
-        else if(Physics.Raycast(ray_L, out hit, 100, GriplayerMask))
+        else if (Physics.Raycast(ray_L, out hit, 100, GriplayerMask))
         {
+
             LineDraw(trLeft.position);
+            GripObject(trLeft);
         }
         else
         {
@@ -214,5 +233,80 @@ public class SEJVRHandControl : MonoBehaviour
         //}
         #endregion
     }
+
+    public Transform VRHand;
+    public Transform VLHand;
+    public bool isGrip = false;
+    public void GripObject(Transform Pos)
+    {
+        print("hit name:" + hit.transform.name);
+
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch) || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        {
+            print("물체 잡기");
+
+            //hit.transform.gameObject.layer = 1 << LayerMask.NameToLayer("Hand");
+
+            //print("내이름은 "+hit.transform.name);
+            //hit.transform.SetParent(VRHand);
+
+            hit.transform.parent = VRHand;
+            grabObj = hit.transform;
+            //hit.transform.position = VRHand.position;
+
+
+
+            //hit.transform.parent =trRight;
+            //hit.transform.position = trRight.position;
+
+            print("호출");
+            isGrip = true;
+        }
+        else if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        {
+            if(grabObj !=null)
+            {
+                Throw();
+                print("물체 놓치기" + hit.transform.name);
+                //hit.transform.SetParent(null);
+                grabObj.parent = null;
+                grabObj = null;
+            }
+        }
+
+        //else return;
+    }
+
+    //오브젝트 잡기 - 충돌해서 이름확인하고 손으로 가져오기
+    //대상 - 다트, 스틱, 총
+    //먼저 물건을 잡는다
+ 
+    Rigidbody SetKinematic(bool enable)  //반복해서 쓸 리지드바디 켜고끄기 함수
+    {
+        //grabObj한테  Rigidbody컴포넌트를 가져온다
+        Rigidbody rb = grabObj.GetComponent<Rigidbody>();
+        //가져온 컴포넌트 물리력 제거
+        rb.isKinematic = enable;
+        return rb;
+    }
+   
+
+    public void Throw()
+    {
+        //던진 힘
+        Vector3 dir = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch);
+        //던진 돌림힘
+        Vector3 angularDir = OVRInput.GetLocalControllerAngularVelocity(OVRInput.Controller.RTouch);
+
+        Rigidbody rb = SetKinematic(false);
+
+        rb.velocity = dir * throwPower;
+        //가져온 Rigidbody 의 angularVelocity 값에 angularDir 을 넣자
+        rb.angularVelocity = angularDir;
+
+    }
+
+
+
 
 }
