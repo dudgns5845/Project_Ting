@@ -21,6 +21,8 @@ TagManager:
   - Floor
   - Stick
   - Hand
+  - hand
+  - Tip
   layers:
   - Default
   - TransparentFX

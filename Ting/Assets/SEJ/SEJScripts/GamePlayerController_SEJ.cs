@@ -89,7 +89,7 @@ public class GamePlayerController_SEJ : MonoBehaviour
         else
         {
             //line.enabled = false;
-            line.gameObject.SetActive(false);
+          //  line.gameObject.SetActive(false);
         }
     }
 
