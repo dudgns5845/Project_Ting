@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class GamePlayerController_SEJ : MonoBehaviour
 {
-    //지금 플레이어의 상태 -- 어떤 게임을 하는중인지
-    //그 영역에 들어가면 true로 만들어준다
-    //나머지는 false
-    public bool isAirHokey = false;
-    public bool isDart = false;
-    public bool isGun = false;
-
+   
     //다트가 닿았는지 확인용
     public bool isTouch;
-
 
 
     public LayerMask gripObjectLayer;
@@ -59,33 +52,27 @@ public class GamePlayerController_SEJ : MonoBehaviour
         int UilayerMask = 1 << LayerMask.NameToLayer("UI");
         int GriplayerMask = 1 << LayerMask.NameToLayer("gripObjectLayer");
    
-
-
         //ui클릭
         if (Physics.Raycast(ray_R, out hit, 100, UilayerMask)) //Ray발사 후 어딘가에 부딪힌다면
         {
             LineDraw(trRight.position);
-
-
         }
         else if (Physics.Raycast(ray_L, out hit, 100, UilayerMask))
         {
             LineDraw(trLeft.position);
         }
 
-        //물체 잡기
-        else if (Physics.Raycast(ray_R, out hit, 100, GriplayerMask))
-        {
-            LineDraw(trRight.position);
-            GripObject(trRight);
-
-        }
-        else if (Physics.Raycast(ray_L, out hit, 100, GriplayerMask))
-        {
-
-           // LineDraw(trLeft.position);
-           // GripObject(trLeft);
-        }
+        ////물체 잡기
+        //else if (Physics.Raycast(ray_R, out hit, 100, GriplayerMask))
+        //{
+        //    LineDraw(trRight.position);
+        //    GripObject(trRight);
+        //}
+        //else if (Physics.Raycast(ray_L, out hit, 100, GriplayerMask))
+        //{
+        //   // LineDraw(trLeft.position);
+        //   // GripObject(trLeft);
+        //}
         else
         {
             //line.enabled = false;
@@ -139,33 +126,39 @@ public class GamePlayerController_SEJ : MonoBehaviour
             {
                 SEJButton.btn.OnClickRight();
             }
-            else if (hit.transform.name.Contains("AirHockeyBtn")) //하키
+            else if(hit.transform.name.Contains("HockeyResetBtn"))
             {
-                AirHockeyTableManager.hockeyTableM.OnClickHockeyBtn();
-                //하키 스크립트 켜기
-                GetComponent<ThrowHockeyBall>().enabled = true;
+                AirHockeyTableManager.hockeyTableM.OnClickHockeyReset();
             }
-            else if (hit.transform.name.Contains("AirHockeyOutBtn")) //하키
-            {
-                AirHockeyTableManager.hockeyTableM.OnClickExitHockeyBtn();
-                GetComponent<ThrowHockeyBall>().enabled = false;
-            }
-            else if (hit.transform.name.Contains("StartDartBtn")) //다트
-            {
-                SEJDartBoard.db.OnStartDart();
-            }
-            else if (hit.transform.name.Contains("ExitDartBtn")) //다트
-            {
-                SEJDartBoard.db.OnExitDart();
-            }
-            else if (hit.transform.name.Contains("StartGunBtn")) //총
-            {
-                GunTableManager.gunTableM.OnClickStartGun();
-            }
-            else if (hit.transform.name.Contains("ExitGunBtn")) //총
-            {
-                GunTableManager.gunTableM.OnClickExitGun();
-            }
+        
+            
+            //else if (hit.transform.name.Contains("AirHockeyBtn")) //하키
+            //{
+            //    AirHockeyTableManager.hockeyTableM.OnClickHockeyBtn();
+            //    //하키 스크립트 켜기
+            //    GetComponent<ThrowHockeyBall>().enabled = true;
+            //}
+            //else if (hit.transform.name.Contains("AirHockeyOutBtn")) //하키
+            //{
+            //    AirHockeyTableManager.hockeyTableM.OnClickExitHockeyBtn();
+            //    GetComponent<ThrowHockeyBall>().enabled = false;
+            //}
+            //else if (hit.transform.name.Contains("StartDartBtn")) //다트
+            //{
+            //    SEJDartBoard.db.OnStartDart();
+            //}
+            //else if (hit.transform.name.Contains("ExitDartBtn")) //다트
+            //{
+            //    SEJDartBoard.db.OnExitDart();
+            //}
+            //else if (hit.transform.name.Contains("StartGunBtn")) //총
+            //{
+            //    GunTableManager.gunTableM.OnClickStartGun();
+            //}
+            //else if (hit.transform.name.Contains("ExitGunBtn")) //총
+            //{
+            //    GunTableManager.gunTableM.OnClickExitGun();
+            //}
 
 
         }
@@ -246,23 +239,39 @@ public class GamePlayerController_SEJ : MonoBehaviour
     {
         print("hit name:" + hit.collider.name);
 
+
+
+
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch) || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
-        {
-            print("물체 잡기");
-            //hit.transform.gameObject.layer = 1 << LayerMask.NameToLayer("Hand");
-            //print("내이름은 "+hit.transform.name);
-            //hit.transform.SetParent(VRHand);
+        { 
+            if(isAirHokey)
+            {
+                print("물체 잡기");
+                //hit.transform.gameObject.layer = 1 << LayerMask.NameToLayer("Hand");
+                //print("내이름은 "+hit.transform.name);
+                //hit.transform.SetParent(VRHand);
 
+                //부모(손)의 리지드바디가 있고 자식개체(스틱)에 리지드바디가 없어서 잡은 물체가 자꾸 손으로 바뀜
+                //가리키는 물체는 스틱이 맞으니까 collider.transform을 넣어주면 됨
+                hit.collider.transform.parent = VRHand;
+                grabObj = hit.collider.transform;
+                //hit.collider.transform.localPosition = new Vector3(0, -0.05f, 0);
+                //hit.collider.transform.eulerAngles = new Vector3(0, 0, 0);
+                //로테이션 0,0,0  포지션 0,-0.12,0.02
 
-            //부모(손)의 리지드바디가 있고 자식개체(스틱)에 리지드바디가 없어서 잡은 물체가 자꾸 손으로 바뀜
-            //가리키는 물체는 스틱이 맞으니까 collider.transform을 넣어주면 됨
-            hit.collider.transform.parent = VRHand;
-            grabObj = hit.collider.transform;
+                print("호출");
+                isGrip = true;
+            }
+            else if(isDart)
+            {
 
-            print("호출");
-            isGrip = true;
+            }
+              
+
+            
+           
         }
-        else if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        else if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch) || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         {
             if(grabObj !=null)
             {
@@ -312,8 +321,36 @@ public class GamePlayerController_SEJ : MonoBehaviour
             rb.angularVelocity = angularDir;
         }
     }
+   
+    
+    //지금 플레이어의 상태 -- 어떤 게임을 하는중인지
+    //그 영역에 들어가면 true로 만들어준다
+    //나머지는 false
+    public bool isAirHokey = false;
+    public bool isDart = false;
+    public bool isGun = false;
 
- 
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "ColliderCube1")
+        {
+            isAirHokey = true;
+        }
+        else if (other.gameObject.name == "ColliderCube1")
+        {
+            isDart = true;
+        }
+        else if (other.gameObject.name == "ColliderCube1")
+        {
+            isGun = true;
+        }
+       
+        else return;
+
+    }
+
+
 
 
 }

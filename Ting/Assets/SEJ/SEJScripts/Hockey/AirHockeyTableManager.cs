@@ -4,25 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-//에어하키의 포톤뷰 관리
-//시작하기를 누르면 
-//점수판이 생성된다
-//공이 테이블 위에서 생성한다
-//스틱(말렛)도 생성한다
+
 
 public class AirHockeyTableManager : MonoBehaviour
 {
 
     public static AirHockeyTableManager hockeyTableM;
+    
+    //시작하기, 나가기 버튼 삭제 (1.11)
 
-    public GameObject hockeyBtnObj;
-    public Button hockeyBtn; 
+    //public GameObject hockeyBtnObj;
+    //public Button hockeyBtn; 
 
-    public GameObject hockeyExitBtnObj;
-    public Button hockeyExitBtn; 
+    //public GameObject hockeyExitBtnObj;
+    //public Button hockeyExitBtn; 
 
+    
     public GameObject score; //점수판
-
+    //public Button HockeyReset;
 
     public GameObject ballFactory;
     public GameObject ballObj;
@@ -62,19 +61,6 @@ public class AirHockeyTableManager : MonoBehaviour
 
     void Start()
     {
-        ////처음에 테이블 위에 아무것도 없이 시작하기 버튼만 있음
-        //hockeyBtnObj.SetActive(true);
-        //score.SetActive(false);
-
-        //stickObj.SetActive(false);
-        //stick2Obj.SetActive(false);
-        //ballObj.SetActive(false);
-
-        //txtLeftScore.text = " " + leftScore;
-        //txtRightScore.text = " " + rightScore;
-
-        //잠깐 수정(1.10) : UI안누르고 가능하도록 바꿔놓음
-        hockeyBtnObj.SetActive(true);
         score.SetActive(true);
 
         stickObj.SetActive(true);
@@ -85,60 +71,71 @@ public class AirHockeyTableManager : MonoBehaviour
         txtRightScore.text = " " + rightScore;
     }
 
- 
 
-    public void OnClickHockeyBtn()
-    {
-        //시작하기 버튼을 누르면
-        GameOnOff_SEJ.onoff.isHockey = true;
-        //시작버튼 사라지고
-        hockeyBtnObj.SetActive(false);
-        //점수판, 공, 스틱 생성
-        score.SetActive(true);
-        ballObj.SetActive(true);
-        stickObj.SetActive(true);
-        stick2Obj.SetActive(true);
+    #region 버튼 함수들
+    //public void OnClickHockeyBtn()
+    //{
+    //    //시작하기 버튼을 누르면
+    //    GameOnOff_SEJ.onoff.isHockey = true;
+    //    //시작버튼 사라지고
+    //    //hockeyBtnObj.SetActive(false);
+    //    //점수판, 공, 스틱 생성
+    //    score.SetActive(true);
+    //    ballObj.SetActive(true);
+    //    stickObj.SetActive(true);
+    //    stick2Obj.SetActive(true);
 
-    }
-    bool isOnClickExit; //나가기 버튼 클릭 여부
-    public void OnClickExitHockeyBtn()
+    //}
+    //bool isOnClickExit; //나가기 버튼 클릭 여부
+    //public void OnClickExitHockeyBtn()
+    //{
+    //    //나가기 버튼 누르면
+    //    GameOnOff_SEJ.onoff.isHockey = false;
+    //    //스코어 리셋, 점수판 사라짐 , 시작하기 버튼 다시 생성
+    //    leftScore = 0;
+    //    txtLeftScore.text = " " + leftScore;
+    //    rightScore = 0;
+    //    txtRightScore.text = " " + rightScore;
+    //    score.SetActive(false);
+    //    ballObj.SetActive(false);
+    //    //hockeyBtnObj.SetActive(true);
+    //    stickObj.SetActive(false);
+    //    stick2Obj.SetActive(false);
+
+    //    isOnClickExit = true;
+
+
+    //}
+    #endregion
+    //리셋버튼
+    public void OnClickHockeyReset()
     {
-        //나가기 버튼 누르면
-        GameOnOff_SEJ.onoff.isHockey = false;
-        //스코어 리셋, 점수판 사라짐 , 시작하기 버튼 다시 생성
-        leftScore = 0;
-        txtLeftScore.text = " " + leftScore;
         rightScore = 0;
-        txtRightScore.text = " " + rightScore;
-        score.SetActive(false);
-        ballObj.SetActive(false);
-        hockeyBtnObj.SetActive(true);
-        stickObj.SetActive(false);
-        stick2Obj.SetActive(false);
-        
-        isOnClickExit = true;
-      
-
+        leftScore = 0;
+        txtRightScore.text = " " +rightScore;
+        txtLeftScore.text = " " + leftScore;
+        stickObj.transform.position = stickPos.position;
+        stick2Obj.transform.position = stick2Pos.position;
     }
 
-  
+
     public void MakeRightBall() //오른쪽 득점
     {
         print("오른쪽 리스폰 호출");
         rightScore += 1; 
         txtRightScore.text = " " +rightScore;
         print("왼쪽플레이어  1점 Get");
-        GameObject effect = Instantiate(effectFactory);
-        effect.transform.position = leftGoal.position; //왼쪽골대에 공이 들어갔다는 것을 알려줌
-        Destroy(effect.gameObject, 2);
+        //GameObject effect = Instantiate(effectFactory);
+        //effect.transform.position = leftGoal.position; //왼쪽골대에 공이 들어갔다는 것을 알려줌
+        //Destroy(effect.gameObject, 2);
 
         //리스폰위치
-        GameObject ballObj = Instantiate(ballFactory);
-        ballObj.transform.position = leftBallPos.position;
-        ballObj.SetActive(true);
-
+        //ballObj = Instantiate(ballFactory);
+        //ballObj.transform.position = leftBallPos.position;
+        //ballObj.SetActive(true);
+        StartCoroutine(BallInit(leftBallPos));
         //계속 공이 생성되면 안되니까
-        isRightGoal = false;
+        //isRightGoal = false;
     }
 
     public GameObject effectFactory;
@@ -153,16 +150,27 @@ public class AirHockeyTableManager : MonoBehaviour
         txtLeftScore.text = " " + leftScore;
         print("오른쪽플레이어  1점 Get");
       
-        GameObject effect = Instantiate(effectFactory);
-        effect.transform.position = rightGoal.position; //오른쪽 골대에 공이 들어갔다는 것을 알려줌
-        Destroy(effect.gameObject, 2);
+        //GameObject effect = Instantiate(effectFactory);
+        //effect.transform.position = rightGoal.position; //오른쪽 골대에 공이 들어갔다는 것을 알려줌
+        //Destroy(effect.gameObject, 2);
 
         //리스폰위치
-        GameObject ballObj = Instantiate(ballFactory);
-        ballObj.transform.position = rightBallPos.position;
-        ballObj.SetActive(true);
+        //ballObj = Instantiate(ballFactory);
+        //ballObj.transform.position = rightBallPos.position;
+        //ballObj.SetActive(true);
+        StartCoroutine(BallInit(rightBallPos));
         //계속 공이 생성되면 안되니까
-        isLeftGoal = false;
+        //isLeftGoal = false;
     }
+
+    IEnumerator BallInit(Transform pos)
+    {
+        yield return new WaitForSeconds(1f);
+        //리스폰위치
+        ballObj = Instantiate(ballFactory);
+        ballObj.transform.position = pos.position;
+        //ballObj.SetActive(true);
+    }
+    
 
 }

@@ -92,9 +92,5 @@ public class BulletFactory : MonoBehaviour
     LineRenderer layser;
     bool isborder;
     public float raycastDistance = 10f;
-    void GunRay()
-    {
-                  
-    }
 
 }
