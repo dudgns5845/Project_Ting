@@ -58,7 +58,6 @@ public class SEJDarts : MonoBehaviour
                 // 다트가 보드조각에 부딪혔을때 보드조각의 본체인 보드에게 점수정보를 넘겨주고싶다.
                 boardPiece.AddScorePlz(this);
             }
-          
         }
     }
 

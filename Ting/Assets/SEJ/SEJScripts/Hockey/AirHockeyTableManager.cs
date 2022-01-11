@@ -62,13 +62,24 @@ public class AirHockeyTableManager : MonoBehaviour
 
     void Start()
     {
-        //처음에 테이블 위에 아무것도 없이 시작하기 버튼만 있음
-        hockeyBtnObj.SetActive(true);
-        score.SetActive(false);
+        ////처음에 테이블 위에 아무것도 없이 시작하기 버튼만 있음
+        //hockeyBtnObj.SetActive(true);
+        //score.SetActive(false);
 
-        stickObj.SetActive(false);
-        stick2Obj.SetActive(false);
-        ballObj.SetActive(false);
+        //stickObj.SetActive(false);
+        //stick2Obj.SetActive(false);
+        //ballObj.SetActive(false);
+
+        //txtLeftScore.text = " " + leftScore;
+        //txtRightScore.text = " " + rightScore;
+
+        //잠깐 수정(1.10) : UI안누르고 가능하도록 바꿔놓음
+        hockeyBtnObj.SetActive(true);
+        score.SetActive(true);
+
+        stickObj.SetActive(true);
+        stick2Obj.SetActive(true);
+        ballObj.SetActive(true);
 
         txtLeftScore.text = " " + leftScore;
         txtRightScore.text = " " + rightScore;

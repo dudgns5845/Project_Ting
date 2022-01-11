@@ -16,10 +16,6 @@ public class TextInput_Rio : MonoBehaviour, IPointerClickHandler
         keyborad.GetComponent<Keyboard_Rio>().total_text = inputField.text;
     }
 
-
-
-
-
     //private void Start()
     //{
     //    EventTrigger eventTrigger = gameObject.AddComponent<EventTrigger>();

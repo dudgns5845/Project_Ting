@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class ThrowDart : MonoBehaviour
 {
-    //다트 공장
+    //다트 공장 ->  1/10 수정 : 공장에서 만들지 말고 미리 앞에 만들어 두기
     public GameObject dartFactory;
     public Transform trRight;
     public Transform trLeft;
@@ -54,6 +54,8 @@ public class ThrowDart : MonoBehaviour
         }
     }
 
+    //다트생성
+    //잡는동안의 상태
     void Darts()
     {
         GameObject dartobj = GameObject.Instantiate(dartFactory);

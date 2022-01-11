@@ -11,7 +11,7 @@ public class GunControl : MonoBehaviour
     //잡고 있는 물체 
     public GameObject gun;
     public Rigidbody gunRb;
-    public LayerMask Gunlayer;
+    public LayerMask Gunlayer; //Gun으로 바꾸기
     public BulletFactory bulletF;
 
     //잡을수 있는 거리 
@@ -34,7 +34,6 @@ public class GunControl : MonoBehaviour
 
         if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
         {
-
             Collider[] gunObj = Physics.OverlapSphere(trRight.position, grabRange, Gunlayer);
 
             gun = gunObj[0].gameObject;
@@ -42,9 +41,6 @@ public class GunControl : MonoBehaviour
             gunRb.useGravity = false;
             gun.transform.position = trRight.transform.position;
             gun.transform.rotation = trRight.rotation;
-
-
-
         }
         if (OVRInput.GetUp(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
         {
@@ -53,8 +49,6 @@ public class GunControl : MonoBehaviour
             {
                 gunRb.useGravity = true;
             }
-
         }
-
     }
 }

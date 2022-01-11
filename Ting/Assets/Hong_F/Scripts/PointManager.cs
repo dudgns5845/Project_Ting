@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class PointManager : MonoBehaviour
 {
-
     public static PointManager pm;
     public Text currScoreText;
     public Text bestScoreText;
@@ -18,7 +17,6 @@ public class PointManager : MonoBehaviour
     public Text startCount;
     public int state;
     public GameObject TargetPattern;
-
 
 
     public GameObject[] pattern;
@@ -48,13 +46,11 @@ public class PointManager : MonoBehaviour
     {
         UpdateScore();
         Gamestart();
-
     }
 
     public void AddScore(int addValue)
     {
         currScore += addValue;
-
     }
 
     void UpdateScore()
@@ -67,7 +63,6 @@ public class PointManager : MonoBehaviour
         {
             bestScore = currScore;
             bestScoreText.text = sBestScore;
-
         }
 
     }

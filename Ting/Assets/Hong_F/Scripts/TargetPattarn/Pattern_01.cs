@@ -33,8 +33,8 @@ public class Pattern_01 : MonoBehaviour
         //movePosition = new Vector3(0, 3, 5);
         movePosition = new Vector3(0, 0, 1);
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, movePosition, 0.1f);
+        //print(transform.position);
 
-        print(transform.position);
 
        //if(p1obj[0|1|2|3|4].activeSelf == false)
        // {
