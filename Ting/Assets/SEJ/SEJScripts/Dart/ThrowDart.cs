@@ -54,6 +54,8 @@ public class ThrowDart : MonoBehaviour
         }
     }
 
+    //다트생성
+    //잡는동안의 상태
     void Darts()
     {
         GameObject dartobj = GameObject.Instantiate(dartFactory);

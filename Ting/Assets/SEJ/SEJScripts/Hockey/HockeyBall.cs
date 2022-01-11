@@ -54,7 +54,7 @@ public class HockeyBall : MonoBehaviour
         }
         else
         {   //컨트롤러로 받은 힘을 반사각으로 뱉는다
-            rigidbody.velocity = Vector3.Reflect(inDirection, collision.contacts[0].normal);
+            rigidbody.velocity = -Vector3.Reflect(inDirection, collision.contacts[0].normal);
         }
 
     }

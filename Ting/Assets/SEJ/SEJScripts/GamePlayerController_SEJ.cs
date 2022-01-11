@@ -11,6 +11,11 @@ public class GamePlayerController_SEJ : MonoBehaviour
     public bool isDart = false;
     public bool isGun = false;
 
+    //다트가 닿았는지 확인용
+    public bool isTouch;
+
+
+
     public LayerMask gripObjectLayer;
 
     public LineRenderer line;
@@ -21,8 +26,6 @@ public class GamePlayerController_SEJ : MonoBehaviour
     public GameObject grabObject;
 
    
-
-
     private bool tryGrab;
     public float grabRadius = 0.5f;
     //양손 손위치
@@ -55,6 +58,7 @@ public class GamePlayerController_SEJ : MonoBehaviour
         //맞은위치
         int UilayerMask = 1 << LayerMask.NameToLayer("UI");
         int GriplayerMask = 1 << LayerMask.NameToLayer("gripObjectLayer");
+   
 
 
         //ui클릭
@@ -79,8 +83,8 @@ public class GamePlayerController_SEJ : MonoBehaviour
         else if (Physics.Raycast(ray_L, out hit, 100, GriplayerMask))
         {
 
-            LineDraw(trLeft.position);
-            GripObject(trLeft);
+           // LineDraw(trLeft.position);
+           // GripObject(trLeft);
         }
         else
         {
@@ -96,7 +100,8 @@ public class GamePlayerController_SEJ : MonoBehaviour
         line.SetPosition(0, Pos);
         line.SetPosition(1, hit.point);
 
-        print(hit.transform.name);
+        print(hit.collider.name); //맞는 콜라이더이름
+
         if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         {
             line.transform.parent = trRight;
@@ -239,25 +244,20 @@ public class GamePlayerController_SEJ : MonoBehaviour
     public bool isGrip = false;
     public void GripObject(Transform Pos)
     {
-        print("hit name:" + hit.transform.name);
+        print("hit name:" + hit.collider.name);
 
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch) || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         {
             print("물체 잡기");
-
             //hit.transform.gameObject.layer = 1 << LayerMask.NameToLayer("Hand");
-
             //print("내이름은 "+hit.transform.name);
             //hit.transform.SetParent(VRHand);
 
-            hit.transform.parent = VRHand;
-            grabObj = hit.transform;
-            //hit.transform.position = VRHand.position;
 
-
-
-            //hit.transform.parent =trRight;
-            //hit.transform.position = trRight.position;
+            //부모(손)의 리지드바디가 있고 자식개체(스틱)에 리지드바디가 없어서 잡은 물체가 자꾸 손으로 바뀜
+            //가리키는 물체는 스틱이 맞으니까 collider.transform을 넣어주면 됨
+            hit.collider.transform.parent = VRHand;
+            grabObj = hit.collider.transform;
 
             print("호출");
             isGrip = true;
@@ -267,10 +267,12 @@ public class GamePlayerController_SEJ : MonoBehaviour
             if(grabObj !=null)
             {
                 Throw();
-                print("물체 놓치기" + hit.transform.name);
+                print("물체 놓치기" + hit.collider.name);
                 //hit.transform.SetParent(null);
                 grabObj.parent = null;
                 grabObj = null;
+
+                isGrip = false;
             }
         }
 
@@ -285,8 +287,11 @@ public class GamePlayerController_SEJ : MonoBehaviour
     {
         //grabObj한테  Rigidbody컴포넌트를 가져온다
         Rigidbody rb = grabObj.GetComponent<Rigidbody>();
-        //가져온 컴포넌트 물리력 제거
-        rb.isKinematic = enable;
+        if(rb != null)
+        {
+            //가져온 컴포넌트 물리력 제거
+            rb.isKinematic = enable;
+        }
         return rb;
     }
    
@@ -300,13 +305,15 @@ public class GamePlayerController_SEJ : MonoBehaviour
 
         Rigidbody rb = SetKinematic(false);
 
-        rb.velocity = dir * throwPower;
-        //가져온 Rigidbody 의 angularVelocity 값에 angularDir 을 넣자
-        rb.angularVelocity = angularDir;
-
+       if(rb != null) //스틱에는 리지드바디가 없어서 안놔지니까
+        {
+            rb.velocity = dir * throwPower;
+            //가져온 Rigidbody 의 angularVelocity 값에 angularDir 을 넣자
+            rb.angularVelocity = angularDir;
+        }
     }
 
-
+ 
 
 
 }
