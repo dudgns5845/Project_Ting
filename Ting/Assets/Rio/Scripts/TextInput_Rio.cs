@@ -6,15 +6,21 @@ using UnityEngine.EventSystems;
 
 public class TextInput_Rio : MonoBehaviour, IPointerClickHandler
 {
-    public InputField inputField;
+    InputField inputField;
     public GameObject keyborad;
+
+    private void Start()
+    {
+        inputField = GetComponent<InputField>();
+        
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        keyborad = GameObject.Find("keyboard");
-
-        keyborad.SetActive(true);
-        keyborad.GetComponent<Keyboard_Rio>().inputField = this.inputField;
-        keyborad.GetComponent<Keyboard_Rio>().total_text = inputField.text;
+        //키보드 활성화
+        keyborad.SetActive(!keyborad.activeSelf);
+        //할당해주고
+        keyborad.GetComponentInParent<VirtualKeyboard>().TextInputBox = GetComponent<VirtualTextInputBox>();
+  
     }
 }
