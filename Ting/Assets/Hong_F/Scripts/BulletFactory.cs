@@ -5,6 +5,7 @@
 
 
 //Gun Bullet Hole안에 붙어있던 스크립트
+//Gun에도 붙어있던데 뭔지 모르겠음
 
 //public class BulletFactory : MonoBehaviour
 //{

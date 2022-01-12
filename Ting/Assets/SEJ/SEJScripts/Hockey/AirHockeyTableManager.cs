@@ -107,8 +107,9 @@ public class AirHockeyTableManager : MonoBehaviour
 
     //}
     #endregion
-    //리셋버튼
-    public void OnClickHockeyReset()
+   
+    
+    public void OnClickHockeyReset() //리셋버튼
     {
         rightScore = 0;
         leftScore = 0;
