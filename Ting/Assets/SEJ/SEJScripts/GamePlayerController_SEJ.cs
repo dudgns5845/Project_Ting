@@ -8,17 +8,15 @@ public class GamePlayerController_SEJ : MonoBehaviour
     //다트가 닿았는지 확인용
     public bool isTouch;
 
-
     public LayerMask gripObjectLayer;
 
-    public LineRenderer line;
+   
 
     //물체 던지는 힘
     public float throwPower;
 
-    public GameObject grabObject;
+    public LineRenderer line;
 
-   
     private bool tryGrab;
     public float grabRadius = 0.5f;
     //양손 손위치
@@ -239,9 +237,6 @@ public class GamePlayerController_SEJ : MonoBehaviour
     {
         print("hit name:" + hit.collider.name);
 
-
-
-
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch) || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         { 
             if(isAirHokey)
@@ -264,12 +259,24 @@ public class GamePlayerController_SEJ : MonoBehaviour
             }
             else if(isDart)
             {
-
+                hit.collider.transform.parent = VRHand;
+                grabObj = hit.collider.transform;
+                print("호출");
+                isGrip = true;
+            }
+            else if(isGun)
+            {
+                hit.collider.transform.parent = VRHand;
+                grabObj = hit.collider.transform;
+                print("호출");
+                isGrip = true;
+                //CathGun();
+                if(OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    SetKinematic(true);
+                }
             }
               
-
-            
-           
         }
         else if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch) || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         {
@@ -280,7 +287,7 @@ public class GamePlayerController_SEJ : MonoBehaviour
                 //hit.transform.SetParent(null);
                 grabObj.parent = null;
                 grabObj = null;
-
+                SetKinematic(false);
                 isGrip = false;
             }
         }
@@ -292,6 +299,38 @@ public class GamePlayerController_SEJ : MonoBehaviour
     //대상 - 다트, 스틱, 총
     //먼저 물건을 잡는다
  
+
+    public Rigidbody gunRb;
+    public LayerMask Gunlayer; //Gun으로 바꾸기
+    //public BulletFactory bulletF;
+
+    //잡을수 있는 거리 
+    float grabRange = 0.2f;
+    //public void CathGun()
+    //{
+      
+    //    SetKinematic(false);
+
+    //    if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
+    //    {
+    //        Collider[] gunObj = Physics.OverlapSphere(trRight.position, grabRange, Gunlayer);
+
+    //        gun = gunObj[0].gameObject;
+    //        gun.transform.SetParent(trRight);
+    //        gunRb.useGravity = false;
+    //        gun.transform.position = trRight.transform.position;
+    //        gun.transform.rotation = trRight.rotation;
+    //    }
+    //    if (OVRInput.GetUp(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
+    //    {
+    //        gun.transform.SetParent(null);
+    //        if (gun.transform.position == trRight.transform.position)
+    //        {
+    //            gunRb.useGravity = true;
+    //        }
+    //    }
+    //}
+
     Rigidbody SetKinematic(bool enable)  //반복해서 쓸 리지드바디 켜고끄기 함수
     {
         //grabObj한테  Rigidbody컴포넌트를 가져온다
