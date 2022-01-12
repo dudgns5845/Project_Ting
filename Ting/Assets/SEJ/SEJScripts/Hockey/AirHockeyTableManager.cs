@@ -117,7 +117,7 @@ public class AirHockeyTableManager : MonoBehaviour
         txtLeftScore.text = " " + leftScore;
         stickObj.transform.position = stickPos.position;
         stick2Obj.transform.position = stick2Pos.position;
-        ballObj.transform.position = rightBallPos.position;
+        ballObj.transform.position = leftBallPos.position;
     }
 
 

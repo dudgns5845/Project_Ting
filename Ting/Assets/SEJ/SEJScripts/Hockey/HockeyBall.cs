@@ -37,7 +37,7 @@ public class HockeyBall : MonoBehaviour
         //rigidbody.AddForce(dir, ForceMode.Impulse);
         inDirection = rigidbody.velocity;
         //inDirection = rigidbody.transform.position - transform.position;
-        rigidbody.AddForceAtPosition(inDirection.normalized, transform.position);
+        rigidbody.AddForceAtPosition(inDirection.normalized, transform.forward);
         Debug.DrawRay(transform.position, transform.forward * 5, Color.green);
     }
 
