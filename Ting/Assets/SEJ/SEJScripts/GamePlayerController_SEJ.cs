@@ -73,8 +73,7 @@ public class GamePlayerController_SEJ : MonoBehaviour
         //}
         else
         {
-            //line.enabled = false;
-            //  line.gameObject.SetActive(false);
+            line.gameObject.SetActive(false);
         }
     }
 
@@ -89,7 +88,8 @@ public class GamePlayerController_SEJ : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         {
-            line.transform.parent = trRight;
+            //line.transform.parent = trRight;
+            line.transform.parent = VRHand;
 
             if (hit.transform.name.Contains("QButton"))
             {
