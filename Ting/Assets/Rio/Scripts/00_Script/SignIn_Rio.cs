@@ -66,7 +66,7 @@ public class SignIn_Rio : MonoBehaviour
             //유저 정보 데이터베이스 저장하는 함수 호출
             db.SaveUserInfo(Name.text, NickName.text, Age.text, Toggle_M.isOn ? "남성" : "여성");
             yield return new WaitForSeconds(1.5f);
-            SceneManager.LoadScene("01_CustomScene");
+            SceneManager.LoadScene("01_CustomScene_VR");
         }
         else print("회원가입 실패!!");
     }
