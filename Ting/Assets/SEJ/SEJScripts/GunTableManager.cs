@@ -7,9 +7,9 @@ public class GunTableManager : MonoBehaviour
 {
     public static GunTableManager gunTableM;
 
-    public GameObject startGunBtn;
+    //public GameObject startGunBtn;
    
-    public GameObject exitGunBtn;
+    //public GameObject exitGunBtn;
 
     public GameObject pointM;
     public GameObject targetPatternM;
@@ -24,36 +24,38 @@ public class GunTableManager : MonoBehaviour
 
     void Start()
     {
-        pointM.SetActive(false);
-        targetPatternM.SetActive(false);
-        gun.SetActive(false);
-        reloadObj.SetActive(false);
+       
     }
-
-    public void OnClickStartGun()
+    void Update()
     {
-        GameOnOff_SEJ.onoff.isGun = true;
-        startGunBtn.SetActive(false);
+        Setting();
+    }
+    void Setting()
+    {
         pointM.SetActive(true);
         targetPatternM.SetActive(true);
         gun.SetActive(true);
         reloadObj.SetActive(true);
-        GameOnOff_SEJ.onoff.PlayGun();
-    }
-    public void OnClickExitGun()
-    {
-
-        GameOnOff_SEJ.onoff.isGun = false;
-        pointM.SetActive(false);
-        startGunBtn.SetActive(true);
-        targetPatternM.SetActive(false);
-        gun.SetActive(false);
-        reloadObj.SetActive(false);
-        GameOnOff_SEJ.onoff.Start();
     }
 
-    void Update()
-    {
-        
-    }
+
+    //버튼 함수들
+    //public void OnClickStartGun()
+    //{
+
+    //    pointM.SetActive(true);
+    //    targetPatternM.SetActive(true);
+    //    gun.SetActive(true);
+    //    reloadObj.SetActive(true);
+    //}
+    //public void OnClickExitGun()
+    //{
+
+    //    pointM.SetActive(false);
+    //    targetPatternM.SetActive(false);
+    //    gun.SetActive(false);
+    //    reloadObj.SetActive(false);
+    //}
+
+ 
 }

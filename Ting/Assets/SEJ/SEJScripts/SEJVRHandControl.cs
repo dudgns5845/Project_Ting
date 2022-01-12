@@ -115,33 +115,33 @@ public class SEJVRHandControl : MonoBehaviour
             {
                 SEJButton.btn.OnClickRight();
             }
-            else if (hit.transform.name.Contains("AirHockeyBtn")) //하키
-            {
-                AirHockeyTableManager.hockeyTableM.OnClickHockeyBtn();
-                //하키 스크립트 켜기
-                GetComponent<ThrowHockeyBall>().enabled = true;
-            }
-            else if (hit.transform.name.Contains("AirHockeyOutBtn")) //하키
-            {
-                AirHockeyTableManager.hockeyTableM.OnClickExitHockeyBtn();
-                GetComponent<ThrowHockeyBall>().enabled = false;
-            }
-            else if (hit.transform.name.Contains("StartDartBtn")) //다트
-            {
-                SEJDartBoard.db.OnStartDart();
-            }
-            else if (hit.transform.name.Contains("ExitDartBtn")) //다트
-            {
-                SEJDartBoard.db.OnExitDart();
-            }
-            else if (hit.transform.name.Contains("StartGunBtn")) //총
-            {
-                GunTableManager.gunTableM.OnClickStartGun();
-            }
-            else if (hit.transform.name.Contains("ExitGunBtn")) //총
-            {
-                GunTableManager.gunTableM.OnClickExitGun();
-            }
+            //else if (hit.transform.name.Contains("AirHockeyBtn")) //하키
+            //{
+            //    AirHockeyTableManager.hockeyTableM.OnClickHockeyBtn();
+            //    //하키 스크립트 켜기
+            //    GetComponent<ThrowHockeyBall>().enabled = true;
+            //}
+            //else if (hit.transform.name.Contains("AirHockeyOutBtn")) //하키
+            //{
+            //    AirHockeyTableManager.hockeyTableM.OnClickExitHockeyBtn();
+            //    GetComponent<ThrowHockeyBall>().enabled = false;
+            //}
+            //else if (hit.transform.name.Contains("StartDartBtn")) //다트
+            //{
+            //    SEJDartBoard.db.OnStartDart();
+            //}
+            //else if (hit.transform.name.Contains("ExitDartBtn")) //다트
+            //{
+            //    SEJDartBoard.db.OnExitDart();
+            //}
+            //else if (hit.transform.name.Contains("StartGunBtn")) //총
+            //{
+            //    GunTableManager.gunTableM.OnClickStartGun();
+            //}
+            //else if (hit.transform.name.Contains("ExitGunBtn")) //총
+            //{
+            //    GunTableManager.gunTableM.OnClickExitGun();
+            //}
 
 
         }

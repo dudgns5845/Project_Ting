@@ -54,7 +54,7 @@ public class HockeyBall : MonoBehaviour
         }
         else
         {   //컨트롤러로 받은 힘을 반사각으로 뱉는다
-            rigidbody.velocity = -Vector3.Reflect(inDirection, collision.contacts[0].normal);
+            rigidbody.velocity = Vector3.Reflect(inDirection, collision.contacts[0].normal);
         }
 
     }
@@ -66,14 +66,12 @@ public class HockeyBall : MonoBehaviour
         if (other.gameObject.name == "RightGoal") //오른쪽 골대 = 왼쪽플레이어 승리
         {
             AirHockeyTableManager.hockeyTableM.MakeLeftBall();
-            //Destroy(gameObject);
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
         if (other.gameObject.name == "LeftGoal")
         {
             AirHockeyTableManager.hockeyTableM.MakeRightBall();
-            //Destroy(gameObject);
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 
