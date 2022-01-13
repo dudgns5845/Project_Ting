@@ -107,8 +107,9 @@ public class AirHockeyTableManager : MonoBehaviour
 
     //}
     #endregion
-    //리셋버튼
-    public void OnClickHockeyReset()
+   
+    
+    public void OnClickHockeyReset() //리셋버튼
     {
         rightScore = 0;
         leftScore = 0;
@@ -116,6 +117,7 @@ public class AirHockeyTableManager : MonoBehaviour
         txtLeftScore.text = " " + leftScore;
         stickObj.transform.position = stickPos.position;
         stick2Obj.transform.position = stick2Pos.position;
+        ballObj.transform.position = rightBallPos.position;
     }
 
 
