@@ -10,10 +10,10 @@ Material:
   m_Name: Bark_Inst
   m_Shader: {fileID: 4800000, guid: 3be7f5566f25aad4ea1f36bf3725063e, type: 3}
   m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP _USEMETALICMAP_ON
-  m_LightmapFlags: 0
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2003
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -92,20 +92,20 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AmbientOcclusion: 1
+    - _AmbientOcclusion: 0.297
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EmissivePower: 0.05
     - _Glossiness: 0.5
-    - _Metalic: 1
+    - _Metalic: 0
     - _Metallic: 0
     - _Mode: 0
     - _NormalScale: 1.1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Roughtness: 0.7
+    - _Roughtness: 0.168
     - _SrcBlend: 1
     - _UVSec: 0
     - _UseMetalicMap: 1
