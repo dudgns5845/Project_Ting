@@ -17,7 +17,7 @@ public class ThrowHockeyBall : MonoBehaviour
     public Transform stickPos;
     public Transform stick2Pos;
 
-    public GameObject cameraRig;
+
 
     private void Awake()
     {
@@ -82,9 +82,9 @@ public class ThrowHockeyBall : MonoBehaviour
                 if (grabObject != null) //안놓아졌다면
                 {
                     grabObject.transform.parent = null;
-                 
-                    if(grabObject.name == "Stick")
-                    grabObject.transform.position = stickPos.position; //내가 잡은 스틱이 Stick1 일 때 놓았을 때 이 위치로
+
+                    if (grabObject.name == "Stick")
+                        grabObject.transform.position = stickPos.position; //내가 잡은 스틱이 Stick1 일 때 놓았을 때 이 위치로
 
                     if (grabObject.name == "Stick2")
                         grabObject.transform.position = stick2Pos.position; //내가 잡은 스틱이 Stick2 일 때 놓았을 때 이 위치로

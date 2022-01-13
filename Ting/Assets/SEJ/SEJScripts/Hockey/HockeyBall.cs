@@ -14,7 +14,6 @@ public class HockeyBall : MonoBehaviour
     public bool isRightGoal; //오른쪽에 골 들어감
     public Transform leftBallPos;  //오른쪽에 골 들어갔을 때 왼쪽 pos에서 리스폰
     public Transform rightBallPos;  //왼쪽에 골 들어갔을 때 오른쪽 pos에서 리스폰
-
     Rigidbody rigidbody;
 
     private void Awake()
@@ -48,7 +47,7 @@ public class HockeyBall : MonoBehaviour
     public void OnCollisionEnter(Collision collision)
     {
         //스틱에 닿으면
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Stick"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Stick")) 
         {   //컨트롤러로 치는 힘을 리지드바디의 속도로 입사각으로 넣는다
             rigidbody.velocity = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch) * kAdjustForce;
         }

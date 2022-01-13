@@ -305,32 +305,6 @@ public class GamePlayerController_SEJ : MonoBehaviour
     //대상 - 다트, 스틱, 총
     //먼저 물건을 잡는다
 
-
-    //public void CathGun()
-    //{
-
-    //    SetKinematic(false);
-
-    //    if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
-    //    {
-    //        Collider[] gunObj = Physics.OverlapSphere(trRight.position, grabRange, Gunlayer);
-
-    //        gun = gunObj[0].gameObject;
-    //        gun.transform.SetParent(trRight);
-    //        gunRb.useGravity = false;
-    //        gun.transform.position = trRight.transform.position;
-    //        gun.transform.rotation = trRight.rotation;
-    //    }
-    //    if (OVRInput.GetUp(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
-    //    {
-    //        gun.transform.SetParent(null);
-    //        if (gun.transform.position == trRight.transform.position)
-    //        {
-    //            gunRb.useGravity = true;
-    //        }
-    //    }
-    //}
-
     Rigidbody SetKinematic(bool enable)  //반복해서 쓸 리지드바디 켜고끄기 함수
     {
         //grabObj한테  Rigidbody컴포넌트를 가져온다

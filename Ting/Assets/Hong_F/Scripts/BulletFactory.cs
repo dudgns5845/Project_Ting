@@ -11,7 +11,6 @@ public class BulletFactory : MonoBehaviour
 {
 
     public GameObject bulletFactory;
-    public GunControl hc;
     public Text bulletText;
     public GameObject gunHole;
     Rigidbody rd;

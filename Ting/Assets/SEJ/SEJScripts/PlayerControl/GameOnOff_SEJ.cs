@@ -24,7 +24,7 @@ public class GameOnOff_SEJ : MonoBehaviour
         GetComponent<ThrowHockeyBall>().enabled = false;
         GetComponent<ThrowDart>().enabled = false;
         dartObjFactory.SetActive(false);
-        GetComponent<GunControl>().enabled = false;
+        //GetComponent<GunControl>().enabled = false;
     }
 
     void Update()
@@ -60,18 +60,18 @@ public class GameOnOff_SEJ : MonoBehaviour
         }
 
     }
-    public void PlayGun()
-    {
-        //GetComponent<GunControl>().enabled = true;
-        if (isGun)
-        {
-            GetComponent<GunControl>().enabled = true;
-        }
-        if (isGun == false)
-        {
-            GetComponent<GunControl>().enabled = false;
-        }
-    }
+    //public void PlayGun()
+    //{
+    //    //GetComponent<GunControl>().enabled = true;
+    //    if (isGun)
+    //    {
+    //        GetComponent<GunControl>().enabled = true;
+    //    }
+    //    if (isGun == false)
+    //    {
+    //        GetComponent<GunControl>().enabled = false;
+    //    }
+    //}
 
 
 
