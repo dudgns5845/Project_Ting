@@ -13,6 +13,9 @@ public class LogIn_Rio : MonoBehaviour
 {
     FirebaseAuth auth;
 
+    public AudioClip sfx_sucess;
+    public AudioClip sfx_fail;
+
     //이메일 패스워드 InputField
     public InputField inputEmail;
     public InputField inputPassword;
@@ -50,6 +53,8 @@ public class LogIn_Rio : MonoBehaviour
     {
         if (inputEmail.text.Length == 0 || inputEmail.text.Length == 0)
         {
+            TXT_Result.color = new Color(255,0, 0);
+            GetComponent<AudioSource>().PlayOneShot(sfx_fail);
             TXT_Result.text = "정보를 다 입력해주세요!!";
             return;
         }
@@ -71,12 +76,16 @@ public class LogIn_Rio : MonoBehaviour
         //만약에 에러가 없다면
         if (task.Exception == null)
         {
+            TXT_Result.color = new Color(0, 0, 255);
             TXT_Result.text = "로그인 성공!!";
+            GetComponent<AudioSource>().PlayOneShot(sfx_sucess);
             yield return new WaitForSeconds(1.5f);
             SceneManager.LoadScene("01_CustomScene_VR");
         }
         else //로그인 실패 로그 출력
         {
+            GetComponent<AudioSource>().PlayOneShot(sfx_fail);
+            TXT_Result.color = new Color(255,0,0);
             TXT_Result.text = "로그인 실패!! ";
         }
     }

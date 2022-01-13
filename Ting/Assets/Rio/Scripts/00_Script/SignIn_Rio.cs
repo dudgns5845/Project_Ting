@@ -44,6 +44,9 @@ public class SignIn_Rio : MonoBehaviour
         //값이 비어있으면 에러 발생하고 끝내기
         if (!InputCheck())
         {
+            GetComponent<AudioSource>().PlayOneShot(sfx_fail);
+            TXT_Result.color = new Color(255, 0, 0);
+            TXT_Result.text = "입력을 정확하게 해주세요";
             print("입력을 정확하게 해주세요");
             return;
         }
@@ -51,10 +54,13 @@ public class SignIn_Rio : MonoBehaviour
         else
         {
             StartCoroutine(SignIn(Email.text, Password.text));
-           
+
         }
     }
 
+    public AudioClip sfx_sucess;
+    public AudioClip sfx_fail;
+    public Text TXT_Result;
     //회원가입 코루틴 함수
     IEnumerator SignIn(string email, string password)
     {
@@ -62,12 +68,21 @@ public class SignIn_Rio : MonoBehaviour
         yield return new WaitUntil(() => task.IsCompleted);
         if (task.Exception == null)
         {
+            GetComponent<AudioSource>().PlayOneShot(sfx_sucess);
+            TXT_Result.color = new Color(0, 0, 255);
+            TXT_Result.text = "회원가입 성공!!";
             print("회원가입 성공!!");
             //유저 정보 데이터베이스 저장하는 함수 호출
             db.SaveUserInfo(Name.text, NickName.text, Age.text, Toggle_M.isOn ? "남성" : "여성");
             yield return new WaitForSeconds(1.5f);
             SceneManager.LoadScene("01_CustomScene_VR");
         }
-        else print("회원가입 실패!!");
+        else
+        {
+            print("회원가입 실패!!");
+            GetComponent<AudioSource>().PlayOneShot(sfx_fail);
+            TXT_Result.color = new Color(255, 0, 0);
+            TXT_Result.text = "회원가입 실패!!";
+        }
     }
 }

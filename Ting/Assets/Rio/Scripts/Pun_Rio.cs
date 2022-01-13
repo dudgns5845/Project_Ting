@@ -61,7 +61,7 @@ public class Pun_Rio : MonoBehaviourPunCallbacks
         Transform spawnPoint = GameObject.Find("SpawnPoint").GetComponent<Transform>();
         
         //플레이어 생성
-        PhotonNetwork.Instantiate("Player", spawnPoint.position, spawnPoint.rotation, 0);
+        PhotonNetwork.Instantiate("S_Play_Player", spawnPoint.position, spawnPoint.rotation, 0);
 
         //photonView.RPC("initCharacter", RpcTarget.All, userid);
     }
