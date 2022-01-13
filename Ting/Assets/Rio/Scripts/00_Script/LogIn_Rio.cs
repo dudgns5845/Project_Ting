@@ -76,6 +76,7 @@ public class LogIn_Rio : MonoBehaviour
         //만약에 에러가 없다면
         if (task.Exception == null)
         {
+            TXT_Result.color = new Color(0, 0, 255);
             TXT_Result.text = "로그인 성공!!";
             GetComponent<AudioSource>().PlayOneShot(sfx_sucess);
             yield return new WaitForSeconds(1.5f);
