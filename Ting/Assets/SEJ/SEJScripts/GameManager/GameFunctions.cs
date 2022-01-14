@@ -155,4 +155,6 @@ public class GameFunctions : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().useGravity = false;
         gameObject.transform.rotation = Quaternion.Euler(new Vector3(180, 180, 90));
     }
-}
+
+
+    }

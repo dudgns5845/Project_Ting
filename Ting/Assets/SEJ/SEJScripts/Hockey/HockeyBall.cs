@@ -81,31 +81,4 @@ public class HockeyBall : MonoBehaviour
         }
     }
 
-
-   //public void MakeRightBall() //오른쪽 리스폰 
-   // {
-   //     GameObject ballObj = Instantiate(ballFactory);
-   //     ballObj.transform.position = rightBallPos.position;
-   //     ballObj.SetActive(true);
-       
-
-   //     //계속 공이 생성되면 안되니까
-   //     isRightGoal = false;
-   // }
-
-   // public void MakeLeftBall() //왼쪽 리스폰
-   // {
-   //     GameObject ballObj = Instantiate(ballFactory);
-   //     ballObj.transform.position = leftBallPos.position;
-   //     ballObj.SetActive(true);
-
-   //     //계속 공이 생성되면 안되니까
-   //     isLeftGoal = false;
-   // }    
-
-
-    //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    //{
-    //    throw new System.NotImplementedException();
-    //}
 }
