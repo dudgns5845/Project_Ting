@@ -2031,7 +2031,7 @@ Camera:
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!1 &726188566781526195
@@ -2105,7 +2105,7 @@ Camera:
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!1 &726188566781526197
@@ -2179,7 +2179,7 @@ Camera:
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!1 &726188566781526199
@@ -15805,8 +15805,6 @@ MonoBehaviour:
       OralCavityColor: []
       Height: 0
       HeadSize: 0
-  userid: 
-  isDone: 0
 --- !u!114 &5780480524149027722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15881,7 +15879,6 @@ MonoBehaviour:
   Man: {fileID: 5860348455630794463}
   Woman: {fileID: 1639307348518325883}
   userid: 
-  playerController: {fileID: 5780480524149027713}
   db: {fileID: 0}
 --- !u!1 &5795695482859399052
 GameObject:
@@ -16270,7 +16267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6078354255864478881
 Transform:
   m_ObjectHideFlags: 0

@@ -17,13 +17,12 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
     public GameObject Man;
     public GameObject Woman;
     public string userid;
-    public GameObject playerController;
+ 
 
     public Database_Rio db;
 
     private void Start()
     {
-
         db = GetComponent<Database_Rio>();
         pv = GetComponent<PhotonView>();
         auth = FirebaseAuth.DefaultInstance;
@@ -34,7 +33,7 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
             Cam.SetActive(true);
             //플레이어 조작 활성화
             //GetComponent<PlayerMove_Rio>().enabled = true;
-            playerController.SetActive(true);
+         
             //자신의 서버상의 캐릭터 id가 뭔지 알려준다
             pv.RPC("userIdSetting", RpcTarget.AllBuffered, auth.CurrentUser.UserId);
 
@@ -49,17 +48,13 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
 
         db.LoadUserInfo(userid, check);
 
-        //데이터 베이스에서 CC데이터를 읽어온다
-        //읽고 난 다음에야 셋팅을 시작한다 ==> 콜백
-        //db.LoadUserInfo(CCSetting);
-        //pv.RPC("UpdateUserCharacter", RpcTarget.AllBuffered, userid);
-
     }
 
 
 
     void check()
     {
+        print("케릭터 커스텀 정보가 업데이트 되었습니다.");
         pv.RPC("CCSetting", RpcTarget.AllBuffered);
     }
 
@@ -68,6 +63,7 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
     void userIdSetting(string id)
     {
         userid = id;
+        print("아이디가 셋팅 되었습니다.");
     }
 
 
@@ -95,63 +91,10 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
             db.UserSetting = Woman.GetComponent<CharacterCustomization>();
             //GetComponent<PlayerMove_Rio>().anim = Woman.GetComponent<Animator>();
         }
-
-        db.UserSetting.SetCharacterSetup(db.myInfo.characterCustomizationSetup);
+        if (pv.IsMine)
+        {
+            db.UserSetting.SetCharacterSetup(db.myInfo.characterCustomizationSetup);
+        }
     }
-
-
-    //[PunRPC]
-    //void UpdateCharacter()
-    //{
-    //    if (pv.IsMine)
-    //    {
-    //        //cc정보를 가지고 활성화한다
-    //        db.UserSetting.SetCharacterSetup(db.myInfo.characterCustomizationSetup);
-    //    }  
-    //    else
-    //    {
-    //        db.LoadUserInfo(CCSetting);
-    //        //cc정보를 가지고 활성화한다
-    //        db.UserSetting.SetCharacterSetup(db.myInfo.characterCustomizationSetup);
-    //    }
-
-    //}
-
-    //[PunRPC]
-    //public void initCharacter(string userid)
-    //{
-    //    //StartCoroutine(UserInit(userid));
-    //    //일단 서버에서 값을 읽어온다
-    //    Database_Rio.instance.LoadUserInfo(userid, ttt);
-    //}
-
-
-    //public IEnumerator UserInit(string userid)
-    //{
-
-    //    yield return new WaitForSeconds(0.5f);
-
-    //    //일단 서버에서 값을 읽어온다
-    //    Database_Rio.instance.LoadUserInfo(userid, ttt);
-
-    //    yield return new WaitForSeconds(3f);
-
-
-    //}
-
-    //public void ttt()
-    //{
-    //    if (Database_Rio.instance.myInfo.characterCustomizationSetup.settingsName == "MaleSettings")
-    //    {
-    //        Player = PhotonNetwork.Instantiate("Man", spawnPoint.position, spawnPoint.rotation, 0);
-    //    }
-    //    else if (Database_Rio.instance.myInfo.characterCustomizationSetup.settingsName == "FemaleSettings")
-    //    {
-    //        Player = PhotonNetwork.Instantiate("Wamen", spawnPoint.position, spawnPoint.rotation, 0);
-    //    }
-
-    //    Database_Rio.instance.UserSetting = Player.GetComponent<CharacterCustomization>();
-    //    Database_Rio.instance.UserSetting.SetCharacterSetup(Database_Rio.instance.myInfo.characterCustomizationSetup);
-    //}
-
 }
+
