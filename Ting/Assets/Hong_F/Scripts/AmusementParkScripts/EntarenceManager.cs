@@ -10,7 +10,6 @@ public class EntarenceManager : MonoBehaviour
     Vector3 closeDoorPos;
 
 
-    public Collider[] cols;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,16 +26,21 @@ public class EntarenceManager : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.name == "Auto Hand Player")
         {
             rollDoor.transform.localPosition = openDoorPos;
         }
-        else
+        
+
+
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "Auto Hand Player")
         {
             rollDoor.transform.position = closeDoorPos;
         }
-
-
-
     }
 }
