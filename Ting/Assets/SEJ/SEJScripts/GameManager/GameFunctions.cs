@@ -114,6 +114,7 @@ public class GameFunctions : MonoBehaviour
         if (0 < MaxCount)
         {
             print("총알 발사");
+            SoundManager_SEJ.soundM.PlayEFT(SoundManager_SEJ.EFT.EFT_SHOOT_GUN);
             GameObject Bullet = Instantiate(bulletFactory);
             Bullet.transform.position = gunHole.transform.position;
             Bullet.transform.rotation = gunHole.transform.rotation;
@@ -135,7 +136,9 @@ public class GameFunctions : MonoBehaviour
     }
     public void GripGun()
     {
+        //총 잡았을 때 손 위치에 맞게 회전시켜주기
         gameObject.transform.rotation = Quaternion.Euler(new Vector3(196.343f, 90, 180));
+        //잘 안되니까 자식에 있는 메쉬렌더러의 회전값을 바꿔준다...?
     }
     public void ReleaseGun() //총 놨을 때 제자리로
     {

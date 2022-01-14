@@ -43,17 +43,22 @@ public class HockeyBall : MonoBehaviour
     Vector3 inDirection;
     // 공이 받는 힘 조절
     public float kAdjustForce = 5;
-
+    bool isHit=false;
     public void OnCollisionEnter(Collision collision)
     {
         //스틱에 닿으면
         if (collision.gameObject.layer == LayerMask.NameToLayer("Stick")) 
         {   //컨트롤러로 치는 힘을 리지드바디의 속도로 입사각으로 넣는다
+            isHit = true;
             rigidbody.velocity = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch) * kAdjustForce;
+            SoundManager_SEJ.soundM.PlayEFT(SoundManager_SEJ.EFT.EFT_HIT_HOCKEY); //사운드
+
         }
         else
         {   //컨트롤러로 받은 힘을 반사각으로 뱉는다
-            rigidbody.velocity = Vector3.Reflect(inDirection, collision.contacts[0].normal);
+            isHit = false;
+            rigidbody.velocity = Vector3.Reflect(-inDirection, collision.contacts[0].normal);
+
         }
 
     }
@@ -64,11 +69,13 @@ public class HockeyBall : MonoBehaviour
         print("리스폰 호출");
         if (other.gameObject.name == "RightGoal") //오른쪽 골대 = 왼쪽플레이어 승리
         {
+            SoundManager_SEJ.soundM.PlayEFT(SoundManager_SEJ.EFT.EFT_GOAL_HOCKEY);
             AirHockeyTableManager.hockeyTableM.MakeLeftBall();
             Destroy(gameObject);
         }
         if (other.gameObject.name == "LeftGoal")
         {
+            SoundManager_SEJ.soundM.PlayEFT(SoundManager_SEJ.EFT.EFT_GOAL_HOCKEY);
             AirHockeyTableManager.hockeyTableM.MakeRightBall();
             Destroy(gameObject);
         }
