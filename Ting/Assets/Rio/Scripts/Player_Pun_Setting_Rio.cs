@@ -17,6 +17,7 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
     public GameObject Man;
     public GameObject Woman;
     public string userid;
+    public GameObject playerController;
 
     public Database_Rio db;
 
@@ -32,8 +33,8 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
             //플레이어 카메라 활성화
             Cam.SetActive(true);
             //플레이어 조작 활성화
-            GetComponent<PlayerMove_Rio>().enabled = true;
-            
+            //GetComponent<PlayerMove_Rio>().enabled = true;
+            playerController.SetActive(true);
             //자신의 서버상의 캐릭터 id가 뭔지 알려준다
             pv.RPC("userIdSetting", RpcTarget.AllBuffered, auth.CurrentUser.UserId);
 
@@ -86,13 +87,13 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
         {
             Man.SetActive(true);
             db.UserSetting = Man.GetComponent<CharacterCustomization>();
-            GetComponent<PlayerMove_Rio>().anim = Man.GetComponent<Animator>();
+            //GetComponent<PlayerMove_Rio>().anim = Man.GetComponent<Animator>();
         }
         else if (db.myInfo.characterCustomizationSetup.settingsName == "FemaleSettings")
         {
             Woman.SetActive(true);
             db.UserSetting = Woman.GetComponent<CharacterCustomization>();
-            GetComponent<PlayerMove_Rio>().anim = Woman.GetComponent<Animator>();
+            //GetComponent<PlayerMove_Rio>().anim = Woman.GetComponent<Animator>();
         }
 
         db.UserSetting.SetCharacterSetup(db.myInfo.characterCustomizationSetup);
