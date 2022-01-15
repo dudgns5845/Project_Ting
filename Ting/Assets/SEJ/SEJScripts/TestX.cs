@@ -20,6 +20,8 @@ public class TestX : MonoBehaviour
 
     public bool isGrip; //잡았다
     Transform grabObj; //잡은 물체를 담아줄 위치
+
+
     #region 현재 어느 존에 있는지
     //지금 플레이어의 상태 -- 어떤 게임을 하는중인지
     //그 영역에 들어가면 true로 만들어준다
@@ -27,6 +29,7 @@ public class TestX : MonoBehaviour
     public bool isAirHokey = false;
     public bool isDart = false;
     public bool isGun = false;
+    bool isClickRay = false;
     public void OnTriggerEnter(Collider other)
     {
         print(other.name);
@@ -54,7 +57,6 @@ public class TestX : MonoBehaviour
 
     }
     #endregion
-
     void Start()
     {
 
@@ -63,51 +65,54 @@ public class TestX : MonoBehaviour
     void Update()
     {
         ClickRay();
-        GripObject(trRight);
-        ReleaseObject(trRight);
-
-
+        ReleaseObject(trLeft);
     }
 
-    private void ClickRay() //레이쏜다
+    public void ClickRay() //레이쏜다
     {
         //오른손 위치,오른손 앞방향으로 나가는 Ray를 만든다
         Ray ray_R = new Ray(trRight.position, trRight.forward);
         Ray ray_L = new Ray(trLeft.position, trLeft.forward);
 
+
         //맞은위치
         int UilayerMask = 1 << LayerMask.NameToLayer("UI");
-        //int GriplayerMask = 1 << LayerMask.NameToLayer("gripObjectLayer");
+        int GriplayerMask = 1 << LayerMask.NameToLayer("gripObjectLayer");
 
         //ui클릭
         if (Physics.Raycast(ray_R, out hit, 100, layer)) //Ray발사 후 어딘가에 부딪힌다면
         {
+
             LineDraw(trRight.position);
             GripObject(trRight);
             ReleaseObject(trRight);
+            isClickRay = true;
         }
         else if (Physics.Raycast(ray_L, out hit, 100, layer))
         {
             LineDraw(trLeft.position);
             GripObject(trLeft);
-            ReleaseObject(trLeft);
+            isClickRay = true;
         }
 
-        ////물체 잡기
-        //else if (Physics.Raycast(ray_R, out hit, 100, GriplayerMask))
-        //{
-        //    LineDraw(trRight.position);
-        //    GripObject(trRight);
-        //    ReleaseObject(trRight);
-        //}
-        //else if (Physics.Raycast(ray_L, out hit, 100, GriplayerMask))
-        //{
-        //    //LineDraw(trLeft.position);
-        //    //GripObject(trLeft);
-        //}
+        //물체 잡기
+        else if (Physics.Raycast(ray_R, out hit, 100, GriplayerMask))
+        {
+            LineDraw(trRight.position);
+            GripObject(trRight);
+            isClickRay = true;
+
+        }
+        else if (Physics.Raycast(ray_L, out hit, 100, GriplayerMask))
+        {
+            //LineDraw(trLeft.position);
+            //GripObject(trLeft);
+            //isClickRay = true;
+        }
         else
         {
             line.gameObject.SetActive(false);
+            isClickRay = false;
         }
 
     }
@@ -238,45 +243,38 @@ public class TestX : MonoBehaviour
     {
         print("hit name:" + hit.transform.name); //레이가 닿은 물체
 
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
-        {
-            int GriplayerMask = 1 << LayerMask.NameToLayer("gripObjectLayer");
-            Collider[] hits = Physics.OverlapSphere(trRight.position, 0.01f);
-            if (hits.Length > 0)
-            {
-                hits[0].transform.parent = trRight;
-                grabObj= hits[0].transform;
-                grabObj.GetComponent<Rigidbody>().isKinematic = true;
-                //SetKinematic(true);
-            }
-            if (isGun)
-            {
-                Shoot(); // 총알 발사
 
-            }
-            else return;
-        }
-        if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch) || OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        if (isAirHokey) //에어하키존이라면
         {
-            if (isAirHokey) //에어하키존이라면
+            if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
             {
                 print("에어하키 잡았다" + grabObj);
                 hit.transform.parent = trRight;
                 hit.transform.position = trRight.position;
                 grabObj = hit.transform;
                 isGrip = true;
-                //손 위치에 맞게 회전시켜주기
-                hit.transform.localPosition = new Vector3(0, -0.05f, 0);
-                hit.transform.eulerAngles = new Vector3(0, 0, 0);
-                isDart = false;
-                isGun = false;
+                ////손 위치에 맞게 회전시켜주기
+                grabObj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                //hit.transform.localPosition = new Vector3(0, -0.05f, 0);
+                //hit.transform.eulerAngles = new Vector3(0, 0, 0);
 
+                if (isGrip)
+                {
+                    isClickRay = false;
+                }
             }
-            else if (isDart)
+
+
+
+        }
+        else if (isDart)
+        {
+            if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
             {
                 hit.transform.parent = trRight;
                 hit.transform.position = trRight.position;
                 grabObj = hit.transform;
+                grabObj.GetComponent<BoxCollider>().enabled = false;
                 grabObj.transform.rotation = Quaternion.Euler(new Vector3(-90f, 0, 0)); //잡았을 때 
                 grabObj.GetComponent<Rigidbody>().useGravity = false; //잡고있는 동안 중력 제거
                 dart = grabObj.GetComponent<SEJDarts>();  // 잡은 물체는 다트스크립트 붙여준다
@@ -285,14 +283,23 @@ public class TestX : MonoBehaviour
 
                 if (grabObj != null)
                 {
-                    isGrip = true;
-                    //오래 가지고 있을수록(=트리거를 누르고 있을수록) 던지는 힘이 커진다.
-                    forceWithTime += forceMax * Time.deltaTime * forceAdg;
-                }
-            }
-            else if (isGun)
-            {
+                    if(isGrip)
+                    {
+                        isClickRay = false;
 
+                        //오래 가지고 있을수록(=트리거를 누르고 있을수록) 던지는 힘이 커진다.
+                        forceWithTime += forceMax * Time.deltaTime * forceAdg;
+                    }
+                   
+                }
+
+            }
+
+        }
+        else if (isGun)
+        {
+            if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+            {
                 hit.transform.parent = trRight;
                 hit.transform.position = trRight.position;
                 grabObj = hit.transform;
@@ -301,68 +308,92 @@ public class TestX : MonoBehaviour
                 //grabObj.transform.rotation = Quaternion.Euler(new Vector3(196.343f, 90, 180));
                 print("호출");
                 isGrip = true;
+
             }
-            else return;
+            else if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+            {
+                Shoot(); // 총알 발사
+            }
         }
 
-    }
+           
+        }
     public void ReleaseObject(Transform Pos)
     {
-        if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch) || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
-        {
-            if (grabObj != null)
-            {
 
-                if (isAirHokey) //에어하키존이라면
+
+        if (isAirHokey) //에어하키존이라면
+        {
+            if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch) || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+            {
+                if (grabObj != null)
                 {
                     print("놓는다" + grabObj);
-                    isDart = false;
-                    isGun = false;
+
                     isGrip = false;
 
-                    grabObj.GetComponent<Rigidbody>().useGravity = true;
+                    //grabObj.GetComponent<Rigidbody>().useGravity = true;
                     grabObj.transform.parent = null;
 
                     if (grabObj.name == "Stick")
                     {
-                        grabObj.transform.position = GetComponent<AirHockeyTableManager>().stickPos.position; //내가 잡은 스틱이 Stick1 일 때 놓았을 때 이 위치로
+                        grabObj.transform.position = AirHockeyTableManager.hockeyTableM.stickPos.position;
+                        grabObj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                        grabObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                        grabObj.GetComponent<Rigidbody>().freezeRotation = true;
+                        //grabObj.transform.position = GetComponent<AirHockeyTableManager>().stickPos.position; //내가 잡은 스틱이 Stick1 일 때 놓았을 때 이 위치로
                         grabObj.GetComponent<Rigidbody>().useGravity = false;
                     }
 
                     else if (grabObj.name == "Stick2")
                     {
-                        grabObj.transform.position = GetComponent<AirHockeyTableManager>().stick2Pos.position; //내가 잡은 스틱이 Stick2 일 때 놓았을 때 이 위치로
+                        grabObj.transform.position = AirHockeyTableManager.hockeyTableM.stick2Pos.position;
+                        grabObj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                        grabObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                        grabObj.GetComponent<Rigidbody>().freezeRotation = true;
+                        //grabObj.transform.position = GetComponent<AirHockeyTableManager>().stick2Pos.position; //내가 잡은 스틱이 Stick2 일 때 놓았을 때 이 위치로
                         grabObj.GetComponent<Rigidbody>().useGravity = false;
                     }
+
                 }
-                else if (isDart)
+
+            }
+
+
+        }
+        else if (isDart)
+        {
+            if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch) || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+            {
+                if (dart != null) //다트가 손에 있는 상태라면 
                 {
-                    if (dart != null) //다트가 손에 있는 상태라면 
-                    {
 
-                        // 던지는 힘의 크기를 제한하고싶다.
-                        forceWithTime = Mathf.Clamp(forceWithTime, 5, forceMax);
-                        //다트가 손을 떠나가도록 부모의 shootPos를 없앤다.
-                        dart.gameObject.transform.parent = null;
-                        //다트를 던지는 함수 실행
-                        dart.Shooting(forceWithTime);
-                        //손에서 떠난 다트
-                        dart = null;
-                        isGrip = false;
-                    }
-
+                    // 던지는 힘의 크기를 제한하고싶다.
+                    forceWithTime = Mathf.Clamp(forceWithTime, 5, forceMax);
+                    //다트가 손을 떠나가도록 부모의 shootPos를 없앤다.
+                    dart.gameObject.transform.parent = null;
+                    //다트를 던지는 함수 실행
+                    dart.Shooting(forceWithTime);
+                    //손에서 떠난 다트
+                    dart = null;
+                    isGrip = false;
                 }
-                else if (isGun)
+
+            }
+
+        }
+        else if (isGun)
+        {
+            if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch) || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+            {
+                if (grabObj != null)
                 {
                     isGrip = false;
                     grabObj.GetComponent<Rigidbody>().useGravity = true; // 총에 중력생겨서 떨어지도록
                     StartCoroutine(respwanGun()); //총 원위치로 리스폰하기
-
                 }
             }
-
         }
-
 
     }
 

@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 5988402531515923924}
   - component: {fileID: 1489216739}
   - component: {fileID: 1489216740}
+  - component: {fileID: 574029362}
   m_Layer: 12
   m_Name: DartObj
   m_TagString: Dart
@@ -189,6 +190,19 @@ MonoBehaviour:
   bulletText: {fileID: 0}
   Tracker: {fileID: 0}
   point: {fileID: 0}
+--- !u!65 &574029362
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841674437645105665}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15561175, y: 0.647171, z: 0.16022944}
+  m_Center: {x: 0.0026103258, y: 0.32180107, z: 0.0053765774}
 --- !u!1 &2010558185775386573
 GameObject:
   m_ObjectHideFlags: 0
