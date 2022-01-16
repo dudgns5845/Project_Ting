@@ -99,7 +99,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!65 &4338583332968214294
 BoxCollider:
@@ -130,7 +130,7 @@ MonoBehaviour:
   isRightGoal: 0
   leftBallPos: {fileID: 0}
   rightBallPos: {fileID: 0}
-  kAdjustForce: 10
+  kAdjustForce: 30
 --- !u!64 &327749741
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager_Hockey : MonoBehaviour
-{ 
+public class SkyBox_SEJ : MonoBehaviour
+{
 
+    public Material skybox;
     void Start()
     {
         
@@ -12,6 +13,8 @@ public class GameManager_Hockey : MonoBehaviour
 
     void Update()
     {
-        
+     
     }
+   
+
 }

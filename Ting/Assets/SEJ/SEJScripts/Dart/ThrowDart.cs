@@ -31,6 +31,12 @@ public class ThrowDart : MonoBehaviour
         {
             Darts();
         }
+        // 다트가 null이 아니라면 아직 다트를 던지기 전이다. 그 상태라면 timeIsForce를 증가시키고싶다.
+        if (dart != null)
+        {
+            //오래 가지고 있을수록(=트리거를 누르고 있을수록) 던지는 힘이 커진다.
+            forceWithTime += forceMax * Time.deltaTime * forceAdg;
+        }
         //else if (Input.GetButtonUp("Fire1") || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         else if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch) || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
         {
@@ -45,12 +51,6 @@ public class ThrowDart : MonoBehaviour
                 //손에서 떠난 다트
                 dart = null;
             }
-        }
-        // 다트가 null이 아니라면 아직 다트를 던지기 전이다. 그 상태라면 timeIsForce를 증가시키고싶다.
-        if (dart != null)
-        {
-            //오래 가지고 있을수록(=트리거를 누르고 있을수록) 던지는 힘이 커진다.
-            forceWithTime += forceMax * Time.deltaTime * forceAdg;
         }
     }
 

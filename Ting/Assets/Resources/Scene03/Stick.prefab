@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 8645548416124703176}
   - component: {fileID: 8133306907329596353}
   - component: {fileID: 8133306907329596352}
-  m_Layer: 0
+  - component: {fileID: 2854496252690511184}
+  m_Layer: 7
   m_Name: Stick
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
@@ -171,7 +172,19 @@ MonoBehaviour:
       m_Calls: []
   onRelease:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2854496252690511184}
+        m_TargetAssemblyTypeName: GameFunctions, Assembly-CSharp
+        m_MethodName: ReleaseStick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   showAdvancedEvents: 0
   onSqueeze:
     m_PersistentCalls:
@@ -189,3 +202,28 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   lockHandOnGrab: 0
+--- !u!114 &2854496252690511184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8645548416124703159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b20dca09e0a481469f5b683664208be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stickPos: {fileID: 0}
+  stick2Pos: {fileID: 0}
+  isTouch: 0
+  forceAdg: 2
+  forceMax: 50
+  rayOrigin: {fileID: 0}
+  isGrip: 0
+  MaxCount: 100
+  bulletFactory: {fileID: 5499962698180123178, guid: f74e26372de8fdd4597b989e02d5724f, type: 3}
+  gunHole: {fileID: 0}
+  bulletText: {fileID: 0}
+  Tracker: {fileID: 0}
+  point: {fileID: 0}

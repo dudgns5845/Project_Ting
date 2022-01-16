@@ -11,37 +11,41 @@ public class BulletFactory : MonoBehaviour
 {
 
     public GameObject bulletFactory;
-    public GunControl hc;
     public Text bulletText;
     public GameObject gunHole;
-    Rigidbody rd;
+    //Rigidbody rd;
     public int MaxCount;
 
+    public bool isGunGrip = false;
     public GameObject reloadobj;
     // Start is called before the first frame update
     void Start()
     {
-        rd = GetComponent<Rigidbody>();
-        MaxCount = 12;
+        //rd = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        bulletinstantiate();
+        if(isGunGrip == true)
+        {
+            bulletinstantiate();
+        }
     }
 
 
     void bulletinstantiate()
     {
         //if (hc.gun.transform.parent == hc.trRight)
+
         {
             if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
             {
-                rd.useGravity = true;
+            
 
                 if (0 < MaxCount)
                 {
+                    SoundManager_SEJ.soundM.PlayEFT(SoundManager_SEJ.EFT.EFT_SHOOT_GUN);
                     GameObject Bullet = Instantiate(bulletFactory);
                     Bullet.transform.position = gunHole.transform.position;
                     Bullet.transform.rotation = gunHole.transform.rotation;
@@ -87,13 +91,15 @@ public class BulletFactory : MonoBehaviour
     IEnumerator respwanGun()
     {
         yield return new WaitForSeconds(1f);
-        transform.position = reloadobj.transform.position + new Vector3(0, 0.2f, 0);
-        rd.useGravity = false;
+        transform.position = point.position;
+        GetComponent<Rigidbody>().useGravity = false;
+        transform.rotation = Quaternion.Euler(new Vector3(180, 180, 90));
+        //rd.useGravity = false;
     }
 
     public GameObject GunHole;
     LineRenderer layser;
     bool isborder;
     public float raycastDistance = 10f;
-
+    public Transform point;
 }
