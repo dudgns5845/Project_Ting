@@ -61,6 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTouching: 0
   rayOrigin: {fileID: 2215472279728799915}
+  effectFactory: {fileID: 1799332239858732, guid: f954d80d3b33b6940ba36a67405b1aa6, type: 3}
 --- !u!54 &5988402531515923924
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -75,7 +76,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 3
 --- !u!65 &574029362
 BoxCollider:

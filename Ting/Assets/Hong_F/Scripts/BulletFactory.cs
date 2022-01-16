@@ -27,7 +27,7 @@ public class BulletFactory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isGunGrip == true)
+        if (isGunGrip == true)
         {
             bulletinstantiate();
         }
@@ -36,38 +36,32 @@ public class BulletFactory : MonoBehaviour
 
     void bulletinstantiate()
     {
-        //if (hc.gun.transform.parent == hc.trRight)
-
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         {
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+
+            if (0 < MaxCount)
             {
-            
-
-                if (0 < MaxCount)
-                {
-                    SoundManager_SEJ.soundM.PlayEFT(SoundManager_SEJ.EFT.EFT_SHOOT_GUN);
-                    GameObject Bullet = Instantiate(bulletFactory);
-                    Bullet.transform.position = gunHole.transform.position;
-                    Bullet.transform.rotation = gunHole.transform.rotation;
-                    Destroy(Bullet, 5);
-                    MaxCount--;
-                }
-                else
-                {
-                    return;
-                }
-
+                SoundManager_SEJ.soundM.PlayEFT(SoundManager_SEJ.EFT.EFT_SHOOT_GUN);
+                GameObject Bullet = Instantiate(bulletFactory);
+                Bullet.transform.position = gunHole.transform.position;
+                Bullet.transform.rotation = gunHole.transform.rotation;
+                Destroy(Bullet, 5);
+                MaxCount--;
+            }
+            else
+            {
+                return;
             }
 
-            if (MaxCount <= 0)
-            {
-                MaxCount = 0;
-            }
-
-            string countS = MaxCount.ToString();
-            bulletText.text = countS;
         }
 
+        if (MaxCount <= 0)
+        {
+            MaxCount = 0;
+        }
+
+        string countS = MaxCount.ToString();
+        bulletText.text = countS;
     }
 
     private void OnTriggerEnter(Collider other)
