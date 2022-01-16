@@ -18,8 +18,8 @@ public class PlayerMove_Rio : MonoBehaviour
     }
     void Update()
     {
-        if (anim == null) return;
-        FSM();
+        //if (anim == null) return;
+        //FSM();
         //Move();
         playerMove();
         playerRot();

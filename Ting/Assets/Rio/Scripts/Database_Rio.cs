@@ -22,9 +22,6 @@ public class Database_Rio : MonoBehaviour
     public CharacterCustomization UserSetting;
 
     public UserInfo myInfo;
-
-    public string userid;
-
     private void Awake()
     {
         myInfo = new UserInfo();
@@ -105,10 +102,6 @@ public class Database_Rio : MonoBehaviour
         }
     }
 
-
-
-
-    public bool isDone = false;
     //값을 불러오는 함수
     public void LoadUserInfo(string userid_, Action NextWork)
     {
@@ -129,7 +122,6 @@ public class Database_Rio : MonoBehaviour
         if (task.Exception == null)
         {
             myInfo = JsonUtility.FromJson<UserInfo>(task.Result.GetRawJsonValue());
-            //UserSetting.SetCharacterSetup(myInfo.characterCustomizationSetup);
             print("유저 정보 읽기 성공");
         }
         else
