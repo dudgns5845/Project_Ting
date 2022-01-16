@@ -48,7 +48,14 @@ public class RollerCoasterM : MonoBehaviour
 
     public void rollfalseFuntion()
     {
-        rollStart = false;
+        // rollStart = false;
+        RollerCoasterM.rollerM.rollStart = false;
+
+        RollerEnterBall.Rn.isRide = false;
+
+       RollerEnterBall.Rn.Cart1Cam.SetActive(false);
+        RollerEnterBall.Rn.playerCam.SetActive(true);
+        print("프린트 시험중입니다.");
     }
 
     

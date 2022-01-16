@@ -5,11 +5,11 @@ using UnityEngine;
 public class RollerStartButton : MonoBehaviour
 {
 
-   public  Animator anim;
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
-      //  anim = GetComponent<Animator>();
+        //  anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -19,7 +19,7 @@ public class RollerStartButton : MonoBehaviour
         //{
         //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         //    RaycastHit hit;
-            
+
         //    if (Physics.Raycast(ray, out hit))
         //    {
         //        if (hit.collider.gameObject.name == "Button")
@@ -32,17 +32,17 @@ public class RollerStartButton : MonoBehaviour
 
     }
 
-   
 
 
-   
+
+
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.CompareTag("Tip"))
+        if (collision.collider.CompareTag("Tip"))
         {
             print("클릭되었습니다");
             anim.SetTrigger("ButtonClick");
-         RollerCoasterM.rollerM.rollStart = true;
+            RollerCoasterM.rollerM.rollStart = true;
 
         }
     }

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GyroDrop : MonoBehaviour
 {
+    public static GyroDrop Gyro;
 
     public float upSpeed = 2f;
     public float downSpeed = 15f;
@@ -13,6 +14,14 @@ public class GyroDrop : MonoBehaviour
 
     public bool upMove;
     public bool downMove;
+
+    private void Awake()
+    {
+        if (Gyro == null)
+        {
+            Gyro = this;
+        }
+    }
     void Start()
     {
 
@@ -22,10 +31,10 @@ public class GyroDrop : MonoBehaviour
     void Update()
     {
 
-        GyodropPlay();
+       // GyodropPlay();
     }
 
-    void GyodropPlay()
+    public void GyodropPlay()
     {
         CenterUPMove();
         CenterDownMove();
