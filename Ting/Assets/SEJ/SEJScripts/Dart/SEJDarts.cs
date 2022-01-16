@@ -13,12 +13,16 @@ public class SEJDarts : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
+
     }
 
     void Update()
     {
-        if (rb.velocity != new Vector3(0, 0, 0))
-            transform.forward = rb.velocity.normalized;
+        //    if (rb.velocity != new Vector3(0, 0, 0))
+        //        transform.forward = rb.velocity.normalized;
+        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
     }
 
     public void Shooting(float forceWithTime)
@@ -30,11 +34,12 @@ public class SEJDarts : MonoBehaviour
         }
         isTouching = false;
         //던져지면 물리법칙을 받는다
-        rb.isKinematic = false;
+        rb.useGravity= true;
         //리지드바디를 이용한 속도는 앞방향 * 힘
         rb.velocity = transform.forward * forceWithTime;
         //회전가속도 
         rb.AddTorque(transform.forward * 10000, ForceMode.Impulse);
+        print("발사하는 힘" + forceWithTime);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -42,6 +47,7 @@ public class SEJDarts : MonoBehaviour
         if (isTouching == true)
             return;
 
+            print("다트가 맞았다");
         Ray ray = new Ray(rayOrigin.position, transform.forward);
         RaycastHit hitInfo;
         if (Physics.Raycast(ray, out hitInfo))

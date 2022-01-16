@@ -6,7 +6,6 @@ public class SoundManager_SEJ : MonoBehaviour
 {
     public static SoundManager_SEJ soundM;
 
-    AudioSource audio;
     private void Awake()
     {
         if (soundM == null)
@@ -14,7 +13,7 @@ public class SoundManager_SEJ : MonoBehaviour
     }
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+       
     }
 
     public AudioSource audioEft;
@@ -50,6 +49,7 @@ public class SoundManager_SEJ : MonoBehaviour
     //}
     public void PlayEFT(EFT type)
     {
+        print("사운드 호출");
         audioEft.PlayOneShot(eftAudios[(int)type]);
     }
 
