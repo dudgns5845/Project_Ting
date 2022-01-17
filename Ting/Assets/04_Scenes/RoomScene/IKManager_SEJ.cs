@@ -14,6 +14,10 @@ public class IKManager_SEJ : MonoBehaviour
     public float weightPos = 1;
     public float weightRot = 1;
 
+    private void Start()
+    {
+        GetComponentInParent<PlayerMove_Rio>().anim = GetComponent<Animator>();
+    }
 
     // Start is called before the first frame update
     private void OnAnimatorIK(int layerIndex)

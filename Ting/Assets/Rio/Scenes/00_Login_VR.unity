@@ -1538,8 +1538,6 @@ MonoBehaviour:
       OralCavityColor: []
       Height: 0
       HeadSize: 0
-  userid: 
-  isDone: 0
 --- !u!82 &648537554
 AudioSource:
   m_ObjectHideFlags: 0
