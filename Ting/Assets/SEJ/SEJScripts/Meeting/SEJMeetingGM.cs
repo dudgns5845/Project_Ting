@@ -44,11 +44,6 @@ public class SEJMeetingGM : MonoBehaviourPunCallbacks
     public bool startUI_ing;
     public bool contUI_ing;
 
-    //나의 포톤 View ID
-    public PhotonView myPhotonView;
-    public Transform[] PlayerPos; //플레이어 생성할 위치들
-    int playerPosIndex; //생선된 플레이어 순서 위치
-
 
  
     private void Awake()
@@ -61,16 +56,7 @@ public class SEJMeetingGM : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        if(PhotonNetwork.IsConnected)
-        {
-            CreatePlayer();
-        }
-        else
-        {
-            PhotonNetwork.GameVersion = "1"; 
-            PhotonNetwork.ConnectUsingSettings(); // name서버에서 master서버로  
-        }
-
+        
         startUI.SetActive(true);
         startUI_ing = true;
         contentsTextBox.SetActive(false);
@@ -82,20 +68,6 @@ public class SEJMeetingGM : MonoBehaviourPunCallbacks
 
         StartCoroutine(NextText());
         StartCoroutine(ColorRenderer(11f));
-
-    }
-
-    private void CreatePlayer()
-    {
-        PhotonNetwork.SendRate = 50;
-        PhotonNetwork.SerializationRate = 50;
-        //나의 플레이어 생성
-        //Vector3 pos = new Vector3()
-
-
-    }
-    public void SetPlayerPos(PhotonView pv)
-    {
 
     }
 

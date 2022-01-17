@@ -21,7 +21,6 @@ public class SoundManager_SEJ : MonoBehaviour
     //public AudioSource audioBgm;
     //public AudioClip[] bgmAudios;
 
-
     public enum BGM
     {
         BGM_GAMEZONE
@@ -33,9 +32,10 @@ public class SoundManager_SEJ : MonoBehaviour
         EFT_GOAL_HOCKEY,
         EFT_SHOOT_GUN,
         EFT_RELEASE_GUN,
-        EFT_THROW_DART
-    }
+        EFT_THROW_DART,
+        EFT_TOUCHING_DART
 
+    }
 
 
     //public void PlayBGM(BGM type)
