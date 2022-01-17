@@ -45,7 +45,7 @@ public class BulletFactory : MonoBehaviour
                 GameObject Bullet = Instantiate(bulletFactory);
                 Bullet.transform.position = gunHole.transform.position;
                 Bullet.transform.rotation = gunHole.transform.rotation;
-                Destroy(Bullet, 5);
+                Destroy(Bullet, 3);
                 MaxCount--;
             }
             else
@@ -87,7 +87,7 @@ public class BulletFactory : MonoBehaviour
         yield return new WaitForSeconds(1f);
         transform.position = point.position;
         GetComponent<Rigidbody>().useGravity = false;
-        transform.rotation = Quaternion.Euler(new Vector3(180, 180, 90));
+        transform.rotation = Quaternion.Euler(new Vector3(270, 180, 90));
         //rd.useGravity = false;
     }
 

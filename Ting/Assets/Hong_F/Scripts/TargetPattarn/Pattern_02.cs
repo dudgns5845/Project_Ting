@@ -31,7 +31,7 @@ public class Pattern_02 : MonoBehaviour
     }
     public void Pattern2()
     {
-        movePosition = new Vector3(0, 0, 5);
+        movePosition = new Vector3(0, 0, 8);
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, movePosition, 0.1f);
 
         if(point100[0].activeSelf == false &&

@@ -11,14 +11,11 @@ public class MeetPlayerControl_SEJ : MonoBehaviour
     public LineRenderer line;
     public LayerMask layer;
 
-
-
     void Update()
     {
         ClickRay();
         //ClickUI();
     }
-
 
     private void ClickRay()
     {
