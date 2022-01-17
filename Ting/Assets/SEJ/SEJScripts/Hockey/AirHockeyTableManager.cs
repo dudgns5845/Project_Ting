@@ -6,10 +6,7 @@ using TMPro;
 
 public class AirHockeyTableManager : MonoBehaviour
 {
-
     public static AirHockeyTableManager hockeyTableM;
-    
-
     
     public GameObject score; //Á¡¼öÆÇ
     //public Button HockeyReset;
@@ -48,7 +45,6 @@ public class AirHockeyTableManager : MonoBehaviour
     void Start()
     {
         score.SetActive(true);
-
         stickObj.SetActive(true);
         stick2Obj.SetActive(true);
         ballObj.SetActive(true);

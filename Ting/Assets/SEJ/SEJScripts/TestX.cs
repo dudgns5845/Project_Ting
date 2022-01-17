@@ -84,11 +84,11 @@ public class TestX : MonoBehaviour
         //오른손 위치,오른손 앞방향으로 나가는 Ray를 만든다
         Ray ray_R = new Ray(trRight.position, trRight.forward);
         Ray ray_L = new Ray(trLeft.position, trLeft.forward);
+       
 
         //ui클릭
         if (Physics.Raycast(ray_R, out hit, 100, layer)) //Ray발사 후 어딘가에 부딪힌다면
         {
-
             LineDraw(trRight.position);
             GripObject(trRight);
         }
@@ -101,7 +101,6 @@ public class TestX : MonoBehaviour
         {
             line.gameObject.SetActive(false);
         }
-
     }
     void LineDraw(Vector3 Pos)
     {
@@ -130,7 +129,6 @@ public class TestX : MonoBehaviour
             else if (hit.transform.name.Contains("Balance"))
             {
                 SEJButton.btn.OnClickBalance();
-
             }
             else if (hit.transform.name.Contains("Question"))
             {
@@ -152,7 +150,6 @@ public class TestX : MonoBehaviour
             {
                 AirHockeyTableManager.hockeyTableM.OnClickHockeyReset();
             }
-
 
         }
         else if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
@@ -189,14 +186,15 @@ public class TestX : MonoBehaviour
                 GameObject dartpin = hit.transform.gameObject;
                 dart = dartpin.GetComponent<SEJDarts>();
                 dartpin.transform.SetParent(trRight);
-                dartpin.transform.localPosition = new Vector3(0, 0, 0);
+                //손에 잡는 위치
+                dartpin.transform.localPosition = new Vector3(-0.03f, 0.001f, 0.213f);
+                //dartpin.transform.localPosition = new Vector3(0, 0, 0);
                 dartpin.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
                 dartpin.transform.Find("Dart4B").GetComponent<Transform>().localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
 
                 isGrip = true;
 
             }
-
 
         }
         else if (isGun)
@@ -303,23 +301,10 @@ public class TestX : MonoBehaviour
     }
 
     #region 다트게임용 변수들
-
     public bool isTouch; //다트가 닿았는지 확인용
     float forceWithTime; // 오래 잡고 있을수록 힘이 커진다
     public float forceAdg = 2; //힘조절
     public float forceMax = 50; //최대 힘
     public SEJDarts dart;
     #endregion
-
-    #region 총게임용 변수들
-    //public bool isGrip;
-    public int MaxCount;
-    public GameObject bulletFactory;
-    public GameObject gunHole;
-    public Text bulletText;
-    public Transform Tracker;
-    //public Transform point; //총이 돌아갈 위치
-    #endregion
-
-
 }

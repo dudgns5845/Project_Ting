@@ -29,7 +29,7 @@ public class SEJDarts : MonoBehaviour
             //start에 쓰면 순서대로 읽느라 오래걸리니까 아예 조건으로 필요할때마다 불러주기
             rb = GetComponent<Rigidbody>();
         }
-        //SoundManager_SEJ.soundM.PlayEFT(SoundManager_SEJ.EFT.EFT_THROW_DART);
+        SoundManager_SEJ.soundM.PlayEFT(SoundManager_SEJ.EFT.EFT_THROW_DART);
         isTouching = false;
         //던져지면 물리법칙을 받는다
         rb.useGravity= true;
@@ -54,11 +54,14 @@ public class SEJDarts : MonoBehaviour
             if (boardPiece != null)
             {
                 print(boardPiece.name);
-
+                
+                //보드에 꽂힌 사운드
                 SoundManager_SEJ.soundM.PlayEFT(SoundManager_SEJ.EFT.EFT_TOUCHING_DART);
+                //이펙트
                 GameObject effect = Instantiate(effectFactory);
-                effect.transform.position = -boardPiece.transform.position;
-                Destroy(effect.gameObject, 0.5f);
+
+                effect.transform.position = particlePos.position;
+                Destroy(effect.gameObject, 1f);
 
 
                 isTouching = true;
@@ -71,6 +74,8 @@ public class SEJDarts : MonoBehaviour
             }
         }
     }
+
+    public Transform particlePos; //파티클 터질 위치 (핀 꼭지점)
 
     public void SetMyChildren(Transform parent)
     {
