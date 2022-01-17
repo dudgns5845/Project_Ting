@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/04_Scenes/00_Login.unity
     guid: ba5a0ee2067fd5444be81de352006ab6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Rio/Scenes/00_Login_VR.unity
     guid: 5653a8afc2b2d194b91c99852ce0bf49
-  - enabled: 1
+  - enabled: 0
     path: Assets/Rio/Scenes/01_CustomScene_VR.unity
     guid: 59762052c66aedb44ad68311953bf033
   - enabled: 0
@@ -23,9 +23,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/04_Scenes/02_Play1.unity
     guid: c414d3e53a337884d895510ec79386b5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Rio/Scenes/02_Play_VR.unity
     guid: c270ef8b588e62142a1441a2627b06cf
+  - enabled: 1
+    path: Assets/Hong_F/Scenes/AmusementPark.unity
+    guid: 456ebadb53d8a3f499589c17dd35067f
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 94fd412d509b34140bbc25e43d753d00, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 286694be8b1172f4aacbcc6a700022b2, type: 2}

@@ -31,14 +31,15 @@ public class Trex : MonoBehaviour
             if (rand == 0)
             {
                 anim.SetTrigger("Idle1");
-                print("11111111111111111");
+                SoundManager.sM.Trex_01();
                 delayTime = 0;
 
             }
             else if (rand == 1)
             {
                 anim.SetTrigger("Idle2");
-                print("2222222222");
+                SoundManager.sM.Trex_02();
+
                 delayTime = 0;
 
 
@@ -46,7 +47,7 @@ public class Trex : MonoBehaviour
             else if (rand == 2)
             {
                 anim.SetTrigger("Idle3");
-                print("33333333333333");
+                SoundManager.sM.Trex_04();
                 delayTime = 0;
 
 
@@ -54,7 +55,8 @@ public class Trex : MonoBehaviour
             else if (rand == 3)
             {
                 anim.SetTrigger("Idle4");
-                print("444444444444444");
+                SoundManager.sM.Trex_03();
+
                 delayTime = 0;
 
 
