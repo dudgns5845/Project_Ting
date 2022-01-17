@@ -28,7 +28,6 @@ public class ColliderGyro : MonoBehaviour
         if (other.gameObject.name == "Auto Hand Player")
         {
 
-          
             groDoor.transform.localPosition = openDoorPos;
         }
 

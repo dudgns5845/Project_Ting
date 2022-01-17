@@ -8,12 +8,13 @@ public class RollerCoasterM : MonoBehaviour
 
     public GameObject StartButton;
     public bool rollStart;
-     Animator anim;
+    Animator anim;
+    public AudioSource rolSound;
     // Start is called before the first frame update
 
     private void Awake()
     {
-        if(null == rollerM)
+        if (null == rollerM)
         {
             rollerM = this;
         }
@@ -34,10 +35,12 @@ public class RollerCoasterM : MonoBehaviour
     public void StartRollerCoaster()
     {
 
-        if(rollStart == true)
+        if (rollStart == true)
         {
 
-        anim.SetBool("Start", true);
+            anim.SetBool("Start", true);
+            rolSound.Play();
+
 
         }
         else
@@ -53,10 +56,10 @@ public class RollerCoasterM : MonoBehaviour
 
         RollerEnterBall.Rn.isRide = false;
 
-       RollerEnterBall.Rn.Cart1Cam.SetActive(false);
+        RollerEnterBall.Rn.Cart1Cam.SetActive(false);
         RollerEnterBall.Rn.playerCam.SetActive(true);
         print("프린트 시험중입니다.");
     }
 
-    
+
 }

@@ -15,9 +15,12 @@ public class GyroDrop : MonoBehaviour
     public bool upMove;
     public bool downMove;
 
+    public GameObject playerCam;
+    public GameObject gyRoCam1;
+
     private void Awake()
     {
-        if (Gyro == null)
+        if (null == Gyro)
         {
             Gyro = this;
         }
@@ -52,10 +55,13 @@ public class GyroDrop : MonoBehaviour
             {
                 transform.Translate(Vector3.up * upSpeed * Time.deltaTime);
                 transform.Rotate(new Vector3(0, rotaSpeed * Time.deltaTime, 0));
-                
+                SoundManager.sM.GyroUP.enabled = true;
+
+
             }
             else
             {
+                SoundManager.sM.GyroMIDDLE.enabled = true;
                 StartCoroutine(CenterDownDelay());
 
             }
@@ -70,6 +76,8 @@ public class GyroDrop : MonoBehaviour
             if (transform.localPosition.y >= -75f)
             {
                 transform.Translate(Vector3.down * downSpeed * Time.deltaTime);
+                SoundManager.sM.GyroDOWN.enabled = true;
+                StartCoroutine(CamChagne());
             }
             else
             {
@@ -82,11 +90,18 @@ public class GyroDrop : MonoBehaviour
 
     IEnumerator CenterDownDelay()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
         downMove = true;
         upMove = false;
         print(" ³»·Á°©´Ï´Ù");
 
 
+    }
+
+    IEnumerator CamChagne()
+    {
+        yield return new WaitForSeconds(5f);
+        playerCam.SetActive(true);
+        gyRoCam1.SetActive(false);
     }
 }

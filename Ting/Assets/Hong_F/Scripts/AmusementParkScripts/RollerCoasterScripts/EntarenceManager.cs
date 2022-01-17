@@ -9,12 +9,15 @@ public class EntarenceManager : MonoBehaviour
     Vector3 openDoorPos;
     Vector3 closeDoorPos;
 
+    
+
 
     // Start is called before the first frame update
     void Start()
     {
         openDoorPos = rollDoor.transform.localPosition + new Vector3(3.5f, 0, 0);
-        closeDoorPos = rollDoor.transform.position;
+        
+        closeDoorPos = rollDoor.transform.localPosition;
     }
 
     // Update is called once per frame
@@ -28,7 +31,9 @@ public class EntarenceManager : MonoBehaviour
     {
         if (other.gameObject.name == "Auto Hand Player")
         {
-            rollDoor.transform.localPosition = openDoorPos;
+            // rollDoor.transform.localPosition = openDoorPos;
+
+            rollDoor.transform.localPosition = Vector3.MoveTowards(rollDoor.transform.localPosition, openDoorPos, 3 * Time.deltaTime);
         }
         
 
@@ -40,7 +45,11 @@ public class EntarenceManager : MonoBehaviour
     {
         if (other.gameObject.name == "Auto Hand Player")
         {
-            rollDoor.transform.position = closeDoorPos;
+            //  rollDoor.transform.position = closeDoorPos;
+
+            rollDoor.transform.localPosition = Vector3.MoveTowards(openDoorPos, closeDoorPos, 3 * Time.deltaTime);
+
+
         }
     }
 }

@@ -14,7 +14,7 @@ public class RollerCoasterManager : MonoBehaviour
     void Start()
     {
         
-        gameObject.GetComponent<AudioSource>().Play();
+       
     }
 
     // Update is called once per frame

@@ -23,9 +23,11 @@ public class RollerEnterBall : MonoBehaviour
     public float isStartTime;
     public bool isRide;
 
+    public AudioSource rolSound;
+
     private void Awake()
     {
-        if (Rn == null)
+        if (null == Rn)
         {
             Rn = this;
         }
@@ -35,6 +37,7 @@ public class RollerEnterBall : MonoBehaviour
     void Start()
     {
         setTime = 4;
+
     }
 
     // Update is called once per frame
@@ -44,13 +47,14 @@ public class RollerEnterBall : MonoBehaviour
         if (Cart1Cam.activeSelf)
         {
             isRide = true;
-        }
-       
 
-       if(isRide)
+        }
+
+
+        if (isRide)
         {
             RollerCoasterM.rollerM.rollStart = true;
-
+           
         }
        //else
        // {
@@ -83,6 +87,7 @@ public class RollerEnterBall : MonoBehaviour
                 // 카메라 바꿔주기
                 playerCam.SetActive(false);
                 Cart1Cam.SetActive(true);
+
                 // 끝나고 플레이어 나가게 만들기 
             }
 

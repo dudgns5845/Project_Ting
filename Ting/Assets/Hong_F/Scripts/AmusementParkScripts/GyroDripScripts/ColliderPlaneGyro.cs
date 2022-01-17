@@ -17,7 +17,7 @@ public class ColliderPlaneGyro : MonoBehaviour
 
     private void Awake()
     {
-        if (cp == null)
+        if (null == cp)
             cp = this;
     }
     // Start is called before the first frame update
@@ -64,5 +64,36 @@ public class ColliderPlaneGyro : MonoBehaviour
             infoCanvas.SetActive(false);
 
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Auto Hand Player")
+        {
+            infoCanvas.SetActive(true);
+
+            SoundManager.sM.welCome.Play();
+            StartCoroutine(WantGYRO());
+            StartCoroutine(HandPlease());
+
+
+
+        }
+    }
+
+    IEnumerator WantGYRO()
+    {
+        yield return new WaitForSeconds(4f);
+        SoundManager.sM.wnatGyro.Play();
+
+
+
+
+    }
+
+    IEnumerator HandPlease()
+    {
+        yield return new WaitForSeconds(8f);
+        SoundManager.sM.handPlease.Play();
     }
 }
