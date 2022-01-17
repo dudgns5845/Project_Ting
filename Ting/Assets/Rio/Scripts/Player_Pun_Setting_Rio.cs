@@ -20,13 +20,15 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
  
 
     public Database_Rio db;
-
-    private void Start()
+    private void Awake()
     {
         db = GetComponent<Database_Rio>();
         pv = GetComponent<PhotonView>();
         auth = FirebaseAuth.DefaultInstance;
+    }
 
+    private void Start()
+    {
         if (pv.IsMine)
         {
             //플레이어 카메라 활성화
@@ -46,31 +48,33 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
             GetComponent<PlayerMove_Rio>().enabled = false;
         }
 
-        db.LoadUserInfo(userid, check);
+      
 
     }
 
 
 
-    void check()
-    {
-        print("케릭터 커스텀 정보가 업데이트 되었습니다.");
-        pv.RPC("CCSetting", RpcTarget.AllBuffered);
-    }
+    //void check()
+    //{
+    //    print("케릭터 커스텀 정보가 업데이트 되었습니다.");
+    //    //pv.RPC("CCSetting", RpcTarget.AllBuffered);
+    //}
 
 
     [PunRPC]
     void userIdSetting(string id)
     {
         userid = id;
-        print("아이디가 셋팅 되었습니다.");
+
+        print("아이디가 셋팅 되었습니다." + userid);
+        db.LoadUserInfo(userid, CCSetting);
     }
 
 
 
 
     //캐릭터가 생성되면 자신의 모습을 CC 데이터로 업데이트 하는 함수
-    [PunRPC]
+    //[PunRPC]
     void CCSetting()
     {
         //성별에 따라 케릭터 활성화한다
@@ -91,7 +95,7 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
             db.UserSetting = Woman.GetComponent<CharacterCustomization>();
             //GetComponent<PlayerMove_Rio>().anim = Woman.GetComponent<Animator>();
         }
-        if (pv.IsMine)
+       // if (pv.IsMine)
         {
             db.UserSetting.SetCharacterSetup(db.myInfo.characterCustomizationSetup);
         }

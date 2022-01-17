@@ -6,6 +6,8 @@ using Firebase.Auth;
 using AdvancedPeopleSystem;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
+
 [System.Serializable]
 public class UserInfo
 {
@@ -22,20 +24,15 @@ public class Database_Rio : MonoBehaviour
     public CharacterCustomization UserSetting;
 
     public UserInfo myInfo;
+    FirebaseDatabase database;
+    public FirebaseAuth auth;
     private void Awake()
     {
         myInfo = new UserInfo();
-    }
-
-    FirebaseDatabase database;
-    public FirebaseAuth auth;
-
-
-    private void Start()
-    {
         database = FirebaseDatabase.DefaultInstance;
         auth = FirebaseAuth.DefaultInstance;
     }
+
 
     //신규 회원 정보 저장 함수
     public void SaveUserInfo(string Name, string NickName, string Age, string Gender)
@@ -77,12 +74,12 @@ public class Database_Rio : MonoBehaviour
 
 
     //캐릭터 커스텀 정보만 업데이트하는 함수
-    public void SaveCCData()
+    public void SaveCCData(string NextPage)
     {
-        StartCoroutine(ISaveCCData());
+        StartCoroutine(ISaveCCData(NextPage));
     }
 
-    IEnumerator ISaveCCData()
+    IEnumerator ISaveCCData(string NextPage)
     {
         myInfo.characterCustomizationSetup = UserSetting.GetSetup();
         //저장 경로
@@ -95,6 +92,7 @@ public class Database_Rio : MonoBehaviour
         if (task.Exception == null)
         {
             print("캐릭터 정보 저장 성공");
+            SceneManager.LoadScene(NextPage);
         }
         else
         {

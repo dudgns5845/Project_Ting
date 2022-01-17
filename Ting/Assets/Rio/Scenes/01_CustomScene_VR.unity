@@ -23515,18 +23515,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 721084479}
-        m_TargetAssemblyTypeName: SceneManager_Rio, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 02_Play_VR
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 554371447}
         m_TargetAssemblyTypeName: UIControllerDEMO, Assembly-CSharp
         m_MethodName: SaveToFile
@@ -23542,13 +23530,13 @@ MonoBehaviour:
       - m_Target: {fileID: 885253078}
         m_TargetAssemblyTypeName: Database_Rio, Assembly-CSharp
         m_MethodName: SaveCCData
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 02_Play_VR
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 901658721}
@@ -29222,8 +29210,6 @@ MonoBehaviour:
       OralCavityColor: []
       Height: 0
       HeadSize: 0
-  userid: 
-  isDone: 0
 --- !u!4 &885253079
 Transform:
   m_ObjectHideFlags: 0
@@ -61456,18 +61442,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2019900681}
-        m_TargetAssemblyTypeName: SceneManager_Rio, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 02_Play_VR
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 8930598424267788972}
         m_TargetAssemblyTypeName: UIControllerDEMO, Assembly-CSharp
         m_MethodName: SaveToFile
@@ -61483,13 +61457,13 @@ MonoBehaviour:
       - m_Target: {fileID: 885253078}
         m_TargetAssemblyTypeName: Database_Rio, Assembly-CSharp
         m_MethodName: SaveCCData
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 02_Play_VR
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 901658721}
