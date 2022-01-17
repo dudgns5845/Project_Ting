@@ -59,8 +59,8 @@ public class SEJDarts : MonoBehaviour
                 SoundManager_SEJ.soundM.PlayEFT(SoundManager_SEJ.EFT.EFT_TOUCHING_DART);
                 //이펙트
                 GameObject effect = Instantiate(effectFactory);
-
-                effect.transform.position = particlePos.position;
+                effect.transform.position = hitInfo.collider.GetComponent<SEJBoardPiece>().transform.position;
+                //effect.transform.position = particlePos.position;
                 Destroy(effect.gameObject, 1f);
 
 

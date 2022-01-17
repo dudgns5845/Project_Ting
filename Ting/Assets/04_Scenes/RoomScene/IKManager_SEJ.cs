@@ -15,8 +15,12 @@ public class IKManager_SEJ : MonoBehaviour
     public float weightRot = 1;
 
     private void Start()
-    {
-        GetComponentInParent<PlayerMove_Rio>().anim = GetComponent<Animator>();
+    { if(gameObject.name == "Woman")
+        { 
+            GetComponentInParent<PlayerMoveInG2>().anim = GetComponent<Animator>();
+        }
+      else
+         GetComponentInParent<PlayerMove_Rio>().anim = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update

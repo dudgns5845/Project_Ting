@@ -68,9 +68,9 @@ public class BulletFactory : MonoBehaviour
     {
         if (other.tag == "Reload")
         {
-            MaxCount = 12;
-            //string countS = MaxCount.ToString();
-            //bulletText.text = countS;
+            MaxCount = 100;
+            string countS = MaxCount.ToString();
+            bulletText.text = countS;
         }
     }
 

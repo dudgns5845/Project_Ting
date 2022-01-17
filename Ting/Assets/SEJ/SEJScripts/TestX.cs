@@ -176,6 +176,17 @@ public class TestX : MonoBehaviour
                 isGrip = true;
                 ////손 위치에 맞게 회전시켜주기 -> 손에 잡는 포지션 만들고 부모로 지정해주기
                 grabObj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                //if (grabObj.transform.name == "Stick" || grabObj.transform.name == "Stick2")
+                //{
+                //    grabObj.transform.Find("Stick").GetComponent<Transform>().localPosition = new Vector3(0, 0, 0);
+                //    grabObj.transform.Find("Stick").GetComponent<Transform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                //}
+                ////else if(grabObj.transform.name == "Stick2")
+                //  {
+                //      grabObj.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                //  }
+                //grabObj.transform.Find("Stick").GetComponent<Transform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                //grabObj.transform.Find("Stick2").GetComponent<Transform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
         }
         else if (isDart)
@@ -212,8 +223,6 @@ public class TestX : MonoBehaviour
                 transform.GetComponentInChildren<BulletFactory>().isGunGrip = true;
             }
         }
-
-
     }
     public void ReleaseObject(Transform Pos)
     {
