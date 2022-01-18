@@ -38,7 +38,7 @@ public class RollerCoasterM : MonoBehaviour
         if (rollStart == true)
         {
 
-            rolSound.Play();
+            rolSound.enabled = true;
             anim.SetBool("Start", true);
 
 
@@ -46,6 +46,8 @@ public class RollerCoasterM : MonoBehaviour
         else
         {
             anim.SetBool("Start", false);
+            rolSound.enabled = false;
+
         }
     }
 
