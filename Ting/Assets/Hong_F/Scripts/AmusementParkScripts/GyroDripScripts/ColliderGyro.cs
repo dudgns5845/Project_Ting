@@ -8,6 +8,8 @@ public class ColliderGyro : MonoBehaviour
     Vector3 openDoorPos;
     Vector3 closeDoorPos;
 
+    public AudioSource doorSound;
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +29,9 @@ public class ColliderGyro : MonoBehaviour
     {
         if (other.gameObject.name == "Auto Hand Player")
         {
+            // rollDoor.transform.localPosition = openDoorPos;
 
-            groDoor.transform.localPosition = openDoorPos;
+            groDoor.transform.localPosition = Vector3.MoveTowards(groDoor.transform.localPosition, openDoorPos, 3 * Time.deltaTime);
         }
 
 
@@ -36,11 +39,22 @@ public class ColliderGyro : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        doorSound.Play();
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.name == "Auto Hand Player")
         {
-            groDoor.transform.position = closeDoorPos;
+            //  rollDoor.transform.position = closeDoorPos;
+
+            groDoor.transform.localPosition = Vector3.MoveTowards(openDoorPos, closeDoorPos, 3 * Time.deltaTime);
+            doorSound.Play();
+
+
+
         }
     }
 }

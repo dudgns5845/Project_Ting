@@ -8,8 +8,10 @@ public class EntarenceManager : MonoBehaviour
     public GameObject rollDoor;
     Vector3 openDoorPos;
     Vector3 closeDoorPos;
+    public AudioSource doorSound;
 
-    
+
+
 
 
     // Start is called before the first frame update
@@ -41,6 +43,11 @@ public class EntarenceManager : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        doorSound.Play();
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.name == "Auto Hand Player")
@@ -48,6 +55,8 @@ public class EntarenceManager : MonoBehaviour
             //  rollDoor.transform.position = closeDoorPos;
 
             rollDoor.transform.localPosition = Vector3.MoveTowards(openDoorPos, closeDoorPos, 3 * Time.deltaTime);
+            doorSound.Play();
+
 
 
         }
