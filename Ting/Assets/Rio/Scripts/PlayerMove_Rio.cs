@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Realtime;
+using Photon.Pun;
 public class PlayerMove_Rio : MonoBehaviour
 {
     public float speed = 6.0F;
@@ -11,53 +12,52 @@ public class PlayerMove_Rio : MonoBehaviour
     public Animator anim;
     CharacterController controller;
 
+    public PhotonView pv;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        pv = GetComponent<PhotonView>();
     }
     void Update()
     {
-        if (anim == null) return;
-        FSM();
-        playerMove();
-        playerRot();
+        if (pv.IsMine)
+        {
+            if (anim == null) return;
+            FSM();
+            playerMove();
+            playerRot();
+        }
     }
 
     void FSM()
     {
         if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch) != Vector2.zero)
-            anim.SetBool("walk", true);
+        {
+            //anim.SetBool("walk", true);
+            pv.RPC("SetAnim", RpcTarget.All, "walk", true);
+        }
         else if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch) == Vector2.zero)
-            anim.SetBool("walk", false);
+        {
+            //anim.SetBool("walk", false);
+            pv.RPC("SetAnim", RpcTarget.All, "walk", false);
+        }
         if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger, OVRInput.Controller.All))
-            anim.SetBool("jump", true);
+        {
+            //anim.SetBool("jump", true);
+            pv.RPC("SetAnim", RpcTarget.All, "jump", true);
+        }
         else if (OVRInput.GetUp(OVRInput.Button.SecondaryIndexTrigger, OVRInput.Controller.All))
-            anim.SetBool("jump", false);
+        {
+            //anim.SetBool("jump", false);
+            pv.RPC("SetAnim", RpcTarget.All, "jump", false);
+        }
+    }
 
-        //if (Input.GetKeyDown(KeyCode.W))
-        //    anim.SetBool("walk", true);
-        //if (Input.GetKeyUp(KeyCode.W))
-        //    anim.SetBool("walk", false);
-        //if (Input.GetKey(KeyCode.Space))
-        //    anim.SetBool("jump", true);
-        //if (Input.GetKeyUp(KeyCode.Space))
-        //    anim.SetBool("jump", false);
-
-        //if (Input.GetKey(KeyCode.Alpha1))
-        //    anim.SetBool("shuffling", true);
-        //if (Input.GetKeyUp(KeyCode.Alpha1))
-        //    anim.SetBool("shuffling", false);
-
-        //if (Input.GetKey(KeyCode.Alpha2))
-        //    anim.SetBool("excited", true);
-        //if (Input.GetKeyUp(KeyCode.Alpha2))
-        //    anim.SetBool("excited", false);
-
-        //if (Input.GetKey(KeyCode.Alpha3))
-        //    anim.SetBool("angry", true);
-        //if (Input.GetKeyUp(KeyCode.Alpha3))
-        //    anim.SetBool("angry", false);
+    [PunRPC]
+    void SetAnim(string animName, bool isActive)
+    {
+        anim.SetBool(animName, isActive);
     }
 
     void playerMove()
@@ -68,8 +68,6 @@ public class PlayerMove_Rio : MonoBehaviour
         moveDirection = new Vector3(stickPos.x, 0, stickPos.y);
         moveDirection = transform.TransformDirection(moveDirection);
         moveDirection *= speed;
-        //if (Input.GetButton("Jump"))
-        //    moveDirection.y = jumpSpeed;
 
         if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger, OVRInput.Controller.All))
             moveDirection.y = jumpSpeed;
@@ -102,6 +100,8 @@ public class PlayerMove_Rio : MonoBehaviour
     {
         rot.y -= 30;
     }
+
+  
 }
 
 
