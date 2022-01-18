@@ -6,9 +6,9 @@ using UnityEngine;
 public class IKManager_SEJ : MonoBehaviour
 {
     public Animator anim;
-    public Transform Left;
-    public Transform Right;
-    public Transform look;
+    Transform Left;
+    Transform Right;
+    Transform look;
     [Range(0f,1f)]
     public float weightLook = 0.2f;
     public float weightPos = 1;
@@ -19,25 +19,34 @@ public class IKManager_SEJ : MonoBehaviour
         GetComponentInParent<PlayerMove_Rio>().anim = GetComponent<Animator>();
     }
 
+    public void Init(Transform l, Transform r, Transform eye)
+    {
+        Left = l;
+        Right = r;
+        look = eye;
+    }
+
     // Start is called before the first frame update
     private void OnAnimatorIK(int layerIndex)
     {
-        anim.SetLookAtWeight(weightLook);
-        anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, weightPos);//가중치
-        anim.SetIKPositionWeight(AvatarIKGoal.RightHand, weightPos);//가중치
-        anim.SetIKRotationWeight(AvatarIKGoal.RightHand, weightRot);
-        anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, weightRot);
+        if(Left != null)
+        {
+            anim.SetLookAtWeight(weightLook);
+            anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, weightPos);//가중치
+            anim.SetIKPositionWeight(AvatarIKGoal.RightHand, weightPos);//가중치
+            anim.SetIKRotationWeight(AvatarIKGoal.RightHand, weightRot);
+            anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, weightRot);
 
-        anim.SetLookAtPosition(look.position);
+            anim.SetLookAtPosition(look.position);
 
-        //특정 물체를 따라가게 하고 싶다
-        anim.SetIKPosition(AvatarIKGoal.LeftHand, Left.position);
-        anim.SetIKPosition(AvatarIKGoal.RightHand, Right.position);
+            //특정 물체를 따라가게 하고 싶다
+            anim.SetIKPosition(AvatarIKGoal.LeftHand, Left.position);
+            anim.SetIKPosition(AvatarIKGoal.RightHand, Right.position);
 
-        //회전
+            //회전
 
-        anim.SetIKRotation(AvatarIKGoal.LeftHand, Left.rotation);
-        anim.SetIKRotation(AvatarIKGoal.RightHand, Right.rotation);
+            anim.SetIKRotation(AvatarIKGoal.LeftHand, Left.rotation);
+            anim.SetIKRotation(AvatarIKGoal.RightHand, Right.rotation);
+        }
     }
-
 }

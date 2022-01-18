@@ -17,9 +17,20 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
     public GameObject Man;
     public GameObject Woman;
     public string userid;
- 
+
+    public GameObject RPCIK;
 
     public Database_Rio db;
+
+    public Transform vrLeft;
+    public Transform vrRight;
+    public Transform vrlook;
+
+    public Transform ikLeft;
+    public Transform ikRight;
+    public Transform iklook;
+
+
     private void Awake()
     {
         db = GetComponent<Database_Rio>();
@@ -35,7 +46,7 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
             Cam.SetActive(true);
             //플레이어 조작 활성화
             //GetComponent<PlayerMove_Rio>().enabled = true;
-         
+
             //자신의 서버상의 캐릭터 id가 뭔지 알려준다
             pv.RPC("userIdSetting", RpcTarget.AllBuffered, auth.CurrentUser.UserId);
 
@@ -44,21 +55,45 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
         {
             //플레이어 카메라 비활성화
             Cam.SetActive(false);
+            RPCIK.SetActive(true);
             //플레이어 조작 활성화
             GetComponent<PlayerMove_Rio>().enabled = false;
         }
 
-      
-
+        SetIkInfo();
     }
 
+    private void Update()
+    {
+        if(pv.IsMine == true)
+        {
+            pv.RPC("SendIKInfo", RpcTarget.All, 0, vrLeft.position, vrLeft.eulerAngles);
+            pv.RPC("SendIKInfo", RpcTarget.All, 1, vrRight.position, vrRight.eulerAngles);
+            pv.RPC("SendIKInfo", RpcTarget.All, 2, vrlook.position, vrlook.eulerAngles);
+        }
+    }
 
-
-    //void check()
-    //{
-    //    print("케릭터 커스텀 정보가 업데이트 되었습니다.");
-    //    //pv.RPC("CCSetting", RpcTarget.AllBuffered);
-    //}
+    [PunRPC]
+    void SendIKInfo(int index, Vector3 pos, Vector3 rot)
+    {
+        if(pv.IsMine == false)
+        {
+            if(index == 0)
+            {
+                ikLeft.transform.position = pos;
+                ikLeft.transform.eulerAngles = rot;
+            }
+            if (index == 1)
+            {
+                ikRight.transform.position = pos;
+                ikRight.transform.eulerAngles = rot;
+            }
+            if (index == 2)
+            {
+                iklook.transform.position = pos;
+            }
+        }
+    }
 
 
     [PunRPC]
@@ -70,16 +105,13 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
         db.LoadUserInfo(userid, CCSetting);
     }
 
-
-
-
     //캐릭터가 생성되면 자신의 모습을 CC 데이터로 업데이트 하는 함수
     //[PunRPC]
     void CCSetting()
     {
         //성별에 따라 케릭터 활성화한다
         //그리고 케릭터 업댓하는 속성을 등록해주고
-        if(db == null)
+        if (db == null)
         {
             print("비어있습니다");
         }
@@ -95,9 +127,24 @@ public class Player_Pun_Setting_Rio : MonoBehaviourPunCallbacks
             db.UserSetting = Woman.GetComponent<CharacterCustomization>();
             //GetComponent<PlayerMove_Rio>().anim = Woman.GetComponent<Animator>();
         }
-       // if (pv.IsMine)
+
+        db.UserSetting.SetCharacterSetup(db.myInfo.characterCustomizationSetup);
+
+    }
+
+    void SetIkInfo()
+    {
+        IKManager_SEJ iKManagerMan = Man.GetComponent<IKManager_SEJ>();
+        IKManager_SEJ iKManagerWoman = Woman.GetComponent<IKManager_SEJ>();
+        if(pv.IsMine)
         {
-            db.UserSetting.SetCharacterSetup(db.myInfo.characterCustomizationSetup);
+            iKManagerMan.Init(vrLeft, vrRight, vrlook);
+            iKManagerWoman.Init(vrLeft, vrRight, vrlook);
+        }
+        else
+        {
+            iKManagerMan.Init(ikLeft, ikRight, iklook);
+            iKManagerWoman.Init(ikLeft, ikRight, iklook);
         }
     }
 }
