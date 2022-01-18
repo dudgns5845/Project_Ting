@@ -38,8 +38,8 @@ public class RollerCoasterM : MonoBehaviour
         if (rollStart == true)
         {
 
-            anim.SetBool("Start", true);
             rolSound.Play();
+            anim.SetBool("Start", true);
 
 
         }
