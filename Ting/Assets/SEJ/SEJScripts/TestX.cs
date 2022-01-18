@@ -84,7 +84,7 @@ public class TestX : MonoBehaviour
         //오른손 위치,오른손 앞방향으로 나가는 Ray를 만든다
         Ray ray_R = new Ray(trRight.position, trRight.forward);
         Ray ray_L = new Ray(trLeft.position, trLeft.forward);
-       
+
 
         //ui클릭
         if (Physics.Raycast(ray_R, out hit, 100, layer)) //Ray발사 후 어딘가에 부딪힌다면
@@ -108,55 +108,62 @@ public class TestX : MonoBehaviour
         line.SetPosition(0, Pos);
         line.SetPosition(1, hit.point);
 
-        print(hit.collider.name); //맞는 콜라이더이름
+        print("LineDraw : " + hit.collider.name); //맞는 콜라이더이름
 
         if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         {
             line.transform.parent = trRight;
 
-            if (hit.transform.name.Contains("QButton"))
+            Button btn = hit.transform.GetComponent<Button>();
+            if (btn != null)
             {
-                SEJButton.btn.OnClickQ();
+                btn.onClick.Invoke();
             }
-            else if (hit.transform.name.Contains("XButton"))
-            {
-                SEJButton.btn.OnClickX();
-            }
-            else if (hit.transform.name.Contains("ContentsButton"))
-            {
-                SEJButton.btn.OnClickContents();
-            }
-            else if (hit.transform.name.Contains("Balance"))
-            {
-                SEJButton.btn.OnClickBalance();
-            }
-            else if (hit.transform.name.Contains("Question"))
-            {
-                SEJButton.btn.OnClickQuestion();
-            }
-            else if (hit.transform.name.Contains("BMenuBtn"))
-            {
-                SEJButton.btn.BalanceMenuBtn();
-            }
-            else if (hit.transform.name.Contains("QMenuBtn"))
-            {
-                SEJButton.btn.QuestionMenuBtn();
-            }
-            else if (hit.transform.name.Contains("RightBtn"))
-            {
-                SEJButton.btn.OnClickRight();
-            }
-            else if (hit.transform.name.Contains("HockeyResetBtn"))
-            {
-                AirHockeyTableManager.hockeyTableM.OnClickHockeyReset();
-            }
+
+            //if (hit.transform.name.Contains("QButton"))
+            //{
+            //    SEJButton.btn.OnClickQ();
+            //}
+            //else if (hit.transform.name.Contains("XButton"))
+            //{
+            //    SEJButton.btn.OnClickX();
+            //}
+            //else if (hit.transform.name.Contains("ContentsButton"))
+            //{
+            //    SEJButton.btn.OnClickContents();
+            //}
+            //else if (hit.transform.name.Contains("Balance"))
+            //{
+            //    SEJButton.btn.OnClickBalance();
+            //}
+            //else if (hit.transform.name.Contains("Question"))
+            //{
+            //    SEJButton.btn.OnClickQuestion();
+            //}
+            //else if (hit.transform.name.Contains("BMenuBtn"))
+            //{
+            //    SEJButton.btn.BalanceMenuBtn();
+            //}
+            //else if (hit.transform.name.Contains("QMenuBtn"))
+            //{
+            //    SEJButton.btn.QuestionMenuBtn();
+            //}
+            //else if (hit.transform.name.Contains("RightBtn"))
+            //{
+            //    SEJButton.btn.OnClickRight();
+            //}
+            //else if (hit.transform.name.Contains("HockeyResetBtn"))
+            //{
+            //    AirHockeyTableManager.hockeyTableM.OnClickHockeyReset();
+            //}
+            
 
         }
         else if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         {
             line.gameObject.SetActive(false);
             line.transform.parent = null;
-            line.enabled = false;
+            //line.enabled = false; // 이거땜에 레이가 클릭 후에 다시 안나오는거였음
         }
 
     } //레이에서 나오는 라인
@@ -164,7 +171,7 @@ public class TestX : MonoBehaviour
     public void GripObject(Transform Pos) //물체를 잡는다 
     {
         print("hit name:" + hit.transform.name); //레이가 닿은 물체
-
+        if (hit.transform.gameObject.layer == LayerMask.NameToLayer("UI")) return;
 
         if (isAirHokey) //에어하키존이라면
         {
@@ -176,6 +183,8 @@ public class TestX : MonoBehaviour
                 isGrip = true;
                 ////손 위치에 맞게 회전시켜주기 -> 손에 잡는 포지션 만들고 부모로 지정해주기
                 grabObj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
+
                 //if (grabObj.transform.name == "Stick" || grabObj.transform.name == "Stick2")
                 //{
                 //    grabObj.transform.Find("Stick").GetComponent<Transform>().localPosition = new Vector3(0, 0, 0);

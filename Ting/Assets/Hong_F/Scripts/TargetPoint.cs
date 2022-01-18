@@ -6,6 +6,7 @@ public class TargetPoint : MonoBehaviour
 {
 
     PointManager pointM;
+    public GameObject eftFactory;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,16 +21,16 @@ public class TargetPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
-        
         if (other.gameObject.CompareTag("Bullet"))
         {
-            gameObject.SetActive(false);
+
+            GameObject eft = Instantiate(eftFactory);
+            eft.transform.position = gameObject.transform.position;
+
+            gameObject.SetActive(false);    
             PointManager.pm.AddScore(100);
             print("100Á¡");
             pointM.objCount--;
-            
-
             
         }
     }

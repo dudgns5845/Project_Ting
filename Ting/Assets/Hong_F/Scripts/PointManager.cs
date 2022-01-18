@@ -23,15 +23,15 @@ public class PointManager : MonoBehaviour
 
     public int objCount;
 
-    int Pstate;
+    public int Pstate;
 
     void Awake()
     {
-      if(pm == null)
+        if (pm == null)
         {
             pm = this;
         }
-      
+
     }
     // Start is called before the first frame update
     void Start()
@@ -59,7 +59,7 @@ public class PointManager : MonoBehaviour
         sBestScore = bestScore.ToString();
         currScoreText.text = sCurrScore;
 
-        if(currScore > bestScore)
+        if (currScore > bestScore)
         {
             bestScore = currScore;
             bestScoreText.text = sBestScore;
@@ -69,43 +69,51 @@ public class PointManager : MonoBehaviour
 
     public void Gamestart()
     {
-        if(state == 0)
+        print("게임시작:"+state);
+        if (state == 0)
         {
             currTime += Time.deltaTime;
 
-            if(currTime > 3)
+            if (currTime > 3)
             {
                 state = 1;
-                     //startCount.text =  "Start!";
+                //startCount.text =  "Start!";
 
                 currTime = 0;
             }
         }
-        else if(state == 1)
+        else if (state == 1)
         {
             currTime += Time.deltaTime;
 
-            if(currTime > 1)
+            if (currTime > 1)
             {
                 state = 2;
                 //startCount.gameObject.SetActive(false);
 
             }
         }
-        else  if(state == 2)
+        else if (state == 2)
         {
-           
+
             patternManager();
 
             currTime = 0;
         }
-        
+
     }
+
+    public void GameOver()
+    {
+        TargetPattern.SetActive(false);
+
+
+    }
+
     float PcurrTime;
     void patternManager()
     {
-        
-        
+
         TargetPattern.SetActive(true);
 
         if (Pstate == 0)
@@ -113,7 +121,7 @@ public class PointManager : MonoBehaviour
             PcurrTime += Time.deltaTime;
             pattern[0].SetActive(true);
 
-            if(PcurrTime > 8 || pattern[0].activeSelf == false)
+            if (PcurrTime > 8 || pattern[0].activeSelf == false)
             {
                 Pstate = 1;
                 pattern[0].SetActive(false);
@@ -121,7 +129,7 @@ public class PointManager : MonoBehaviour
             }
 
         }
-        else if(Pstate == 1)
+        else if (Pstate == 1)
         {
             PcurrTime += Time.deltaTime;
             pattern[1].SetActive(true);
@@ -132,7 +140,7 @@ public class PointManager : MonoBehaviour
                 PcurrTime = 0;
             }
         }
-        else if(Pstate == 2)
+        else if (Pstate == 2)
         {
             PcurrTime += Time.deltaTime;
             pattern[2].SetActive(true);
@@ -146,7 +154,7 @@ public class PointManager : MonoBehaviour
 
         }
 
-        else if(Pstate == 3)
+        else if (Pstate == 3)
         {
             PcurrTime += Time.deltaTime;
             pattern[3].SetActive(true);
@@ -172,6 +180,6 @@ public class PointManager : MonoBehaviour
 
 
     }
-    
+
 
 }

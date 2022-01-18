@@ -24,7 +24,7 @@ public class SoundManager_SEJ : MonoBehaviour
     public enum BGM
     {
         BGM_GAMEZONE,
-        BGM_Cafe
+        BGM_CAFE
     }
     public enum EFT
     { 
@@ -32,7 +32,7 @@ public class SoundManager_SEJ : MonoBehaviour
         EFT_WALL_HOCKEY,
         EFT_GOAL_HOCKEY,
         EFT_SHOOT_GUN,
-        EFT_RELEASE_GUN,
+        EFT_RESPAWN_GUN,
         EFT_THROW_DART,
         EFT_TOUCHING_DART
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MeetPlayerControl_SEJ : MonoBehaviour
 {
@@ -10,11 +11,10 @@ public class MeetPlayerControl_SEJ : MonoBehaviour
     public Transform trLeft;
     public LineRenderer line;
     public LayerMask layer;
-
+    //public Button btn;
     void Update()
     {
         ClickRay();
-        //ClickUI();
     }
 
     private void ClickRay()
@@ -25,7 +25,7 @@ public class MeetPlayerControl_SEJ : MonoBehaviour
         //¸ÂÀºÀ§Ä¡
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit)) //Ray¹ß»ç ÈÄ ¾îµò°¡¿¡ ºÎµúÈù´Ù¸é
+        if (Physics.Raycast(ray, out hit, 100, layer)) //Ray¹ß»ç ÈÄ ¾îµò°¡¿¡ ºÎµúÈù´Ù¸é
         {
             line.gameObject.SetActive(true);
             line.SetPosition(0, trRight.position);
@@ -36,9 +36,13 @@ public class MeetPlayerControl_SEJ : MonoBehaviour
             if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
             {
                 print(hit.transform.name);
-                //int layerMask = 1 << LayerMask.NameToLayer("Q");
-
                 line.transform.parent = trRight;
+
+                //Button btn = hit.transform.GetComponent<Button>();
+                //if (btn != null)
+                //{
+                //    btn.onClick.Invoke();
+                //}
 
                 if (hit.transform.name.Contains("QButton"))
                 {
