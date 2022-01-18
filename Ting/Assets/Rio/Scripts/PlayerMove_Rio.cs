@@ -21,9 +21,9 @@ public class PlayerMove_Rio : MonoBehaviour
     }
     void Update()
     {
+        if (anim == null) return;
         if (pv.IsMine)
         {
-            if (anim == null) return;
             FSM();
             playerMove();
             playerRot();
