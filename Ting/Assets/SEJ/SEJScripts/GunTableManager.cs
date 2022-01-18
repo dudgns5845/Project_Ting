@@ -7,14 +7,14 @@ public class GunTableManager : MonoBehaviour
 {
     public static GunTableManager gunTableM;
 
-    //public GameObject startGunBtn;
-   
-    //public GameObject exitGunBtn;
+
 
     public GameObject pointM;
     public GameObject targetPatternM;
     public GameObject gun;
     public GameObject reloadObj;
+
+    public GameObject reset;
 
     private void Awake()
     {
@@ -38,24 +38,34 @@ public class GunTableManager : MonoBehaviour
         reloadObj.SetActive(true);
     }
 
+    public Transform[] resetPattern;
+   public void OnClickResetGun()
+    {
+        
+        print("리셋버튼");
+        PointManager.pm.currScore = 0; //현재점수 초기화
+        PointManager.pm.Pstate = 0;
 
-    //버튼 함수들
-    //public void OnClickStartGun()
-    //{
+        for (int i =0; i<resetPattern.Length; i++)
+        {
+            for(int j=0; j< resetPattern[i].childCount; j++)
+            {
 
-    //    pointM.SetActive(true);
-    //    targetPatternM.SetActive(true);
-    //    gun.SetActive(true);
-    //    reloadObj.SetActive(true);
-    //}
-    //public void OnClickExitGun()
-    //{
+                resetPattern[i].GetChild(j).gameObject.SetActive(false);
+                resetPattern[i].GetChild(j).gameObject.SetActive(true);
+            }
+        }
 
-    //    pointM.SetActive(false);
-    //    targetPatternM.SetActive(false);
-    //    gun.SetActive(false);
-    //    reloadObj.SetActive(false);
-    //}
 
+        
+            for (int j = 0; j < targetPattern.childCount; j++)
+            {
+                targetPattern.GetChild(j).gameObject.SetActive(false);
+            targetPattern.GetChild(0).gameObject.SetActive(true);
+            }
+        
+
+    }
+      public  Transform targetPattern;
  
 }

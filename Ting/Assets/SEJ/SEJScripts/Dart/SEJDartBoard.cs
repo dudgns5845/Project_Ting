@@ -53,4 +53,18 @@ public class SEJDartBoard : MonoBehaviour
         print("맞은 점수 : " + type * scoreNum);
     }
 
+    public GameObject DartObjectsFac;
+    public Transform dartRespawnPos;
+    public GameObject dartObjects;
+    public void OnClickResetDart()
+    {
+        SCORE = 0; //현 점수 초기화
+
+        DartObjs dartObjs = dartObjects.GetComponent<DartObjs>();
+        dartObjs.ResetDart();
+        
+        dartObjects = Instantiate(DartObjectsFac);
+        dartObjects.transform.position = dartRespawnPos.position;
+    }
+
 }

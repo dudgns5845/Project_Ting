@@ -16,20 +16,29 @@ public class Pattern_01 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        obj_count = p1obj.Length;
-        //transform.position = new Vector3(0, 3, 15);
-        transform.localPosition = new Vector3(0, 0, 12);
+        //obj_count = p1obj.Length;
+        //transform.localPosition = new Vector3(0, 0, 12);
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        Pattern1();
+        if (TestX.test.isGun == true)
+        {
+            Pattern1();
+
+        }
+        else return;
     }
 
     public void Pattern1()
     {
+
+
+        obj_count = p1obj.Length;
+        transform.localPosition = new Vector3(0, 0, 12);
+
         //movePosition = new Vector3(0, 3, 5);
         movePosition = new Vector3(0, 0, 1);
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, movePosition, 0.1f);

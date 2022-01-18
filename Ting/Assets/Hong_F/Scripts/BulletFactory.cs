@@ -64,26 +64,30 @@ public class BulletFactory : MonoBehaviour
         bulletText.text = countS;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Reload")
-        {
-            MaxCount = 12;
-            //string countS = MaxCount.ToString();
-            //bulletText.text = countS;
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag == "Floor")
+    //    {
+    //        MaxCount = 100;
+    //        string countS = MaxCount.ToString();
+    //        bulletText.text = countS;
+    //    }
+    //}
 
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Floor")
         {
+            MaxCount = 100;
+            string countS = MaxCount.ToString();
+            bulletText.text = countS;
             StartCoroutine(respwanGun());
             print("¹Ù´Ú¿¡ ´ê¾Ò½À´Ï´Ù.");
         }
     }
     IEnumerator respwanGun()
     {
+        SoundManager_SEJ.soundM.PlayEFT(SoundManager_SEJ.EFT.EFT_RESPAWN_GUN);
         yield return new WaitForSeconds(1f);
         transform.position = point.position;
         GetComponent<Rigidbody>().useGravity = false;

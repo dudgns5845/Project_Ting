@@ -10,7 +10,7 @@ public class SkyBox_SEJ : MonoBehaviour
     void Start()
     { 
         //처음 스카이박스의 노출값
-        exposureAdg = 0.5f;
+        exposureAdg = 0.4f;
     }
 
     void Update()
@@ -27,9 +27,10 @@ public class SkyBox_SEJ : MonoBehaviour
             //exposureAdg += Time.fixedDeltaTime;
             exposureAdg += Time.deltaTime;
 
-            if (exposureAdg >= 1)
+            if (exposureAdg >= 1.3f )
             {
-                exposureAdg = 0.5f;
+                exposureAdg -= Time.deltaTime;
+                exposureAdg = 0.35f;
             }
         }
        
