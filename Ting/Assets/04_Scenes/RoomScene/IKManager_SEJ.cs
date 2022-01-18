@@ -6,28 +6,29 @@ using UnityEngine;
 public class IKManager_SEJ : MonoBehaviour
 {
     public Animator anim;
-    Transform Left;
-    Transform Right;
-    Transform look;
+    public Transform Left;
+    public Transform Right;
+    public Transform look;
     [Range(0f,1f)]
     public float weightLook = 0.2f;
     public float weightPos = 1;
     public float weightRot = 1;
 
     private void Start()
-    { if(gameObject.name == "Woman")
-        { 
-            GetComponentInParent<PlayerMoveInG2>().anim = GetComponent<Animator>();
-        }
-      else
-         GetComponentInParent<PlayerMove_Rio>().anim = GetComponent<Animator>();
+    { 
+        //if(gameObject.name == "Woman")
+        //{ 
+        //    GetComponentInParent<PlayerMoveInG2>().anim = GetComponent<Animator>();
+        //}
+        //else
+        // GetComponentInParent<PlayerMove_Rio>().anim = GetComponent<Animator>();
     }
 
     public void Init(Transform l, Transform r, Transform eye)
     {
         Left = l;
         Right = r;
-        look = eye;
+       look = eye;
     }
 
     // Start is called before the first frame update

@@ -85,14 +85,15 @@ public class TestX : MonoBehaviour
         Ray ray_R = new Ray(trRight.position, trRight.forward);
         Ray ray_L = new Ray(trLeft.position, trLeft.forward);
 
+            print("레이발사");
 
         //ui클릭
-        if (Physics.Raycast(ray_R, out hit, 100, layer)) //Ray발사 후 어딘가에 부딪힌다면
+        if (Physics.Raycast(ray_R, out hit, 1000, layer)) //Ray발사 후 어딘가에 부딪힌다면
         {
             LineDraw(trRight.position);
             GripObject(trRight);
         }
-        else if (Physics.Raycast(ray_L, out hit, 100, layer))
+        else if (Physics.Raycast(ray_L, out hit, 1000, layer))
         {
             LineDraw(trLeft.position);
             GripObject(trLeft);
